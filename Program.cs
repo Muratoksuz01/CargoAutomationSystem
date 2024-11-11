@@ -3,25 +3,21 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// EF Core ile bağlantı dizesini ekliyoruz
 builder.Services.AddDbContext<CargoContext>(options =>
-    options.UseInMemoryDatabase("CargoDb")); // Bu satır veritabanını bellekte tutar (in-memory database)
+    options.UseInMemoryDatabase("CargoDb")); 
 
-// Servisleri ekleyin
-builder.Services.AddScoped<CargoContext>(); // DbContext'i Scoped olarak ekliyoruz
+builder.Services.AddScoped<CargoContext>(); 
 
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();  // Uygulamayı oluşturuyoruz
+var app = builder.Build();  
 
-// Hata yönetimi ve güvenlik ayarları
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
-// Diğer uygulama yapılandırmaları
 app.UseRouting();
 app.UseStaticFiles();
 app.MapControllerRoute(

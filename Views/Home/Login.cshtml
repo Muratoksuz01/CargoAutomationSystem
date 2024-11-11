@@ -1,24 +1,19 @@
-@using static CargoAutomationSystem.Controllers.HomeController
 @{
     ViewData["Title"] = "Bireysel Giriş";
 }
-@section navbar{
-@await Html.PartialAsync("_navbar")
+@section navbar {
+    @await Html.PartialAsync("_navbar")
 }
 @model LoginViewModel
 
-@{
-    var tempMessage = ViewData["IsSuccess"] as TempMessage;
-}
 
-@if (tempMessage != null)
+@if (ViewBag.IsSuccess != null)
 {
-    <div class="alert @(tempMessage.IsSuccess ? "alert-success" : "alert-danger") alert-dismissible fade show" role="alert">
-        @tempMessage.Message
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @ViewBag.IsSuccess
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-
 
 <h2>Bireysel Giriş</h2>
 
@@ -31,7 +26,7 @@
 
     <div class="form-group">
         <label asp-for="Password"></label>
-        <input  class="form-control" asp-for="Password" placeholder="Şifrenizi girin" value="password1" />
+        <input class="form-control" asp-for="Password" placeholder="Şifrenizi girin" value="password1" />
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
@@ -43,7 +38,5 @@
 </form>
 
 @section Scripts {
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }

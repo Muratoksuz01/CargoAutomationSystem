@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Kargo Gönder";
+}
+
+@model SendCargoViewModel
+
+
+<h2>Kargo Gönder</h2>
+
+<form asp-action="SendCargo" method="post" class="form-group">
+    <!-- Gönderici Bilgileri (readonly) -->
+    <fieldset disabled>
+        <legend>Gönderici Bilgileri</legend>
+
+        <div class="mb-3">
+            <label asp-for="SenderEmail" class="form-label">Gönderici Email</label>
+            <input asp-for="SenderEmail" class="form-control" readonly />
+            <span asp-validation-for="SenderEmail" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SenderUsername" class="form-label">Gönderici Kullanıcı Adı</label>
+            <input asp-for="SenderUsername" class="form-control" readonly />
+            <span asp-validation-for="SenderUsername" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SenderAddress" class="form-label">Gönderici Adresi</label>
+            <input asp-for="SenderAddress" class="form-control" readonly value="" />
+            <span asp-validation-for="SenderAddress" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SenderPhone" class="form-label">Gönderici Telefon</label>
+            <input asp-for="SenderPhone" class="form-control" readonly />
+            <span asp-validation-for="SenderPhone" class="text-danger"></span>
+        </div>
+    </fieldset>
+
+    <!-- Alıcı Bilgileri (editable) -->
+    <fieldset>
+        <legend>Alıcı Bilgileri</legend>
+
+        <div class="mb-3">
+            <label asp-for="RecipientName" class="form-label">Alıcı Adı</label>
+            <input asp-for="RecipientName" class="form-control" />
+            <span asp-validation-for="RecipientName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="RecipientAddress" class="form-label">Alıcı Adresi</label>
+            <input asp-for="RecipientAddress" class="form-control" />
+            <span asp-validation-for="RecipientAddress" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="RecipientPhone" class="form-label">Alıcı Telefonu</label>
+            <input asp-for="RecipientPhone" class="form-control" />
+            <span asp-validation-for="RecipientPhone" class="text-danger"></span>
+        </div>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Kargo Gönder</button>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+@section navbar {
+    @await Html.PartialAsync("_Bnavbar", false)
+}

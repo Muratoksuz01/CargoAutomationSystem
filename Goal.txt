@@ -1,0 +1,8 @@
+        10/11/2024
+redirect seonra sayfaları tasarla   tamamlandı 
+
+        12/11/2024
+- yonlendirdigin sayfaları icindeki sayfaları  tasarla                          tamamlandı
+- sube kısmı icin tum cargoları listeleyn bir databaseyı tasarla ve gosterdir
+
+

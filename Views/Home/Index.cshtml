@@ -1,22 +1,8 @@
-﻿@using static CargoAutomationSystem.Controllers.HomeController
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-
 @section navbar {
     @await Html.PartialAsync("_navbar")
-}
-@{
-    var tempMessage = ViewData["IsSuccess"] as TempMessage;
-}
-
-@if (tempMessage != null)
-{
-    <div class="alert @(tempMessage.IsSuccess ? "alert-success" : "alert-danger") alert-dismissible fade show" role="alert">
-        @tempMessage.Message
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
 }
 
 

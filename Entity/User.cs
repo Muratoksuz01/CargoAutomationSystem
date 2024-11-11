@@ -1,28 +1,17 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace CargoAutomationSystem.Entity
 {
     public class User
     {
-        [Key]
         public int UserId { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string UserName { get; set; }
-
-        [Required]
-        [EmailAddress]
+        public string Username { get; set; }
         public string Email { get; set; }
-
-        [Required]
         public string Password { get; set; }
-
         public string Address { get; set; }
-
-        [Phone]
         public string Phone { get; set; }
-
         public string ImageUrl { get; set; }
+
+        // İlişkiler
+        public ICollection<Cargo> SentCargos { get; set; } = new List<Cargo>(); // Kullanıcıya ait gönderilen kargolar
+        public ICollection<Cargo> ReceivedCargos { get; set; } = new List<Cargo>(); // Kullanıcıya ait alınan kargolar
     }
 }

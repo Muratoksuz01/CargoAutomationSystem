@@ -1,46 +1,17 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using CargoAutomationSystem.Entity;
 
-namespace CargoAutomationSystem.Entity
+public class Cargo
 {
-    public class Cargo
-    {
-        [Key]
-        public int CargoId { get; set; }
-
-        [Required]
-        [EmailAddress]
-        public string SenderEmail { get; set; }
-
-        [Required]
-        public string SenderAddress { get; set; }
-
-        [Required]
-        public string SenderUserName { get; set; }
-
-        [Required]
-        [Phone]
-        public string SenderPhone { get; set; }
-
-        [Required]
-        public string ReceiverAddress { get; set; }
-
-        [Required]
-        [EmailAddress]
-        public string ReceiverEmail { get; set; }
-
-        [Required]
-        public string ReceiverUserName { get; set; }
-
-        [Required]
-        [Phone]
-        public string ReceiverPhone { get; set; }
-
-        // Şube ile ilişki
-        public int BranchId { get; set; }
-        public Branch Branch { get; set; }
-
-        // CargoInfo ile ilişki
-        public ICollection<CargoInfo> CargoInfos { get; set; } = new List<CargoInfo>();
-    }
+    public int CargoId { get; set; }
+    public int SenderId { get; set; }
+    public int ReceiverId { get; set; }
+    public int CurrentBranchId { get; set; }
+    public string HashCode { get; set; }
+    public string Status { get; set; }
+    
+    // İlişkiler
+    public User Sender { get; set; } // Gönderici kullanıcı bilgisi
+    public User Receiver { get; set; } // Alıcı kullanıcı bilgisi
+    public Branch CurrentBranch { get; set; } // Mevcut şube bilgisi
+    public ICollection<CargoInfo> CargoInfos { get; set; } = new List<CargoInfo>(); // Cargo bilgileri ile ilişki
 }

@@ -1,26 +1,11 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CargoAutomationSystem.Entity
+public class CargoInfo
 {
-    public class CargoInfo
-    {
-        [Key]
-        public int CargoInfoId { get; set; }
-
-        [Required]
-        public int CargoId { get; set; }
-
-        public Cargo Cargo { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Status { get; set; } // "Taşımada", "İptal Edildi", "Tamamlandı" gibi değerler alabilir
-
-        [Required]
-        public DateTime Date { get; set; } // İşlem tarihi
-
-        // CargoProcess ile ilişki
-        public ICollection<CargoProcess> CargoProcesses { get; set; } = new List<CargoProcess>();
-    }
+    public int CargoInfoId { get; set; }
+    public int CargoId { get; set; }
+    public string Status { get; set; } // "Taşımada", "İptal Edildi", "Tamamlandı"
+    public DateTime Date { get; set; } = DateTime.Now;
+    
+    // İlişkiler
+    public Cargo Cargo { get; set; } // İlgili cargo bilgisi
+    public ICollection<CargoProcess> CargoProcesses { get; set; } = new List<CargoProcess>(); // Cargo süreç bilgileri ile ilişki
 }

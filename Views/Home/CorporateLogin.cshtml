@@ -5,6 +5,13 @@
 @section navbar{
 @await Html.PartialAsync("_navbar")
 }
+@if (ViewBag.IsSuccess != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @ViewBag.IsSuccess
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 <h2>Kurumsal Giriş</h2>
 
 <form asp-action="CorporateLogin" asp-controller="Home" method="post">
