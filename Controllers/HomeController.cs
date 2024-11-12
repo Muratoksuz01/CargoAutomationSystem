@@ -1,9 +1,10 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CargoAutomationSystem.Models;
 using CargoAutomationSystem.Data;
 using CargoAutomationSystem.Entity;
-using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace CargoAutomationSystem.Controllers;
 
@@ -17,26 +18,58 @@ public class HomeController : Controller
 
 
     public IActionResult Index()
-{     
+    {
         return View();
     }
-    
- 
+    private User AuthenticateUser(string email, string password)
+    {
+         return Users.SingleOrDefault(u => u.Email == email && u.Password == password);
+        // return new User
+        // {
+        //     UserId = 1,
+        //     Username = "JohnDoe",
+        //     Email = "johndoe@example.com",
+        //     Address = "123 Main St, City"
+        // };
+    }
+
 
     [HttpPost]
-    public IActionResult Login(LoginViewModel model)
+    public async Task<IActionResult> Login(LoginViewModel model)
     {
         if (ModelState.IsValid)
         {
-            var entity = Users.FirstOrDefault(i => i.Email == model.Email && i.Password == model.Password);
-            if (entity == null)
+            var user = AuthenticateUser(model.Email, model.Password);
+            if (user != null)
             {
-                ViewBag.IsSuccess = "kullanıcı bulunamadı ";
-                return View(model);
+                // Kullanıcı bilgileri doğruysa, claims oluşturuluyor
+                var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),  // Kullanıcı ID'si
+                new Claim(ClaimTypes.Name, user.Username),                      // Kullanıcı adı
+                new Claim(ClaimTypes.Email, user.Email),                        // Kullanıcı email
+                new Claim("Address", user.Address ?? ""),
+                new Claim(ClaimTypes.MobilePhone, user.Phone ?? ""),
+                new Claim("ImageUrl", user.ImageUrl ?? "")
+
+            };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                // Kimlik doğrulama cookies'i oluşturuluyor
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
+                return RedirectToAction("Index", "User"); // Başarılı girişten sonra yönlendirme
             }
-            return RedirectToAction("Index","User");
+
+            else
+            {
+                ModelState.AddModelError("", "Geçersiz kullanıcı adı veya şifre");
+                return View(model); // Giriş başarısızsa tekrar giriş ekranına dön
+            }
         }
 
+        ModelState.AddModelError("", "formu kontorl ediniz ");
         return View(model);
     }
     [HttpPost]
@@ -59,17 +92,18 @@ public class HomeController : Controller
         {
             var entity = Branches.FirstOrDefault(i => i.Email == model.Email && i.Password == model.Password);
             if (entity == null)
-            {   ViewBag.IsSuccess="basarısız kullanıcı girişimi";
+            {
+                ViewBag.IsSuccess = "basarısız kullanıcı girişimi";
                 return View(model);
             }
-        
-            return RedirectToAction("Index","Branch");
+
+            return RedirectToAction("Index", "Branch");
         }
 
         return View(model);
     }
 
-   public IActionResult Login() => View();
+    public IActionResult Login() => View();
 
     [HttpPost]
     public IActionResult CorporateRegister(CorporateRegisterViewModel model)
