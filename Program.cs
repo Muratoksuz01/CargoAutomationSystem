@@ -19,6 +19,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Home/AccessDenied"; // Erişim engellendiğinde yönlendirme
     });
 
+// Session için yapılandırma ekleniyor
+builder.Services.AddDistributedMemoryCache();  // Session için gerekli bellek tabanlı önbellek
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session süresi, isteğe göre değiştirilebilir
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Diğer servisler
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();  
@@ -38,8 +48,11 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Session'ı kullanabilmek için UseSession'ı ekleyin
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=LogIn}/{id?}");
 
 app.Run();

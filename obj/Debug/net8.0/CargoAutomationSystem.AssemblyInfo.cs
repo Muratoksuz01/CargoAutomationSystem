@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CargoAutomationSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf3ec537c836ad83e4eb0519756cc73fc84737cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d676be4b9243eedf2d8df9a72d26ee440682ef2f")]
 [assembly: System.Reflection.AssemblyProductAttribute("CargoAutomationSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CargoAutomationSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

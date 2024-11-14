@@ -1,6 +1,8 @@
 @model UserInfoViewModel
 @section navbar{
-    @await Html.PartialAsync("_Bnavbar",Model)
+
+@await Component.InvokeAsync("User")
 }
+
 
 <h1>user index sayfası daha sonra belki tanıtım sayfası olabilr  </h1>

@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using CargoAutomationSystem.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CargoAutomationSystem.Controllers
@@ -7,36 +9,38 @@ namespace CargoAutomationSystem.Controllers
     public class UserController : Controller
     {
 
+        protected UserInfoViewModel CurrentUser => new UserInfoViewModel
+        {
+            UserId = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : 0,
+            Username = User.FindFirstValue(ClaimTypes.Name),
+            Email = User.FindFirstValue(ClaimTypes.Email),
+            Address = User.FindFirstValue("Address"),
+            Phone = User.FindFirstValue(ClaimTypes.MobilePhone),
+            ImageUrl = User.FindFirstValue("ImageUrl")
+        };
+
         public IActionResult Index()
         {
             System.Console.WriteLine("User index sfoksiyonu  ");
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var username = User.FindFirstValue(ClaimTypes.Name);
-System.Console.WriteLine(username.GetType());
-            var email = User.FindFirstValue(ClaimTypes.Email);
-            var address = User.FindFirstValue("Address");
-            var phone = User.FindFirstValue(ClaimTypes.MobilePhone);
-            var imageUrl = User.FindFirstValue("ImageUrl");
 
             // Kullanıcı bilgilerini UserInfoViewModel'e ekliyoruz
-            var userInfos = new UserInfoViewModel
-            {
-                UserId = int.TryParse(userId, out var id) ? id : 0, // userId null değilse integer olarak eklenir
-                Username = username,
-                Email = email,
-                Address = address,
-                Phone = phone,
-                ImageUrl = imageUrl
-            };
+
             // Kargo gönderim işlemiyle ilgili hazırlıklar yapılabilir
-            return View(userInfos); // SendCargo.cshtml dosyasına yönlendirir
+            return View(CurrentUser); // SendCargo.cshtml dosyasına yönlendirir
         }
 
         // Kargo gönderme sayfasını gösterir
         public IActionResult SendCargo()
         {
-            // Kargo gönderim işlemiyle ilgili hazırlıklar yapılabilir
-            return View(); // SendCargo.cshtml dosyasına yönlendirir
+            var sendCargoModel = new SendCargoViewModel
+            {
+                SenderEmail = CurrentUser.Email,
+                SenderUsername = CurrentUser.Username,
+                SenderAddress = CurrentUser.Address,
+                SenderPhone = CurrentUser.Phone
+            };
+
+            return View(sendCargoModel);
         }
 
         // Kargo takibi sayfasını gösterir
@@ -51,7 +55,9 @@ System.Console.WriteLine(username.GetType());
         {
             // Oturumu temizle
             HttpContext.Session.Clear();
-            return RedirectToAction("Login", "Account"); // Login sayfasına yönlendir
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme); // Çerezle giriş yapan kullanıcıyı çıkartıyoruz
+
+            return RedirectToAction("Login", "Home"); // Login sayfasına yönlendir
         }
 
         // Kullanıcı ayarlarını gösterir
