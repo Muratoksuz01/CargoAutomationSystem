@@ -7,9 +7,9 @@ public static class DataSeeding
         new User
         {
             UserId = 1,
-            Username = "john_doe",
-            Email = "john@example.com",
-            Password = "hashedpassword3",
+            Username = "user1",
+            Email = "user1@example.com",
+            Password = "user1",
             Address = "789 West St, Westside",
             Phone = "123-456-7890",
             ImageUrl = "/img/john_doe.png"
@@ -17,8 +17,8 @@ public static class DataSeeding
         new User
         {
             UserId = 2,
-            Username = "jane_smith",
-            Email = "jane@example.com",
+            Username = "user2",
+            Email = "user2@example.com",
             Password = "hashedpassword4",
             Address = "101 South St, Southside",
             Phone = "987-654-3210",
@@ -46,23 +46,27 @@ public static class DataSeeding
         }
     };
 
-    public static List<Cargo> Cargos = new List<Cargo>
+ public static List<Cargo> Cargos { get; } = new List<Cargo>
     {
-        new Cargo
+        new Cargo()
         {
-            CargoId = 1,
+            CargoId=1,
             SenderId = 1,
-            ReceiverId = 2,
             CurrentBranchId = 1,
+            RecipientName = "Alice",
+            RecipientAddress = "789 Maple St",
+            RecipientPhone = "555-7890",
             HashCode = "ABC123",
             Status = "Taşımada"
         },
-        new Cargo
+        new Cargo()
         {
-            CargoId = 2,
+            CargoId=2,
             SenderId = 2,
-            ReceiverId = 1,
             CurrentBranchId = 2,
+            RecipientName = "Bob",
+            RecipientAddress = "321 Oak St",
+            RecipientPhone = "555-4321",
             HashCode = "XYZ789",
             Status = "Tamamlandı"
         }
