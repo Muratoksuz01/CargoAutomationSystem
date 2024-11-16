@@ -1,1 +1,55 @@
-@* TrackCargo view *@ 
+@model IEnumerable<CargoAutomationSystem.Models.TrackCargoViewModel>
+
+@section navbar {
+    @await Component.InvokeAsync("User")
+}
+
+<h2>Kargo Takip</h2>
+
+<form asp-action="TrackCargo" method="post">
+    <div class="mb-3">
+        <label for="hashCode" class="form-label">Takip Kodu</label>
+        <input type="text" id="hashCode" name="hashCode" class="form-control" placeholder="Takip kodunu girin" />
+    </div>
+    <button type="submit" class="btn btn-primary">Sorgula</button>
+</form>
+
+@if (!Model.Any())
+{
+    <p>Kargo bilgisi bulunamadı.</p>
+}
+else
+{
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Receiver Name</th>
+                <th scope="col">Receiver Address</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.CargoId</th>
+                    <td>@item.RecipientName</td>
+                    <td>@item.RecipientAddress</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode">
+                            <i class="fa-solid fa-circle-info"></i> 
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts{
+    <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>
+
+}

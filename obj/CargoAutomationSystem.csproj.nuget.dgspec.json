@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj": {}
+    "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj": {
+    "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj",
+        "projectUniqueName": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj",
         "projectName": "CargoAutomationSystem",
-        "projectPath": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj",
+        "projectPath": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj",
         "packagesPath": "C:\\Users\\denem\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\",
+        "outputPath": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\denem\\AppData\\Roaming\\NuGet\\NuGet.Config"

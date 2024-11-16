@@ -11,7 +11,7 @@ public static class DataSeeding
             Email = "user1@example.com",
             Password = "user1",
             Address = "789 West St, Westside",
-            Phone = "123-456-7890",
+            Phone = "11111111111",
             ImageUrl = "/img/john_doe.png"
         },
         new User
@@ -21,7 +21,16 @@ public static class DataSeeding
             Email = "user2@example.com",
             Password = "hashedpassword4",
             Address = "101 South St, Southside",
-            Phone = "987-654-3210",
+            Phone = "22222222222",
+            ImageUrl = "/img/jane_smith.png"
+        },  new User
+        {
+            UserId = 3,
+            Username = "user3",
+            Email = "user3@example.com",
+            Password = "hashedpassword4",
+            Address = "101 South St, Southside",
+            Phone = "33333333333",
             ImageUrl = "/img/jane_smith.png"
         }
     };
@@ -46,16 +55,16 @@ public static class DataSeeding
         }
     };
 
- public static List<Cargo> Cargos { get; } = new List<Cargo>
+    public static List<Cargo> Cargos { get; } = new List<Cargo>
     {
         new Cargo()
         {
             CargoId=1,
             SenderId = 1,
             CurrentBranchId = 1,
-            RecipientName = "Alice",
+            RecipientName = "user2",
             RecipientAddress = "789 Maple St",
-            RecipientPhone = "555-7890",
+            RecipientPhone = "22222222222",
             HashCode = "ABC123",
             Status = "Taşımada"
         },
@@ -64,10 +73,32 @@ public static class DataSeeding
             CargoId=2,
             SenderId = 2,
             CurrentBranchId = 2,
-            RecipientName = "Bob",
+            RecipientName = "user1",
             RecipientAddress = "321 Oak St",
-            RecipientPhone = "555-4321",
-            HashCode = "XYZ789",
+            RecipientPhone = "11111111111",
+            HashCode = "XYZfew789",
+            Status = "Tamamlandı"
+        },
+          new Cargo()
+        {
+            CargoId=3,
+            SenderId = 2,
+            CurrentBranchId = 1,
+            RecipientName = "user3",
+            RecipientAddress = "321 Oak St",
+            RecipientPhone = "33333333333",
+            HashCode = "XYZ7vs89",
+            Status = "Tamamlandı"
+        },
+            new Cargo()
+        {
+            CargoId=4,
+            SenderId = 1,
+            CurrentBranchId = 2,
+            RecipientName = "user3",
+            RecipientAddress = "321 Oak St",
+            RecipientPhone = "33333333333",
+            HashCode = "XYZ78vs9",
             Status = "Tamamlandı"
         }
     };

@@ -1,0 +1,72 @@
+@model DetailViewModel
+@using CargoAutomationSystem.Helpers
+
+@section navbar {
+    @await Component.InvokeAsync("User")
+}
+
+<h2>Kargo Detayları</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Bilgi</th>
+            <th scope="col">Değer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Kargo Bilgileri -->
+        <tr>
+            <th scope="row">1</th>
+            <td>Kargo ID</td>
+            <td>@Model.CargoId</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Takip Kodu</td>
+            <td>@Model.HashCode</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Kargo Durumu</td>
+            <td>@Model.Status</td>
+        </tr>
+        <tr>
+            <th scope="row">4</th>
+            <td>Alıcı Adı</td>
+            <td>@MaskingHelper.MaskName(Model.RecipientName)</td>
+        </tr>
+        <tr>
+            <th scope="row">5</th>
+            <td>Alıcı Adresi</td>
+            <td>@MaskingHelper.MaskName(Model.RecipientAddress)</td>
+        </tr>
+        <tr>
+            <th scope="row">6</th>
+            <td>Alıcı Telefon</td>
+            <td>@MaskingHelper.MaskPhone(Model.RecipientPhone)</td>
+        </tr>
+        <!-- Gönderici Bilgileri -->
+        <tr>
+            <th scope="row">7</th>
+            <td>Gönderici Adı</td>
+            <td>@MaskingHelper.MaskName(Model.SenderUsername)</td>
+        </tr>
+        <tr>
+            <th scope="row">8</th>
+            <td>Gönderici Email</td>
+            <td>@MaskingHelper.MaskEmail(Model.SenderEmail)</td>
+        </tr>
+        <tr>
+            <th scope="row">9</th>
+            <td>Gönderici Adresi</td>
+            <td>@MaskingHelper.MaskName(Model.SenderAddress)</td>
+        </tr>
+        <tr>
+            <th scope="row">10</th>
+            <td>Gönderici Telefon</td>
+            <td>@MaskingHelper.MaskPhone(Model.SenderPhone)</td>
+        </tr>
+    </tbody>
+</table>
