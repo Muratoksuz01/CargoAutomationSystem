@@ -14,5 +14,6 @@ namespace CargoAutomationSystem.Models
         public string SenderEmail { get; set; }
         public string SenderAddress { get; set; }
         public string SenderPhone { get; set; }
+        public string CurrentBranch { get; set; }
     }
 }

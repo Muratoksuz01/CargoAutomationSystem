@@ -6,13 +6,7 @@
 
 <h2>Kargo Takip</h2>
 
-<form asp-action="TrackCargo" method="post">
-    <div class="mb-3">
-        <label for="hashCode" class="form-label">Takip Kodu</label>
-        <input type="text" id="hashCode" name="hashCode" class="form-control" placeholder="Takip kodunu girin" />
-    </div>
-    <button type="submit" class="btn btn-primary">Sorgula</button>
-</form>
+
 
 @if (!Model.Any())
 {
@@ -24,6 +18,7 @@ else
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Sender Name</th>
                 <th scope="col">Receiver Name</th>
                 <th scope="col">Receiver Address</th>
                 <th scope="col">Status</th>
@@ -35,6 +30,7 @@ else
             {
                 <tr>
                     <th scope="row">@item.CargoId</th>
+                    <td>@item.SenderName</td>
                     <td>@item.RecipientName</td>
                     <td>@item.RecipientAddress</td>
                     <td>@item.Status</td>

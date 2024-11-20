@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zmQJ5avQa9sjpUdNCE1vfF5uBZg7iRPeZttbZ7JlEQg=",
+  "Hash": "9KH87C2XCXJkkWRklaNkOEYftodxiabWTTZo0EQgI/M=",
   "Source": "CargoAutomationSystem",
   "BasePath": "_content/CargoAutomationSystem",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "CargoAutomationSystem\\wwwroot",
       "Source": "CargoAutomationSystem",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CargoAutomationSystem.styles.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CargoAutomationSystem.styles.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Computed",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "CargoAutomationSystem.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CargoAutomationSystem.styles.css"
+      "OriginalItemSpec": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CargoAutomationSystem.styles.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CargoAutomationSystem.bundle.scp.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CargoAutomationSystem.bundle.scp.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Computed",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "CargoAutomationSystem.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CargoAutomationSystem.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CargoAutomationSystem.bundle.scp.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\css\\site.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\favicon.ico",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -93,10 +93,257 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\jane_smith.png",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\0558f9f9-f2f5-4bbd-b288-de6bdd6f4740.jpeg",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/0558f9f9-f2f5-4bbd-b288-de6bdd6f4740.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\0558f9f9-f2f5-4bbd-b288-de6bdd6f4740.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\244366a0-79a0-4c40-b35c-4081945c5184.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/244366a0-79a0-4c40-b35c-4081945c5184.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\244366a0-79a0-4c40-b35c-4081945c5184.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\34337543-e829-49c4-8729-eeac42c91830.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/34337543-e829-49c4-8729-eeac42c91830.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\34337543-e829-49c4-8729-eeac42c91830.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\455e7d4c-1cf7-44a0-a5a1-0f782137750a.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/455e7d4c-1cf7-44a0-a5a1-0f782137750a.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\455e7d4c-1cf7-44a0-a5a1-0f782137750a.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\4a10fd68-c125-428b-a300-8e7f11ecdf7e.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/4a10fd68-c125-428b-a300-8e7f11ecdf7e.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\4a10fd68-c125-428b-a300-8e7f11ecdf7e.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\4af714b2-5cfe-4fec-ac4c-dcbaae533f8f.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/4af714b2-5cfe-4fec-ac4c-dcbaae533f8f.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\4af714b2-5cfe-4fec-ac4c-dcbaae533f8f.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\7bc00b22-11c3-4f15-96aa-01d079b66f56.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/7bc00b22-11c3-4f15-96aa-01d079b66f56.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\7bc00b22-11c3-4f15-96aa-01d079b66f56.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\aa3a4eec-ab30-4b85-80ba-fcc4adbab1e3.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/aa3a4eec-ab30-4b85-80ba-fcc4adbab1e3.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\aa3a4eec-ab30-4b85-80ba-fcc4adbab1e3.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\c3d62b2c-c6b5-4a64-a025-ba7d7c5887cc.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/c3d62b2c-c6b5-4a64-a025-ba7d7c5887cc.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\c3d62b2c-c6b5-4a64-a025-ba7d7c5887cc.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\dba237da-e533-4d6f-876d-5242b8053c85.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/dba237da-e533-4d6f-876d-5242b8053c85.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\dba237da-e533-4d6f-876d-5242b8053c85.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\dcfff418-d262-4e07-8535-244d465f54ee.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/dcfff418-d262-4e07-8535-244d465f54ee.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\dcfff418-d262-4e07-8535-244d465f54ee.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\e09692ed-1ada-40e0-91b5-f8ca965b39b3.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/e09692ed-1ada-40e0-91b5-f8ca965b39b3.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\e09692ed-1ada-40e0-91b5-f8ca965b39b3.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\f190c53b-ef05-4e0b-a2fb-308e34e10f20.jpeg",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/f190c53b-ef05-4e0b-a2fb-308e34e10f20.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\f190c53b-ef05-4e0b-a2fb-308e34e10f20.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\jane_smith.png",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "img/jane_smith.png",
       "AssetKind": "All",
@@ -112,10 +359,10 @@
       "OriginalItemSpec": "wwwroot\\img\\jane_smith.png"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\nouser.png",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\img\\nouser.png",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "img/nouser.png",
       "AssetKind": "All",
@@ -131,10 +378,10 @@
       "OriginalItemSpec": "wwwroot\\img\\nouser.png"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\js\\site.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\js\\site.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "js/site.js",
       "AssetKind": "All",
@@ -150,10 +397,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css",
       "AssetKind": "All",
@@ -169,10 +416,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "AssetKind": "All",
@@ -188,10 +435,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "AssetKind": "All",
@@ -207,10 +454,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "AssetKind": "All",
@@ -226,10 +473,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "AssetKind": "All",
@@ -245,10 +492,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "AssetKind": "All",
@@ -264,10 +511,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "AssetKind": "All",
@@ -283,10 +530,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "AssetKind": "All",
@@ -302,10 +549,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css",
       "AssetKind": "All",
@@ -321,10 +568,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "AssetKind": "All",
@@ -340,10 +587,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "AssetKind": "All",
@@ -359,10 +606,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "AssetKind": "All",
@@ -378,10 +625,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "AssetKind": "All",
@@ -397,10 +644,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "AssetKind": "All",
@@ -416,10 +663,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "AssetKind": "All",
@@ -435,10 +682,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "AssetKind": "All",
@@ -454,10 +701,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css",
       "AssetKind": "All",
@@ -473,10 +720,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "AssetKind": "All",
@@ -492,10 +739,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "AssetKind": "All",
@@ -511,10 +758,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "AssetKind": "All",
@@ -530,10 +777,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "AssetKind": "All",
@@ -549,10 +796,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "AssetKind": "All",
@@ -568,10 +815,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "AssetKind": "All",
@@ -587,10 +834,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "AssetKind": "All",
@@ -606,10 +853,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css",
       "AssetKind": "All",
@@ -625,10 +872,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css.map",
       "AssetKind": "All",
@@ -644,10 +891,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css",
       "AssetKind": "All",
@@ -663,10 +910,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -682,10 +929,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css",
       "AssetKind": "All",
@@ -701,10 +948,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "AssetKind": "All",
@@ -720,10 +967,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "AssetKind": "All",
@@ -739,10 +986,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "AssetKind": "All",
@@ -758,10 +1005,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js",
       "AssetKind": "All",
@@ -777,10 +1024,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "AssetKind": "All",
@@ -796,10 +1043,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "AssetKind": "All",
@@ -815,10 +1062,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "AssetKind": "All",
@@ -834,10 +1081,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js",
       "AssetKind": "All",
@@ -853,10 +1100,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "AssetKind": "All",
@@ -872,10 +1119,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "AssetKind": "All",
@@ -891,10 +1138,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "AssetKind": "All",
@@ -910,10 +1157,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js",
       "AssetKind": "All",
@@ -929,10 +1176,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js.map",
       "AssetKind": "All",
@@ -948,10 +1195,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js",
       "AssetKind": "All",
@@ -967,10 +1214,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js.map",
       "AssetKind": "All",
@@ -986,10 +1233,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/bootstrap/LICENSE",
       "AssetKind": "All",
@@ -1005,10 +1252,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "AssetKind": "All",
@@ -1024,10 +1271,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "AssetKind": "All",
@@ -1043,10 +1290,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE.txt",
       "AssetKind": "All",
@@ -1062,10 +1309,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.js",
       "AssetKind": "All",
@@ -1081,10 +1328,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min.js",
       "AssetKind": "All",
@@ -1100,10 +1347,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.js",
       "AssetKind": "All",
@@ -1119,10 +1366,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min.js",
       "AssetKind": "All",
@@ -1138,10 +1385,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery-validation/LICENSE.md",
       "AssetKind": "All",
@@ -1157,10 +1404,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery/dist/jquery.js",
       "AssetKind": "All",
@@ -1176,10 +1423,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery/dist/jquery.min.js",
       "AssetKind": "All",
@@ -1195,10 +1442,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery/dist/jquery.min.map",
       "AssetKind": "All",
@@ -1214,10 +1461,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Identity": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
       "RelativePath": "lib/jquery/LICENSE.txt",
       "AssetKind": "All",

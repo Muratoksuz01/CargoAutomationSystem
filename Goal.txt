@@ -1,9 +1,14 @@
-        10/11/2024
-redirect seonra sayfaları tasarla   tamamlandı 
-
-        12/11/2024 11 in gecesi
-- yonlendirdigin sayfaları icindeki sayfaları  tasarla                          tamamlandı
-- sube kısmı icin tum cargoları listeleyn bir databaseyı tasarla ve gosterdir
-        12/11/2024 12 gunduz 
-- sube kısmı icin tum cargoları listeleyn bir databaseyı tasarla ve gosterdir
-
+                16/11/24
+-20/11 tamamandı- user index sayfasında yapılcak işlemler icin bir on tasarım olabilr aktif cargoları user hakkında bilgiler fln.
+-20/11 tamamandı-user setting kısmı password kismi yapılcak ama oncelikle biraz tasarım yapılması gerek oraya                                   
+-20/11 tamamlandı- user setting icin bir kısıtlama yok bos bırakabilr vazıyett bunları ayarla                                                    
+                --hala user authintication olayı yok 
+                -- branch sayfası yapılcak 
+                        --oncelikle index 
+                        --aklıma tek bu geldi şimdi
+                en son databaseyı ayarlayacagız 
+                                20/11/24
+                -- register da birkac validation textdanger hatası var basit bir sey  
+-20/11 tamamandı- register da resmi duzelt
+-20/11 tamamandı- register olduktan sonra kullnıcıın username,adress ve phone gorunmuyor 
+-20/11 tamamandı - trackcargoda tabloda ullanıcın gonderdigi kısmında yazmalıyız                                                                

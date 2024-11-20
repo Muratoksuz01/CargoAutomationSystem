@@ -22,7 +22,7 @@ public static class DataSeeding
             Password = "hashedpassword4",
             Address = "101 South St, Southside",
             Phone = "22222222222",
-            ImageUrl = "/img/jane_smith.png"
+            ImageUrl = "jane_smith.png"
         },  new User
         {
             UserId = 3,
@@ -31,7 +31,7 @@ public static class DataSeeding
             Password = "hashedpassword4",
             Address = "101 South St, Southside",
             Phone = "33333333333",
-            ImageUrl = "/img/jane_smith.png"
+            ImageUrl = "jane_smith.png"
         }
     };
 

@@ -2,13 +2,13 @@
     ViewData["Title"] = "Kayıt Ol";
 }
 @model RegisterViewModel
-@section navbar{
-@await Html.PartialAsync("_navbar")
+@section navbar {
+    @await Html.PartialAsync("_navbar")
 }
 
 <h2>Kayıt Ol</h2>
 
-<form method="post" asp-action="Register" asp-controller="Home">
+<form method="post" asp-action="Register" asp-controller="Home" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="UserName"></label>
         <input class="form-control" asp-for="UserName" placeholder="Kullanıcı Adı" />
@@ -29,7 +29,7 @@
 
     <div class="form-group">
         <label asp-for="ConfirmPassword"></label>
-        <input  class="form-control" asp-for="ConfirmPassword" placeholder="Şifrenizi tekrar girin" />
+        <input class="form-control" asp-for="ConfirmPassword" placeholder="Şifrenizi tekrar girin" />
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
 
@@ -45,10 +45,10 @@
         <span asp-validation-for="Address" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="ImageUrl"></label>
-        <input class="form-control" asp-for="ImageUrl" placeholder="Resim URL'nizi girin" />
-        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Resim</label>
+        <input class="form-control" type="file" name="file" id="formFile">
+
     </div>
 
     <button type="submit" class="btn btn-primary">Kayıt Ol</button>
@@ -60,7 +60,8 @@
 
 
 @section Scripts {
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
 }

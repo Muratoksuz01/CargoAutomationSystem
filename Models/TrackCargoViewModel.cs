@@ -5,6 +5,7 @@ namespace CargoAutomationSystem.Models
         
     public int CargoId { get; set; } // Otomatik artan ID
     public int SenderId { get; set; } // Gönderici kullanıcı ID'si (User ile ilişki)
+    public  string SenderName { get; set; }
     public int CurrentBranchId { get; set; } // Mevcut şube ID'si (Branch ile ilişki)
 
     // Alıcı bilgileri, sistemde kayıtlı değilse buradan tutulacak

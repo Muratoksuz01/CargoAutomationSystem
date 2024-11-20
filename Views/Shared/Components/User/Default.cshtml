@@ -19,11 +19,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @Model.Username
-                        <img src="@(Model.ImageUrl !=null ? Model.ImageUrl:"nouser.png")" class="ms-1 rounded-circle" width="30" alt="User Image">
+                        <img src="/img/@(!string.IsNullOrEmpty( Model.ImageUrl) ? Model.ImageUrl:"nouser.png")" 
+                        class="ms-1 rounded-circle" width="30" alt="User Image">
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" asp-controller="User" asp-action="LogOut">Log Out</a></li>
-                        <li><a class="dropdown-item" asp-controller="User" asp-action="Setting">Ayarlar</a></li>
+                        <li><a class="dropdown-item" asp-controller="User" asp-action="Settings">Ayarlar</a></li>
                     </ul>
                 </li>
             </ul>

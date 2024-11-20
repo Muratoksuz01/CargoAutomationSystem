@@ -5,6 +5,7 @@ using CargoAutomationSystem.Entity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CargoAutomationSystem.Controllers;
 
@@ -21,9 +22,107 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    [HttpPost]
+    public IActionResult Register(RegisterViewModel model, IFormFile? file)
+    {
+        ModelState.Remove("ImageUrl");
+        if (ModelState.IsValid)
+        {
+            string imageUrl = null;
+
+            // Eğer dosya yüklenmişse işlem yap
+            if (file != null && file.Length > 0)
+            {
+                // Dosya ismini oluştur (benzersiz yapmak için Guid kullanabilirsiniz)
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+                // Dosya kaydedileceği dizin (örneğin "wwwroot/images/")
+                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
+
+                // Dizin yoksa oluştur
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                // Tam dosya yolu
+                var filePath = Path.Combine(uploadPath, fileName);
+
+                // Dosyayı fiziksel olarak kaydet
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                // Kaydedilen dosyanın URL'ini oluştur
+                imageUrl = fileName;
+            }
+
+            // Kullanıcıyı kaydet
+            Users.Add(new User
+            {
+                Email = model.Email,
+                Password = model.Password,
+                Username = model.UserName,
+                Phone = model.PhoneNumber,
+                Address = model.Address,
+                ImageUrl = imageUrl // Kaydedilen resim URL'sini atıyoruz
+            });
+
+            return RedirectToAction("Index");
+        }
+        foreach (var state in ModelState)
+        {
+            string key = state.Key; // Alan adı
+            foreach (var error in state.Value.Errors)
+            {
+                Console.WriteLine($"Field: {key}, Error: {error.ErrorMessage}");
+            }
+        }
+        return View(model);
+    }
+
+    [AcceptVerbs("GET", "POST")]
+    public IActionResult VerifyUserName(string UserName)
+    {
+        // Kullanıcı adlarını kontrol et
+        if (Users.Any(u => u.Username == UserName))
+        {
+            return Json($"Kullanıcı adı '{UserName}' zaten alınmış.");
+        }
+        return Json(true); // Kullanıcı adı kullanılabilir
+    }
+
+    [AcceptVerbs("GET", "POST")]
+    public IActionResult VerifyEmail(string Email)
+    {
+        // Email adreslerini kontrol et
+        if (Users.Any(u => u.Email == Email))
+        {
+            return Json($"Email '{Email}' zaten kullanılıyor.");
+        }
+        return Json(true); // Email kullanılabilir
+    }
+
+    [AcceptVerbs("GET", "POST")]
+    public IActionResult VerifyPhone(string PhoneNumber)
+    {  
+        // Telefon numaralarını kontrol et
+        if (Users.Any(u => u.Phone == PhoneNumber))
+        {
+            return Json($"Telefon numarası '{PhoneNumber}' zaten kayıtlı.");
+        }
+        return Json(true); // Telefon numarası kullanılabilir
+    }
+
+
+
+
+
     private User AuthenticateUser(string email, string password)
     {
-         return Users.SingleOrDefault(u => u.Email == email && u.Password == password);
+        return Users.SingleOrDefault(u => u.Email == email && u.Password == password);
         // return new User
         // {
         //     UserId = 1,
@@ -46,11 +145,13 @@ public class HomeController : Controller
                 var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),  // Kullanıcı ID'si
-                new Claim(ClaimTypes.Name, user.Username),                      // Kullanıcı adı
-                new Claim(ClaimTypes.Email, user.Email),                        // Kullanıcı email
-                new Claim("Address", user.Address ?? ""),
-                new Claim(ClaimTypes.MobilePhone, user.Phone ?? ""),
-                new Claim("ImageUrl", user.ImageUrl ?? "")
+                // new Claim(ClaimTypes.Name, user.Username),                      // Kullanıcı adı
+                // new Claim(ClaimTypes.Email, user.Email),                        // Kullanıcı email
+                // new Claim("Address", user.Address ?? ""),
+                // new Claim(ClaimTypes.MobilePhone, user.Phone ?? ""),
+                // new Claim("ImageUrl", user.ImageUrl ?? ""),
+                // new Claim("Password", user.Password)
+
 
             };
 
@@ -72,18 +173,7 @@ public class HomeController : Controller
         ModelState.AddModelError("", "formu kontorl ediniz ");
         return View(model);
     }
-    [HttpPost]
-    public IActionResult Register(RegisterViewModel model)
-    {
-        if (ModelState.IsValid)
-        {
-            // Simulating a user registration
-            Users.Add(new User { Email = model.Email, Password = model.Password });
-            return RedirectToAction("Index");
-        }
 
-        return View(model);
-    }
 
     [HttpPost]
     public IActionResult CorporateLogin(LoginViewModel model)
