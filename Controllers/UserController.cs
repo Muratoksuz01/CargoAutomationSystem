@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using CargoAutomationSystem.Entity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using CargoAutomationSystem.Models.Users;
 
 namespace CargoAutomationSystem.Controllers
 {
@@ -21,24 +22,6 @@ namespace CargoAutomationSystem.Controllers
 
 
         };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public IActionResult Settings()
         {
@@ -60,7 +43,9 @@ namespace CargoAutomationSystem.Controllers
         public IActionResult UpdatePassword(SettingsViewModel model)
         {
             var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-
+            model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
+            model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
+            model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
             if (!ModelState.IsValid)
             {
                 foreach (var key in ModelState.Keys)
@@ -72,17 +57,12 @@ namespace CargoAutomationSystem.Controllers
                     }
                 }
 
-                model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
-                model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
-                model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
+
                 return View("Settings", model); // Ana modeli döndürüyoruz.
             }
 
             if (user.Password != model.UpdatePassword.CurrentPassword)
             {
-                model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
-                model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
-                model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
                 ModelState.AddModelError("UpdatePassword.CurrentPassword", "Current password is incorrect.");
                 return View("Settings", model);
             }
@@ -256,11 +236,9 @@ namespace CargoAutomationSystem.Controllers
             System.Console.WriteLine("User index fonksiyonu çalıştı.");
             return View(user);
         }
-
-
         public IActionResult Detail(string hashCode)
         {
-         
+
 
             var cargo = DataSeeding.Cargos.SingleOrDefault(c => c.HashCode == hashCode);
             if (cargo == null)
@@ -275,7 +253,7 @@ namespace CargoAutomationSystem.Controllers
                 CargoId = cargo.CargoId,
                 HashCode = cargo.HashCode,
                 Status = cargo.Status,
-                CurrentBranch=Branches.Where( a=>a.BranchId == cargo.CurrentBranchId).Select(a=>a.BranchName).FirstOrDefault(),
+                CurrentBranch = Branches.Where(a => a.BranchId == cargo.CurrentBranchId).Select(a => a.BranchName).FirstOrDefault(),
 
                 RecipientName = cargo.RecipientName,
                 RecipientAddress = cargo.RecipientAddress,
@@ -312,7 +290,7 @@ namespace CargoAutomationSystem.Controllers
                     CargoId = c.CargoId,
                     SenderId = c.SenderId,
                     CurrentBranchId = c.CurrentBranchId,
-                    SenderName=Users.Where(y => y.UserId == c.SenderId).Select(y => y.Username).FirstOrDefault(),
+                    SenderName = Users.Where(y => y.UserId == c.SenderId).Select(y => y.Username).FirstOrDefault(),
                     RecipientName = c.RecipientName,
                     RecipientAddress = c.RecipientAddress,
                     RecipientPhone = c.RecipientPhone,
@@ -323,7 +301,6 @@ namespace CargoAutomationSystem.Controllers
 
             return View(cargos);
         }
-
         public IActionResult LogOut()
         {
             // Oturumu temizle

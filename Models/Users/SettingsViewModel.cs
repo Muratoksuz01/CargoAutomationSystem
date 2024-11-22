@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CargoAutomationSystem.Models
+namespace CargoAutomationSystem.Models.Users
 {
     public class SettingsViewModel
     {

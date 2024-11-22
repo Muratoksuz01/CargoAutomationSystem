@@ -9,10 +9,10 @@ public static class DataSeeding
             UserId = 1,
             Username = "user1",
             Email = "user1@example.com",
-            Password = "user1",
+            Password = "hashedpassword4",
             Address = "789 West St, Westside",
             Phone = "11111111111",
-            ImageUrl = "/img/john_doe.png"
+            ImageUrl = "john_doe.png"
         },
         new User
         {
@@ -49,7 +49,7 @@ public static class DataSeeding
         {
             BranchId = 2,
             Email = "branch2@cargo.com",
-            Password = "hashedpassword2",
+            Password = "hashedpassword1",
             BranchName = "East Branch",
             Address = "456 East Rd, East Town"
         }
@@ -68,6 +68,17 @@ public static class DataSeeding
             HashCode = "ABC123",
             Status = "Taşımada"
         },
+           new Cargo()
+        {
+            CargoId=3,
+            SenderId = 2,
+            CurrentBranchId = 1,
+            RecipientName = "user3",
+            RecipientAddress = "321 Oak St",
+            RecipientPhone = "33333333333",
+            HashCode = "XYZ7vs89",
+            Status = "Tamamlandı"
+        },
         new Cargo()
         {
             CargoId=2,
@@ -79,17 +90,7 @@ public static class DataSeeding
             HashCode = "XYZfew789",
             Status = "Tamamlandı"
         },
-          new Cargo()
-        {
-            CargoId=3,
-            SenderId = 2,
-            CurrentBranchId = 1,
-            RecipientName = "user3",
-            RecipientAddress = "321 Oak St",
-            RecipientPhone = "33333333333",
-            HashCode = "XYZ7vs89",
-            Status = "Tamamlandı"
-        },
+
             new Cargo()
         {
             CargoId=4,
@@ -103,44 +104,28 @@ public static class DataSeeding
         }
     };
 
-    public static List<CargoInfo> CargoInfos = new List<CargoInfo>
-    {
-        new CargoInfo
-        {
-            CargoInfoId = 1,
-            CargoId = 1,
-            Status = "Taşımada",
-            Date = DateTime.Now.AddDays(-1)
-        },
-        new CargoInfo
-        {
-            CargoInfoId = 2,
-            CargoId = 2,
-            Status = "Tamamlandı",
-            Date = DateTime.Now.AddDays(-2)
-        }
-    };
+ 
 
     public static List<CargoProcess> CargoProcesses = new List<CargoProcess>
     {
         new CargoProcess
         {
             CargoProcessId = 1,
-            CargoInfoId = 1,
+            CargoId = 1,
             Process = "Şubeden Gönderildi",
             ProcessDate = DateTime.Now.AddHours(-12)
         },
         new CargoProcess
         {
             CargoProcessId = 2,
-            CargoInfoId = 1,
+            CargoId = 1,
             Process = "Alıcıya Ulaştı",
             ProcessDate = DateTime.Now.AddHours(-1)
         },
         new CargoProcess
         {
             CargoProcessId = 3,
-            CargoInfoId = 2,
+            CargoId = 2,
             Process = "Şubeden Gönderildi",
             ProcessDate = DateTime.Now.AddDays(-2).AddHours(-3)
         }

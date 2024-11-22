@@ -1,4 +1,4 @@
-namespace CargoAutomationSystem.Models
+namespace CargoAutomationSystem.Models.Users
 {
     public class IndexViewModel()
     {

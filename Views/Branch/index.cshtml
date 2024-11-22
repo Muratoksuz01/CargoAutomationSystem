@@ -1,4 +1,63 @@
-@section navbar{
-    @await Html.PartialAsync("_Snavbar",false)
+@section navbar {
+    @await Component.InvokeAsync("Branch")
 }
-<h1>brnach dosyası </h1>
+@model BIndexViewModel
+
+
+
+<div class="row p-3">
+    <div class="col-md-3">
+        <div class="card d-flex align-items-center">
+            <div class="card-body">
+                <h5 class="card-title">@Model.BranchInfos.BranchName</h5>
+                <p class="card-text">@Model.BranchInfos.Email</p>
+                <p class="card-text">@Model.BranchInfos.Address</p>
+                <a href="/Branch/Settings" class="text-primary">Düzenlemek ister misiniz?</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <a href="/Branch/TrackCargo" class="btn btn-outline-success">kargolarınızı izleyin</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">receiver Name</th>
+                    <th scope="col">receiver Address</th>
+                    <th scope="col">status</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Cargos != null && Model.Cargos.Any())
+                {
+                    @foreach (var item in Model.Cargos)
+                    {
+                        <tr>
+                            <th scope="row">@item.CargoId</th>
+                            <td>@item.ReceiverName</td>
+                            <td>@item.ReceiverAddress</td>
+                            <td>@item.Status</td>
+                            <td>
+                                <a asp-controller="Branch" asp-action="Detail" asp-route-HashCode="@item.HashCode">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">Kargo bilgisi bulunamadı.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>
+
+}

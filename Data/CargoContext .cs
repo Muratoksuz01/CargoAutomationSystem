@@ -9,7 +9,6 @@ namespace CargoAutomationSystem.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Cargo> Cargos { get; set; }
-        public DbSet<CargoInfo> CargoInfos { get; set; }
         public DbSet<CargoProcess> CargoProcesses { get; set; }
 
         // Veritabanı ilişkilerini ve tabloların yapılandırmalarını burada tanımlayabilirsiniz.

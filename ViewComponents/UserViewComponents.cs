@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using CargoAutomationSystem.Entity;
 using CargoAutomationSystem.Models;
+using CargoAutomationSystem.Models.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CargoAutomationSystem.ViewComponents
@@ -14,13 +15,7 @@ namespace CargoAutomationSystem.ViewComponents
         {
             var claimsPrincipal = User as ClaimsPrincipal;
 
-            // Claims üzerinden kullanıcı bilgilerini alıyoruz
-         //   var userId = claimsPrincipal?.FindFirstValue(ClaimTypes.NameIdentifier);
-            // var username = claimsPrincipal?.Identity?.Name;
-            // var email = claimsPrincipal?.FindFirstValue(ClaimTypes.Email);
-            // var address = claimsPrincipal?.FindFirstValue("Address");
-            // var phone = claimsPrincipal?.FindFirstValue(ClaimTypes.MobilePhone);
-            // var imageUrl = claimsPrincipal?.FindFirstValue("ImageUrl");
+  
 
             int userId = int.Parse(claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier));
 

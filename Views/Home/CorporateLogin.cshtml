@@ -17,13 +17,13 @@
 <form asp-action="CorporateLogin" asp-controller="Home" method="post">
     <div class="form-group">
         <label asp-for="Email"></label>
-        <input class="form-control" asp-for="Email" placeholder="Kurumsal Email adresinizi girin" />
+        <input class="form-control" asp-for="Email" value="branch1@cargo.com" placeholder="Kurumsal Email adresinizi girin" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Password"></label>
-        <input type="password" class="form-control" asp-for="Password" placeholder="Şifrenizi girin" />
+        <input type="password" class="form-control" value="hashedpassword1" asp-for="Password" placeholder="Şifrenizi girin" />
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
