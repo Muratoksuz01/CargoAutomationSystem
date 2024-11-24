@@ -1,11 +1,14 @@
-                16/11/24
-                                                   
+                16/11/24                                   
 --hala user authintication olayı yok 
 -- branch sayfası yapılcak 
-        --oncelikle index 
         --aklıma tek bu geldi şimdi
-en son databaseyı ayarlayacagız 
+--en son databaseyı ayarlayacagız 
                 21/11/24
 -- user da update Image fok. resim gondermeden save diyince hata gonderiyor 
---send cargo yaptıktan sonra kargo index de ve track cargo sayasında gorunmesi gerek 
+--send cargo yaptıktan sonra kargo index de ve track cargo sayfasında gorunmesi gerek yani gonderdikleride gorunmeli
 -- index sayfasında resim olmayınca nouser.png gelmiyor                            
+                23/11/24
+--branch list de tamamlananlar ve olmaynlar icin tablo olmalı 
+        --tamamlananlar icin her bir satıra silme işlemi koyulabilir 
+--branch da Branch/Index de iken url bunu User/Index diyince calişmaması gerek bu da branck ve user da giriş yapan kişisin id si aynı olması 
+        yani her kişiye unigue saf int olan bir primary key vermeliyiz 

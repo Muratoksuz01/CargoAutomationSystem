@@ -16,6 +16,81 @@ namespace CargoAutomationSystem.Controllers
         {
             BranchId = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : 0,
         };
+        
+
+public IActionResult RemoveCargo(string hashCode)
+{
+    foreach (var branch in DataSeeding.Branches)
+    {
+        var cargo = branch.Cargos.FirstOrDefault(c => c.HashCode == hashCode);
+        if (cargo != null)
+        {
+            branch.Cargos.Remove(cargo); // Şubeden kargoyu kaldır
+            System.Console.WriteLine($"Kargonun şube bağlantısı kaldırıldı. Hash kodu: {hashCode}");
+            break;
+        }
+    }
+
+    return RedirectToAction("List");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public IActionResult List()
+        {
+            var cargos = Cargos
+                .Where(c => c.CurrentBranchId == CurrentBranch.BranchId)
+                .Select(c => new BListViewModel
+                {
+                    CargoId = c.CargoId,
+                    RecipientName = c.RecipientName,
+                    RecipientAddress = c.RecipientAddress,
+                    HashCode = c.HashCode,
+                    Status = c.Status
+                })
+                .ToList();
+            return View(cargos);
+        }
+
+        public IActionResult Details(string hashCode)
+        {
+            var cargo = DataSeeding.Cargos.SingleOrDefault(c => c.HashCode == hashCode);
+            if (cargo == null)
+            {
+                return NotFound($"No cargo found with hash code: {hashCode}");
+            }
+            var sender = DataSeeding.Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
+            var detail = new DetailViewModel
+            {
+                CargoId = cargo.CargoId,
+                HashCode = cargo.HashCode,
+                Status = cargo.Status,
+
+                RecipientName = cargo.RecipientName,
+                RecipientAddress = cargo.RecipientAddress,
+                RecipientPhone = cargo.RecipientPhone,
+
+                SenderId = sender?.UserId ?? 0,
+                SenderUsername = sender?.Username,
+                SenderEmail = sender?.Email,
+                SenderAddress = sender?.Address,
+                SenderPhone = sender?.Phone
+            };
+            System.Console.WriteLine($"Detail fetched for cargo hash code: {hashCode}");
+            return View(detail);
+        }
 
         public IActionResult Index()
         {
@@ -44,6 +119,14 @@ namespace CargoAutomationSystem.Controllers
             return View(branch);
         }
 
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("CorporateLogin", "Home");
+        }
+
+
         public IActionResult Settings()
         {
             System.Console.WriteLine(" branch setting de ");
@@ -58,46 +141,71 @@ namespace CargoAutomationSystem.Controllers
             return View(model);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public IActionResult List()
+        [HttpPost]
+        public IActionResult UpdateUsername(BSettingsViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                //       TempData["Error"] = "Invalid username.";
+                return View("Settings", model);
+            }
+
+            var branch = Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
+            branch.BranchName = model.UpdateUsername.Username;
+            //                                                       sonra burada saveChanges gelecek
+
+            //  TempData["Message"] = "Username updated successfully!";
+            return RedirectToAction("Settings");
         }
 
-        public IActionResult LogOut()
+
+        [HttpPost]
+        public IActionResult UpdateInfo(BSettingsViewModel model)
         {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Login", "Home");
+            if (!ModelState.IsValid)
+            {
+                return View("Settings", model); 
+            }
+            var branch = Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
+            branch.Email = model.EditInfo.Email;
+            branch.Address = model.EditInfo.Address;
+            return RedirectToAction("Settings");
         }
 
-        public IActionResult Setting()
+        [HttpPost]
+        public IActionResult UpdatePassword(BSettingsViewModel model)
         {
-            return View();
+            var branch = Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
+            model.UpdateUsername = new BUpdateUsernameViewModel { Username = branch.BranchName };
+            model.EditInfo = new BEditInfoViewModel { Email = branch.Email, Address = branch.Address };
+            if (!ModelState.IsValid)
+            {
+                foreach (var key in ModelState.Keys)
+                {
+                    var errors = ModelState[key].Errors;
+                    foreach (var error in errors)
+                    {
+                        Console.WriteLine($"Field: {key}, Error: {error.ErrorMessage}");
+                    }
+                }
+
+
+                return View("Settings", model); // Ana modeli döndürüyoruz.
+            }
+
+            if (branch.Password != model.UpdatePassword.CurrentPassword)
+            {
+                ModelState.AddModelError("UpdatePassword.CurrentPassword", "Current password is incorrect.");
+                return View("Settings", model);
+            }
+
+            branch.Password = model.UpdatePassword.NewPassword;
+            //                                                       sonra burada saveChanges gelecek
+
+            return RedirectToAction("Settings");
         }
+
+
     }
 
 

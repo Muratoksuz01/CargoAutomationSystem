@@ -73,6 +73,7 @@ namespace CargoAutomationSystem.Controllers
             //     TempData["Message"] = "Password updated successfully!";
             return RedirectToAction("Settings");
         }
+      
         [HttpPost]
         public IActionResult UpdateImage(SettingsViewModel model, IFormFile file)
         {

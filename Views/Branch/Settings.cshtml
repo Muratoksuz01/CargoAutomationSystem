@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <form asp-action="UpdateInfo" method="post">
+            <form asp-controller="Branch" asp-action="UpdateInfo" method="post">
                 <div class="mb-3">
                     <label asp-for="EditInfo.Email" class="form-label">Email</label>
                     <input class="form-control" asp-for="EditInfo.Email">
@@ -43,7 +43,7 @@
             </form>
         </div>
         <div class="col-md-4">
-            <form asp-controller="User" asp-action="UpdatePassword" method="post">
+            <form asp-controller="Branch" asp-action="UpdatePassword" method="post">
                 <div class="mb-3">
                     <label for="currentPassword" class="form-label">Current Password</label>
                     <input class="form-control" asp-for="UpdatePassword.CurrentPassword">
@@ -79,7 +79,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form asp-action="UpdateUsername" method="post">
+                <form asp-action="UpdateUsername" asp-controller="Branch" method="post">
                     <div class="mb-3">
                         <label asp-for="UpdateUsername.Username" class="form-label"></label>
                         <input class="form-control" asp-for="UpdateUsername.Username">

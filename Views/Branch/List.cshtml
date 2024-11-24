@@ -1,34 +1,94 @@
 @section navbar {
-    @await Component.InvokeAsync("Branch")
+  @await Component.InvokeAsync("Branch")
 }
-<table class="table table-striped table-hover">
-      <caption>List of users</caption>
 
-  <thead class="table-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>twitter</td>
-    </tr>
-  </tbody>
-</table>
+@model IEnumerable<BListViewModel>
+
+<h2>Tüm Kargolar</h2>
+
+@if (!Model.Any())
+{
+  <p>Şubenizde şu anda hiç kargo yok.</p>
+}
+else
+ {
+
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        Devam Eden Kargolar
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+      data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status != "Tamamlandı"))
+
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Tamamlananlar
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+      data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status == "Tamamlandı"))
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+@*
+  <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+    <!-- Devam Eden Kargolar -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+          Devam Eden Kargolar
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+        aria-labelledby="panelsStayOpen-headingOne">
+        <div class="accordion-body">
+          @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status != "Tamamlandı"))
+        </div>
+      </div>
+    </div>
+
+    <!-- Tamamlanan Kargolar -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+          Tamamlananlar
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+        aria-labelledby="panelsStayOpen-headingTwo">
+        <div class="accordion-body">
+          @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status == "Tamamlandı"))
+        </div>
+      </div>
+    </div>
+  </div> *@
+}
+
+@section Scripts {
+  <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>
+}
+
+
+
