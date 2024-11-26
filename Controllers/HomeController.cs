@@ -12,10 +12,43 @@ namespace CargoAutomationSystem.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly CargoContext _context;
+    private readonly List<User> Users;
+    private readonly List<Branch> Branches;
 
-    private readonly List<User> Users = DataSeeding.Users;
-    private readonly List<Branch> Branches = DataSeeding.Branches;
+    public HomeController()
+    {
+        // DataSeeding'den Users listesinin null olup olmadığını kontrol ediyoruz
+        if (DataSeeding.Users == null)
+        {
+            Console.WriteLine("DataSeeding.Users listesi NULL!");
+            Users = new List<User>(); // Eğer null ise boş bir liste başlatıyoruz
+        }
+        else
+        {
+            Console.WriteLine("DataSeeding.Users listesi yüklendi.");
+            Users = DataSeeding.Users.ToList(); // List'e çeviriyoruz
+        }
+
+        // Aynı kontrolü Branches için de yapabiliriz
+        if (DataSeeding.Branches == null)
+        {
+            Console.WriteLine("DataSeeding.Branches listesi NULL!");
+            Branches = new List<Branch>(); // Eğer null ise boş bir liste başlatıyoruz
+        }
+        else
+        {
+            Console.WriteLine("DataSeeding.Branches listesi yüklendi.");
+            Branches = DataSeeding.Branches.ToList(); // List'e çeviriyoruz
+        }
+    }
+
+
+
+
+    // private readonly CargoContext _context;
+
+    // private readonly List<User> Users = DataSeeding.Users.ToList();
+    // private readonly List<Branch> Branches = DataSeeding.Branches;
 
     [HttpPost]
     public IActionResult Register(RegisterViewModel model, IFormFile? file)
@@ -25,47 +58,55 @@ public class HomeController : Controller
         {
             string imageUrl = null;
 
-            // Eğer dosya yüklenmişse işlem yap
+            // Resim dosyası yükleme
             if (file != null && file.Length > 0)
             {
-                // Dosya ismini oluştur (benzersiz yapmak için Guid kullanabilirsiniz)
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-
-                // Dosya kaydedileceği dizin (örneğin "wwwroot/images/")
                 var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
-
-                // Dizin yoksa oluştur
                 if (!Directory.Exists(uploadPath))
                 {
                     Directory.CreateDirectory(uploadPath);
                 }
-
-                // Tam dosya yolu
                 var filePath = Path.Combine(uploadPath, fileName);
-
-                // Dosyayı fiziksel olarak kaydet
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
-
-                // Kaydedilen dosyanın URL'ini oluştur
                 imageUrl = fileName;
             }
 
-            // Kullanıcıyı kaydet
-            Users.Add(new User
+            // Yeni kullanıcı oluşturma
+            var newUser = new User
             {
+                UserId = DataSeeding.Users.Count + 1,
+                Username = model.UserName,
                 Email = model.Email,
                 Password = model.Password,
-                Username = model.UserName,
-                Phone = model.PhoneNumber,
                 Address = model.Address,
-                ImageUrl = imageUrl // Kaydedilen resim URL'sini atıyoruz
-            });
+                Phone = model.PhoneNumber,
+                ImageUrl = imageUrl,
+                Cargos = new List<Cargo>()
+            };
+
+            // Geçici kullanıcı kontrolü
+            var tempUser = DataSeeding.Users.FirstOrDefault(u => u.Phone == model.PhoneNumber && u.Password == "temporary");
+            if (tempUser != null)
+            {
+                // Geçici kullanıcının kargolarını yeni kullanıcıya aktar
+                newUser.Cargos.AddRange(tempUser.Cargos);
+
+                // Geçici kullanıcıyı sil
+                DataSeeding.Users.Remove(tempUser);
+                System.Console.WriteLine($"Geçici kullanıcı {tempUser.Username} sistemden kaldırıldı.");
+            }
+
+            // Yeni kullanıcıyı listeye ekle
+            DataSeeding.Users.Add(newUser);
+            System.Console.WriteLine($"Yeni kullanıcı oluşturuldu: {newUser.Username}");
 
             return RedirectToAction("Index");
         }
+
         foreach (var state in ModelState)
         {
             string key = state.Key; // Alan adı
@@ -74,18 +115,19 @@ public class HomeController : Controller
                 Console.WriteLine($"Field: {key}, Error: {error.ErrorMessage}");
             }
         }
+
         return View(model);
     }
 
     private User AuthenticateUser(string email, string password)
     {
         return Users.SingleOrDefault(u => u.Email == email && u.Password == password);
-   
+
     }
-     private Branch AuthenticateBranch(string email, string password)
+    private Branch AuthenticateBranch(string email, string password)
     {
         return Branches.SingleOrDefault(u => u.Email == email && u.Password == password);
-   
+
     }
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model)
@@ -139,7 +181,7 @@ public class HomeController : Controller
         ModelState.AddModelError("", "formu kontorl ediniz ");
         return View(model);
     }
-  
+
     [HttpPost]
     public IActionResult CorporateRegister(CorporateRegisterViewModel model)
     {
@@ -152,11 +194,11 @@ public class HomeController : Controller
         return View(model);
     }
 
-    public IActionResult CorporateRegister()=>View();
-    public IActionResult Register()=>View();
-    public IActionResult CorporateLogin()=>View();
+    public IActionResult CorporateRegister() => View();
+    public IActionResult Register() => View();
+    public IActionResult CorporateLogin() => View();
     public IActionResult Login() => View();
-    public IActionResult Index()=>View();
+    public IActionResult Index() => View();
     [AcceptVerbs("GET", "POST")]
     public IActionResult VerifyUserName(string UserName)
     {
@@ -181,7 +223,7 @@ public class HomeController : Controller
 
     [AcceptVerbs("GET", "POST")]
     public IActionResult VerifyPhone(string PhoneNumber)
-    {  
+    {
         // Telefon numaralarını kontrol et
         if (Users.Any(u => u.Phone == PhoneNumber))
         {

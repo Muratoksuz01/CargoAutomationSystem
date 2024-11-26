@@ -12,3 +12,9 @@
         --tamamlananlar icin her bir satıra silme işlemi koyulabilir 
 --branch da Branch/Index de iken url bunu User/Index diyince calişmaması gerek bu da branck ve user da giriş yapan kişisin id si aynı olması 
         yani her kişiye unigue saf int olan bir primary key vermeliyiz 
+
+
+                24/11/24
+buyuk problem biz kargoyu senderıd tanımladık ve currentID tnaımladık 
+bu sebeb cargoyu seube sildiginde user tablosounanda silinecek bu olmamalı 
+yada user tamamlanna kargoyu sildiginde bu subeden de silinecek anlamında olmamalı 

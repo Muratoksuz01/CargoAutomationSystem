@@ -1,3 +1,6 @@
+namespace CargoAutomationSystem.Entity
+{
+    
 public class CargoProcess
 {
     public int CargoProcessId { get; set; }
@@ -7,4 +10,5 @@ public class CargoProcess
     
     // İlişkiler
     public Cargo Cargo { get; set; } // İlgili cargo bilgi süreci
+}
 }

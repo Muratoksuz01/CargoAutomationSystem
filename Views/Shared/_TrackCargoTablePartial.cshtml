@@ -1,0 +1,36 @@
+@model IEnumerable<TrackCargoViewModel>
+
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Sender Name</th>
+            <th scope="col">Receiver Name</th>
+            <th scope="col">Receiver Address</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.CargoId</th>
+                <td>@item.SenderName</td>
+                <td>@item.RecipientName</td>
+                <td>@item.RecipientAddress</td>
+                <td>@item.Status</td>
+                <td>
+                    <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode">
+                        <i class="fa-solid fa-circle-info"></i> 
+                    </a>
+                     @if (item.Status == "Tamamlandı")
+                    {
+                        <a asp-controller="User" asp-action="RemoveCargo" class="ms-2" asp-route-HashCode="@item.HashCode">
+                            <i class="fa-solid fa-trash"></i> </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
