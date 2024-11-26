@@ -36,7 +36,7 @@ namespace CargoAutomationSystem.Models.Home
         [StringLength(1000, ErrorMessage = "Kullanıcı adı {0} karakterden fazla olamaz. Minumum {1} karakter olmalıdır.", MinimumLength = 10)]
         public string Address { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
     }
 
 }

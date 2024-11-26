@@ -45,79 +45,81 @@ public class HomeController : Controller
 
 
 
-    // private readonly CargoContext _context;
-
-    // private readonly List<User> Users = DataSeeding.Users.ToList();
-    // private readonly List<Branch> Branches = DataSeeding.Branches;
-
-    [HttpPost]
-    public IActionResult Register(RegisterViewModel model, IFormFile? file)
+[HttpPost]
+    public IActionResult Register(RegisterViewModel model, IFormFile file)
+{
+    if (!ModelState.IsValid)
     {
-        ModelState.Remove("ImageUrl");
-        if (ModelState.IsValid)
+        System.Console.WriteLine("Kayıt sırasında hata oluştu");
+        foreach (var key in ModelState.Keys)
         {
-            string imageUrl = null;
-
-            // Resim dosyası yükleme
-            if (file != null && file.Length > 0)
-            {
-                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
-                if (!Directory.Exists(uploadPath))
-                {
-                    Directory.CreateDirectory(uploadPath);
-                }
-                var filePath = Path.Combine(uploadPath, fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-                imageUrl = fileName;
-            }
-
-            // Yeni kullanıcı oluşturma
-            var newUser = new User
-            {
-                UserId = DataSeeding.Users.Count + 1,
-                Username = model.UserName,
-                Email = model.Email,
-                Password = model.Password,
-                Address = model.Address,
-                Phone = model.PhoneNumber,
-                ImageUrl = imageUrl,
-                Cargos = new List<Cargo>()
-            };
-
-            // Geçici kullanıcı kontrolü
-            var tempUser = DataSeeding.Users.FirstOrDefault(u => u.Phone == model.PhoneNumber && u.Password == "temporary");
-            if (tempUser != null)
-            {
-                // Geçici kullanıcının kargolarını yeni kullanıcıya aktar
-                newUser.Cargos.AddRange(tempUser.Cargos);
-
-                // Geçici kullanıcıyı sil
-                DataSeeding.Users.Remove(tempUser);
-                System.Console.WriteLine($"Geçici kullanıcı {tempUser.Username} sistemden kaldırıldı.");
-            }
-
-            // Yeni kullanıcıyı listeye ekle
-            DataSeeding.Users.Add(newUser);
-            System.Console.WriteLine($"Yeni kullanıcı oluşturuldu: {newUser.Username}");
-
-            return RedirectToAction("Index");
-        }
-
-        foreach (var state in ModelState)
-        {
-            string key = state.Key; // Alan adı
-            foreach (var error in state.Value.Errors)
+            var errors = ModelState[key].Errors;
+            foreach (var error in errors)
             {
                 Console.WriteLine($"Field: {key}, Error: {error.ErrorMessage}");
             }
         }
-
         return View(model);
     }
+
+    string imageUrl;
+
+    // Eğer dosya gönderilmişse
+    if (file != null && file.Length > 0)
+    {
+        // Dosya adı için benzersiz bir isim oluştur
+        var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
+        var filePath = Path.Combine("wwwroot/img", uniqueFileName);
+
+        // Dosyayı belirtilen klasöre kaydet
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            file.CopyTo(stream);
+        }
+
+        imageUrl = $"{uniqueFileName}"; // URL için dosya yolu
+    }
+    else
+    {
+        // Dosya gelmezse varsayılan resim
+        imageUrl = "nouser.png";
+    }
+
+    // Kullanıcıyı bul (geçici bir kullanıcı olup olmadığını kontrol et)
+    var tempUser = Users.FirstOrDefault(u => u.Phone == model.PhoneNumber && u.IsTemporary);
+    if (tempUser != null)
+    {
+        // TempUser'ı güncelle
+        tempUser.Username = model.UserName;
+        tempUser.Email = model.Email;
+        tempUser.Password = model.Password; // Şifreyi hashleyerek saklayın
+        tempUser.Address = model.Address;
+        tempUser.IsTemporary = false; // Artık kalıcı kullanıcı oldu
+        tempUser.ImageUrl = imageUrl; // Resim URL'sini güncelle
+
+        System.Console.WriteLine($"TempUser güncellendi: {tempUser.Username}");
+    }
+    else
+    {
+        // Yeni kullanıcı oluştur
+        var newUser = new User
+        {
+            UserId = Users.Count + 1,
+            Username = model.UserName,
+            Email = model.Email,
+            Password = model.Password, 
+            Address = model.Address,
+            Phone = model.PhoneNumber,
+            IsTemporary = false,
+            ImageUrl = imageUrl 
+        };
+        Users.Add(newUser);
+        System.Console.WriteLine($"Yeni kullanıcı oluşturuldu: {newUser.Username}");
+    }
+
+    return RedirectToAction("Index", "Home");
+}
+
 
     private User AuthenticateUser(string email, string password)
     {
@@ -224,13 +226,14 @@ public class HomeController : Controller
     [AcceptVerbs("GET", "POST")]
     public IActionResult VerifyPhone(string PhoneNumber)
     {
-        // Telefon numaralarını kontrol et
-        if (Users.Any(u => u.Phone == PhoneNumber))
+        // Sadece kalıcı kullanıcıları kontrol et
+        if (Users.Any(u => u.Phone == PhoneNumber && !u.IsTemporary))
         {
             return Json($"Telefon numarası '{PhoneNumber}' zaten kayıtlı.");
         }
         return Json(true); // Telefon numarası kullanılabilir
     }
+
 
 
 }

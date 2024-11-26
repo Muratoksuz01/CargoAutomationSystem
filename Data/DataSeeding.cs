@@ -63,6 +63,7 @@ public static class DataSeeding
             Address = "789 West St, Westside",
             Phone = "11111111111",
             ImageUrl = "john_doe.png",
+            IsTemporary=false,
             Cargos = new List<Cargo> { Cargos[0], Cargos[1], Cargos[3] }  // Kargo ID 1, 2, 4
         },
         new User
@@ -74,6 +75,7 @@ public static class DataSeeding
             Address = "101 South St, Southside",
             Phone = "22222222222",
             ImageUrl = "jane_smith.png",
+            IsTemporary=false,
             Cargos = new List<Cargo> { Cargos[0], Cargos[1], Cargos[2] }  // Kargo ID 1, 2, 3
         },
         new User
@@ -85,6 +87,7 @@ public static class DataSeeding
             Address = "123 South St, Southside",
             Phone = "33333333333",
             ImageUrl = "jane_smith.png",
+            IsTemporary=false,
             Cargos = new List<Cargo> { Cargos[2], Cargos[3] }  // Kargo ID 3, 4
         }
     };

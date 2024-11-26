@@ -31,6 +31,7 @@ namespace CargoAutomationSystem.Controllers
             var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
             var sendCargoModel = new SendCargoViewModel
             {
+                SenderId=user.UserId,
                 SenderEmail = user.Email,
                 SenderUsername = user.Username,
                 SenderAddress = user.Address,
@@ -93,16 +94,16 @@ namespace CargoAutomationSystem.Controllers
             }
             else
             {
-                // Kayıtlı değilse, geçici kullanıcı olarak eklenir
                 var tempUser = new User
                 {
-                    UserId = Users.Count + 1, // Yeni bir ID atama
+                    UserId = Users.Count + 1, 
                     Username = model.RecipientName,
-                    Email = $"{model.RecipientPhone}@temporary.com", // Geçici bir email oluşturma
-                    Password = "temporary", // Geçici bir şifre
+                    Email = $"{model.RecipientPhone}@temporary.com", 
+                    Password = "temporary", 
                     Address = model.RecipientAddress,
                     Phone = model.RecipientPhone,
                     ImageUrl = null,
+                    IsTemporary=true,
                     Cargos = new List<Cargo> { newCargo }
                 };
 
@@ -156,29 +157,6 @@ namespace CargoAutomationSystem.Controllers
         }
 
 
-        public IActionResult RemoveCargo(string hashCode)
-        {
-            var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-
-            System.Console.WriteLine($"Gelen hash kodu: {hashCode}");
-            var cargoToRemove = DataSeeding.Cargos.FirstOrDefault(c => c.HashCode == hashCode);
-            if (cargoToRemove == null)
-            {
-                System.Console.WriteLine("Kargo bulunamadı.");
-                return RedirectToAction("TrackCargo"); // Eğer kargo bulunamazsa geri yönlendir
-            }
-
-
-            if (user.Cargos.Contains(cargoToRemove))
-            {
-                user.Cargos.Remove(cargoToRemove);
-                System.Console.WriteLine($"Kargo {cargoToRemove.HashCode} kullanıcıdan silindi: {user.Username}");
-            }
-
-            return RedirectToAction("TrackCargo");
-        }
-
-
         public IActionResult Detail(string hashCode)
         {
             var cargo = Cargos.SingleOrDefault(c => c.HashCode == hashCode);
@@ -221,6 +199,37 @@ namespace CargoAutomationSystem.Controllers
 
             return View(cargos);
         }
+
+
+
+
+
+
+        public IActionResult RemoveCargo(string hashCode)
+        {
+            var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+
+            System.Console.WriteLine($"Gelen hash kodu: {hashCode}");
+            var cargoToRemove = DataSeeding.Cargos.FirstOrDefault(c => c.HashCode == hashCode);
+            if (cargoToRemove == null)
+            {
+                System.Console.WriteLine("Kargo bulunamadı.");
+                return RedirectToAction("TrackCargo"); // Eğer kargo bulunamazsa geri yönlendir
+            }
+
+
+            if (user.Cargos.Contains(cargoToRemove))
+            {
+                user.Cargos.Remove(cargoToRemove);
+                System.Console.WriteLine($"Kargo {cargoToRemove.HashCode} kullanıcıdan silindi: {user.Username}");
+            }
+
+            return RedirectToAction("TrackCargo");
+        }
+
+
+
+
 
         public IActionResult LogOut()
         {

@@ -9,6 +9,8 @@ namespace CargoAutomationSystem.Entity
         public string Password { get; set; }
         public string Phone { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsTemporary { get; set; } // Yeni alan
+
         public List<Cargo> Cargos { get; set; }  // Kullanıcının kargo listesi
     }
 }
