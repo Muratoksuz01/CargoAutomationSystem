@@ -25,7 +25,7 @@ else
     <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
       data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status != "Tamamlandı"))
+        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status != "Tamamlandı"  && x.Status!="Teslim Edildi"))
 
       </div>
     </div>
@@ -40,52 +40,14 @@ else
     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
       data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status == "Tamamlandı"))
+        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status == "Tamamlandı" || x.Status=="Teslim Edildi"))
 
       </div>
     </div>
   </div>
 
 </div>
-
-
-
-@*
-  <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
-    <!-- Devam Eden Kargolar -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-          data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-          Devam Eden Kargolar
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-        aria-labelledby="panelsStayOpen-headingOne">
-        <div class="accordion-body">
-          @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status != "Tamamlandı"))
-        </div>
-      </div>
-    </div>
-
-    <!-- Tamamlanan Kargolar -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-          data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-          Tamamlananlar
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
-        aria-labelledby="panelsStayOpen-headingTwo">
-        <div class="accordion-body">
-          @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status == "Tamamlandı"))
-        </div>
-      </div>
-    </div>
-  </div> *@
 }
-
 @section Scripts {
   <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>
 }

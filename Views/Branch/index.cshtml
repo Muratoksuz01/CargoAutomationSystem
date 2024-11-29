@@ -32,27 +32,34 @@
             <tbody>
                 @if (Model.Cargos != null && Model.Cargos.Any())
                 {
-                    @foreach (var item in Model.Cargos)
+                    for (int i = 0; i < Model.Cargos.Count(); i++)
                     {
-                        <tr>
-                            <th scope="row">@item.CargoId</th>
-                            <td>@item.ReceiverName</td>
-                            <td>@item.ReceiverAddress</td>
-                            <td>@item.Status</td>
-                            <td>
-                                <a asp-controller="Branch" asp-action="Detail" asp-route-HashCode="@item.HashCode">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        var item = Model.Cargos.ElementAt(i);
+                        <!-- Model'deki her bir öğeye index ile erişim -->
+                        @if (item.Status != "Teslim Edildi" || item.Status == "Tamamlandı")
+                        {
+                            <tr>
+                                <th scope="row">@(i + 1) </th> <!-- i + 1 ile index'in 1'den başlamasını sağlıyoruz -->
+                                <td>@item.ReceiverName</td>
+                                <td>@item.ReceiverAddress</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    <a asp-controller="Branch" asp-action="Details" asp-route-HashCode="@item.HashCode">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     }
                 }
                 else
                 {
                     <tr>
-                        <td colspan="3" class="text-center">Kargo bilgisi bulunamadı.</td>
+                        <td colspan="5" class="text-center">Kargo bilgisi bulunamadı.</td>
                     </tr>
                 }
+
+
             </tbody>
         </table>
     </div>

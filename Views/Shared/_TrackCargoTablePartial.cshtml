@@ -1,5 +1,9 @@
 @model IEnumerable<TrackCargoViewModel>
 
+@{
+   var cargos = Model.ToList();  // IEnumerable'i listeye dönüştürmek, for döngüsü için gerekebilir
+}
+
 <table class="table mt-4">
     <thead>
         <tr>
@@ -8,28 +12,41 @@
             <th scope="col">Receiver Name</th>
             <th scope="col">Receiver Address</th>
             <th scope="col">Status</th>
-            <th scope="col"></th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (cargos != null && cargos.Any())  // Model'deki veri olup olmadığını kontrol et
+        {
+            @for (int i = 0; i < cargos.Count; i++)
+            {
+                var item = cargos[i];  // Koleksiyonun elemanına erişim
+
+                <tr>
+                    <th scope="row">@(i+1)</th>
+                    <td>@item.SenderName</td>
+                    <td>@item.RecipientName</td>
+                    <td>@item.RecipientAddress</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode">
+                            <i class="fa-solid fa-circle-info"></i> 
+                        </a>
+                        @if (item.Status == "Tamamlandı" || item.Status=="Teslim Edildi")
+                        {
+                            <a asp-controller="User" asp-action="RemoveCargo" class="ms-2" asp-route-HashCode="@item.HashCode">
+                                <i class="fa-solid fa-trash"></i> 
+                            </a>
+                        }
+                    </td>
+                </tr>
+
+            }
+        }
+        else
         {
             <tr>
-                <th scope="row">@item.CargoId</th>
-                <td>@item.SenderName</td>
-                <td>@item.RecipientName</td>
-                <td>@item.RecipientAddress</td>
-                <td>@item.Status</td>
-                <td>
-                    <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode">
-                        <i class="fa-solid fa-circle-info"></i> 
-                    </a>
-                     @if (item.Status == "Tamamlandı")
-                    {
-                        <a asp-controller="User" asp-action="RemoveCargo" class="ms-2" asp-route-HashCode="@item.HashCode">
-                            <i class="fa-solid fa-trash"></i> </a>
-                    }
-                </td>
+                <td colspan="6" class="text-center">Herhangi bir kargo bulunamadı.</td>
             </tr>
         }
     </tbody>

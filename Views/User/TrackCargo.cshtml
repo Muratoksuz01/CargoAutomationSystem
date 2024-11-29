@@ -24,7 +24,7 @@ else
             <div id="collapseInProgress" class="accordion-collapse collapse show" 
                  aria-labelledby="headingInProgress" data-bs-parent="#accordionTrackCargo">
                 <div class="accordion-body">
-                    @await Html.PartialAsync("_TrackCargoTablePartial", Model.Where(x => x.Status != "Tamamlandı"))
+                    @await Html.PartialAsync("_TrackCargoTablePartial", Model.Where(x => x.Status != "Tamamlandı" && x.Status!="Teslim Edildi"))
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ else
             <div id="collapseCompleted" class="accordion-collapse collapse" 
                  aria-labelledby="headingCompleted" data-bs-parent="#accordionTrackCargo">
                 <div class="accordion-body">
-                    @await Html.PartialAsync("_TrackCargoTablePartial", Model.Where(x => x.Status == "Tamamlandı"))
+                    @await Html.PartialAsync("_TrackCargoTablePartial", Model.Where(x => x.Status == "Tamamlandı" || x.Status=="Teslim Edildi"))
                 </div>
             </div>
         </div>

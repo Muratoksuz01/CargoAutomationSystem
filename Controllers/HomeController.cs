@@ -12,41 +12,55 @@ namespace CargoAutomationSystem.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly List<User> Users;
-    private readonly List<Branch> Branches;
-
-    public HomeController()
+       private User AuthenticateUser(string email, string password)
     {
-        // DataSeeding'den Users listesinin null olup olmadığını kontrol ediyoruz
-        if (DataSeeding.Users == null)
-        {
-            Console.WriteLine("DataSeeding.Users listesi NULL!");
-            Users = new List<User>(); // Eğer null ise boş bir liste başlatıyoruz
-        }
-        else
-        {
-            Console.WriteLine("DataSeeding.Users listesi yüklendi.");
-            Users = DataSeeding.Users.ToList(); // List'e çeviriyoruz
-        }
+        return Users.SingleOrDefault(u => u.Email == email && u.Password == password);
 
-        // Aynı kontrolü Branches için de yapabiliriz
-        if (DataSeeding.Branches == null)
-        {
-            Console.WriteLine("DataSeeding.Branches listesi NULL!");
-            Branches = new List<Branch>(); // Eğer null ise boş bir liste başlatıyoruz
-        }
-        else
-        {
-            Console.WriteLine("DataSeeding.Branches listesi yüklendi.");
-            Branches = DataSeeding.Branches.ToList(); // List'e çeviriyoruz
-        }
     }
+    private Branch AuthenticateBranch(string email, string password)
+    {
+        return Branches.SingleOrDefault(u => u.Email == email && u.Password == password);
+
+    }
+   
+    // private readonly List<User> Users;
+    // private readonly List<Branch> Branches;
+
+    private readonly List<User> Users = DataSeeding.Users;
+        private readonly List<Branch> Branches = DataSeeding.Branches;
+
+    // public HomeController()
+    // {
+    //     // DataSeeding'den Users listesinin null olup olmadığını kontrol ediyoruz
+    //     if (DataSeeding.Users == null)
+    //     {
+    //         Console.WriteLine("DataSeeding.Users listesi NULL!");
+    //         Users = new List<User>(); // Eğer null ise boş bir liste başlatıyoruz
+    //     }
+    //     else
+    //     {
+    //         Console.WriteLine("DataSeeding.Users listesi yüklendi.");
+    //         Users = DataSeeding.Users.ToList(); // List'e çeviriyoruz
+    //     }
+
+    //     // Aynı kontrolü Branches için de yapabiliriz
+    //     if (DataSeeding.Branches == null)
+    //     {
+    //         Console.WriteLine("DataSeeding.Branches listesi NULL!");
+    //         Branches = new List<Branch>(); // Eğer null ise boş bir liste başlatıyoruz
+    //     }
+    //     else
+    //     {
+    //         Console.WriteLine("DataSeeding.Branches listesi yüklendi.");
+    //         Branches = DataSeeding.Branches.ToList(); // List'e çeviriyoruz
+    //     }
+    // }
 
 
 
 
 [HttpPost]
-    public IActionResult Register(RegisterViewModel model, IFormFile file)
+    public IActionResult Register(RegisterViewModel model, IFormFile? file)
 {
     if (!ModelState.IsValid)
     {
@@ -81,7 +95,6 @@ public class HomeController : Controller
     }
     else
     {
-        // Dosya gelmezse varsayılan resim
         imageUrl = "nouser.png";
     }
 
@@ -115,22 +128,16 @@ public class HomeController : Controller
         };
         Users.Add(newUser);
         System.Console.WriteLine($"Yeni kullanıcı oluşturuldu: {newUser.Username}");
+        System.Console.WriteLine($"Yeni email oluşturuldu: {newUser.Email}");
+        System.Console.WriteLine($"Yeni password oluşturuldu: {newUser.Password}");
     }
 
-    return RedirectToAction("Index", "Home");
+    return RedirectToAction("Login", "Home");
 }
 
 
-    private User AuthenticateUser(string email, string password)
-    {
-        return Users.SingleOrDefault(u => u.Email == email && u.Password == password);
-
-    }
-    private Branch AuthenticateBranch(string email, string password)
-    {
-        return Branches.SingleOrDefault(u => u.Email == email && u.Password == password);
-
-    }
+ 
+   
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model)
     {

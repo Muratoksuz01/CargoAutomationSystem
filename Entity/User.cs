@@ -11,6 +11,6 @@ namespace CargoAutomationSystem.Entity
         public string ImageUrl { get; set; }
         public bool IsTemporary { get; set; } // Yeni alan
 
-        public List<Cargo> Cargos { get; set; }  // Kullanıcının kargo listesi
+        public List<Cargo>? Cargos { get; set; }  // Kullanıcının kargo listesi
     }
 }

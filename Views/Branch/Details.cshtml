@@ -1,7 +1,9 @@
 @model DetailViewModel
+
 @section navbar {
     @await Component.InvokeAsync("Branch")
 }
+
 <h2>Kargo Detayları</h2>
 
 <table class="table table-striped">
@@ -65,6 +67,49 @@
             <td>Gönderici Telefon</td>
             <td>@Model.SenderPhone</td>
         </tr>
-        
     </tbody>
 </table>
+
+<!-- Detaylar Butonu -->
+<button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails"
+    aria-expanded="false" aria-controls="collapseDetails">
+    Detayları Göster
+</button>
+
+<!-- Collapse Alanı -->
+<div class="collapse mt-3" id="collapseDetails">
+    <h4>Kargo Süreçleri</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">İşlem</th>
+                <th scope="col">Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.CargoProcesses != null && Model.CargoProcesses.Any())
+            {
+                for (int i = 0; i < Model.CargoProcesses.Count(); i++)
+                {
+                    var process = Model.CargoProcesses.ElementAt(i);
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@process.Process</td>
+                        <td>@process.ProcessDate.ToString("dd MMM yyyy HH:mm")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center">Kargo süreci bilgisi bulunamadı.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>
+}

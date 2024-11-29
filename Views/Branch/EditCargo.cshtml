@@ -1,0 +1,47 @@
+@model EditCargoViewModel
+
+<h2>Kargo Düzenleme</h2>
+
+<form method="post" asp-action="EditCargo">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label for="HashCode">Kargo Hash Kodu:</label>
+        <input type="text" name="HashCode" value="@Model.HashCode" readonly class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Status">Kargo Durumu:</label>
+        <select name="Status" id="Status" class="form-control" onchange="toggleBranchDropdown()">
+            <option value="">İşlem Seçiniz</option>
+            <option value="Teslim Edildi">Teslim Edildi</option>
+            <option value="Başka Şubeye Aktar">Başka Şubeye Aktar</option>
+        </select>
+    </div>
+
+    <div class="form-group" id="branchDropdown" style="display:none;">
+        <label for="NewBranchId">Yeni Şube Seçiniz:</label>
+        <select name="NewBranchId" class="form-control">
+            <option value="">Şube Seçiniz</option>
+            @foreach (var branch in Model.Branches)
+            {
+                <option value="@branch.BranchId">@branch.BranchName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+</form>
+
+@section Scripts {
+    <script>
+        function toggleBranchDropdown() {
+            var status = document.getElementById('Status').value;
+            var branchDropdown = document.getElementById('branchDropdown');
+            if (status === 'Başka Şubeye Aktar') {
+                branchDropdown.style.display = 'block';
+            } else {
+                branchDropdown.style.display = 'none';
+            }
+        }
+    </script>
+}

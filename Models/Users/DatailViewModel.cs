@@ -1,6 +1,6 @@
+using CargoAutomationSystem.Entity;
 namespace CargoAutomationSystem.Models.Users
 {
-
     public class DetailViewModel
     {
         public int CargoId { get; set; }
@@ -15,5 +15,7 @@ namespace CargoAutomationSystem.Models.Users
         public string SenderAddress { get; set; }
         public string SenderPhone { get; set; }
         public string CurrentBranch { get; set; }
+        public List<CargoProcess> CargoProcesses { get; set; }
+
     }
 }

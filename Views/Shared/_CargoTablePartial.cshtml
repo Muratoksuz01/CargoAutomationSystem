@@ -11,27 +11,42 @@
         </tr>
     </thead>
     <tbody class="table-group-divider">
-        @foreach (var (item, index) in Model.Select((value, i) => (value, i + 1)))
+        @if (!Model.Any())  
         {
             <tr>
-                <th scope="row">@index</th>
-                <td>@item.RecipientName</td>
-                <td>@item.RecipientAddress</td>
-                <td>@item.Status</td>
-                <td>
-                    <a asp-controller="Branch" asp-action="Edit" asp-route-HashCode="@item.HashCode">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a asp-controller="Branch" asp-action="Details" class="ms-2" asp-route-HashCode="@item.HashCode">
-                        <i class="fa-solid fa-circle-info"></i>
-                    </a>
-                    @if (item.Status == "Tamamlandı")
-                    {
-                        <a asp-controller="Branch" asp-action="RemoveCargo" class="ms-2" asp-route-HashCode="@item.HashCode">
-                            <i class="fa-solid fa-trash"></i> </a>
-                    }
+                <td colspan="5" class="text-center text-muted">
+                    <strong>Hiçbir kargo bulunmamaktadır.</strong><br />
                 </td>
             </tr>
+        }
+        else
+        {
+            @foreach (var (item, index) in Model.Select((value, i) => (value, i + 1)))
+            {
+                <tr>
+                    <th scope="row">@index</th>
+                    <td>@item.RecipientName</td>
+                    <td>@item.RecipientAddress</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <a asp-controller="Branch" asp-action="Details" class="ms-2" asp-route-HashCode="@item.HashCode">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </a>
+                        @if (item.Status == "Tamamlandı" || item.Status == "Teslim Edildi")
+                        {
+                            <a asp-controller="Branch" asp-action="RemoveCargo" class="ms-2" asp-route-HashCode="@item.HashCode">
+                                <i class="fa-solid fa-trash"></i> 
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Branch" asp-action="EditCargo" asp-route-HashCode="@item.HashCode">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

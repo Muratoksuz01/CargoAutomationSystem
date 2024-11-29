@@ -7,9 +7,4 @@
 --branch da Branch/Index de iken url bunu User/Index diyince calişmaması gerek bu da branck ve user da giriş yapan kişisin id si aynı olması 
         yani her kişiye unigue saf int olan bir primary key vermeliyiz 
                 26/11/24
---index sayasında kargo ıd geliyor # bolumune bunu index olarak degiştir 
 --branch icin edit sayfası tasarla 
---user kayıt olurken illaki resim recmek zorunda bu olmamalı 
-
-
-    

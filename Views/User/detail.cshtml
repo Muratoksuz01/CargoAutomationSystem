@@ -68,10 +68,49 @@
             <td>Gönderici Telefon</td>
             <td>@MaskingHelper.MaskPhone(Model.SenderPhone)</td>
         </tr>
-           <tr>
+        <tr>
             <th scope="row">11</th>
-            <td>buludugu sube</td>
+            <td>Bulunduğu Şube</td>
             <td>@Model.CurrentBranch</td>
         </tr>
     </tbody>
 </table>
+
+<!-- Detayları Göster Butonu -->
+<button class="btn btn-info mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#cargoProcessTable" aria-expanded="false" aria-controls="cargoProcessTable">
+    Detayları Göster
+</button>
+
+<!-- Kargo Süreçleri Tablosu -->
+<div class="collapse mt-3" id="cargoProcessTable">
+    <h4>Kargo Süreçleri</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">İşlem</th>
+                <th scope="col">Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.CargoProcesses != null && Model.CargoProcesses.Any())
+            {
+                for (int i = 0; i < Model.CargoProcesses.Count(); i++)
+                {
+                    var process = Model.CargoProcesses.ElementAt(i);
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@process.Process</td>
+                        <td>@process.ProcessDate.ToString("dd MMM yyyy HH:mm")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center">Kargo süreci bilgisi bulunamadı.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

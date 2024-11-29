@@ -19,6 +19,8 @@ namespace CargoAutomationSystem.Controllers
         private readonly List<User> Users = DataSeeding.Users;
         private readonly List<Branch> Branches = DataSeeding.Branches;
         private readonly List<Cargo> Cargos = DataSeeding.Cargos;
+        private readonly List<CargoProcess> CargoProcesses = DataSeeding.CargoProcesses;
+
 
         protected UserInfoViewModel CurrentUser => new UserInfoViewModel
         {
@@ -31,7 +33,7 @@ namespace CargoAutomationSystem.Controllers
             var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
             var sendCargoModel = new SendCargoViewModel
             {
-                SenderId=user.UserId,
+                SenderId = user.UserId,
                 SenderEmail = user.Email,
                 SenderUsername = user.Username,
                 SenderAddress = user.Address,
@@ -71,7 +73,7 @@ namespace CargoAutomationSystem.Controllers
             if (sender != null)
             {
                 sender.Cargos.Add(newCargo);
-            System.Console.WriteLine("kargo sender cargosa vertabanına eklendi");
+                System.Console.WriteLine("kargo sender cargosa vertabanına eklendi");
 
             }
 
@@ -80,7 +82,7 @@ namespace CargoAutomationSystem.Controllers
             if (branch != null)
             {
                 branch.Cargos.Add(newCargo);
-            System.Console.WriteLine("kargo branch cargosa vertabanına eklendi");
+                System.Console.WriteLine("kargo branch cargosa vertabanına eklendi");
 
             }
 
@@ -96,14 +98,14 @@ namespace CargoAutomationSystem.Controllers
             {
                 var tempUser = new User
                 {
-                    UserId = Users.Count + 1, 
+                    UserId = Users.Count + 1,
                     Username = model.RecipientName,
-                    Email = $"{model.RecipientPhone}@temporary.com", 
-                    Password = "temporary", 
+                    Email = $"{model.RecipientPhone}@temporary.com",
+                    Password = "temporary",
                     Address = model.RecipientAddress,
                     Phone = model.RecipientPhone,
                     ImageUrl = null,
-                    IsTemporary=true,
+                    IsTemporary = true,
                     Cargos = new List<Cargo> { newCargo }
                 };
 
@@ -115,10 +117,10 @@ namespace CargoAutomationSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        
-    
 
-    public IActionResult Index()
+
+
+        public IActionResult Index()
         {
             // Aktif kullanıcıyı buluyoruz.
             var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
@@ -128,16 +130,22 @@ namespace CargoAutomationSystem.Controllers
                 return NotFound("Kullanıcı bulunamadı.");
             }
 
-            // Kullanıcının devam eden kargolarını alıyoruz.
-            var userCargos = user.Cargos
-                .Where(c => c.Status != "Tamamlandı") // Tamamlanmamış kargolar.
-                .Select(c => new IndexCargoViewModel
-                {
-                    CargoId = c.CargoId,
-                    SenderName = Users.FirstOrDefault(u => u.UserId == c.SenderId)?.Username, // Gönderici adı.
-                    Status = c.Status,
-                    HashCode = c.HashCode
-                }).ToList();
+            // Kargo listesi, eğer yoksa boş bir liste oluşturulacak.
+            List<IndexCargoViewModel> userCargos;
+            userCargos = new List<IndexCargoViewModel>();
+            if (user.Cargos != null)
+            {
+                userCargos = user.Cargos
+                                   .Where(c => c.Status != "Tamamlandı") // Tamamlanmamış kargolar.
+                                   .Select(c => new IndexCargoViewModel
+                                   {
+                                       CargoId = c.CargoId,
+                                       SenderName = Users.FirstOrDefault(u => u.UserId == c.SenderId)?.Username, // Gönderici adı.
+                                       Status = c.Status,
+                                       HashCode = c.HashCode
+                                   }).ToList();
+            }
+
 
             // ViewModel'i oluşturuyoruz.
             var model = new IndexViewModel
@@ -157,12 +165,26 @@ namespace CargoAutomationSystem.Controllers
         }
 
 
+
         public IActionResult Detail(string hashCode)
         {
+            // Kargo bilgilerini alıyoruz
             var cargo = Cargos.SingleOrDefault(c => c.HashCode == hashCode);
-            if (cargo == null) return NotFound($"No cargo found with hash code: {hashCode}");
+            if (cargo == null)
+                return NotFound($"No cargo found with hash code: {hashCode}");
+
+            // Gönderici bilgilerini alıyoruz
             var sender = Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
+
+            // Bulunduğu şube bilgisini alıyoruz
             var currentBranch = Branches.SingleOrDefault(b => b.BranchId == cargo.CurrentBranchId);
+
+            // Kargo süreçlerini alıyoruz
+            var cargoProcesses = CargoProcesses.Where(cp => cp.CargoId == cargo.CargoId)
+                                               .OrderBy(cp => cp.ProcessDate)
+                                               .ToList();
+
+            // ViewModel'ı dolduruyoruz
             var detail = new DetailViewModel
             {
                 CargoId = cargo.CargoId,
@@ -172,14 +194,18 @@ namespace CargoAutomationSystem.Controllers
                 RecipientName = cargo.RecipientName,
                 RecipientAddress = cargo.RecipientAddress,
                 RecipientPhone = cargo.RecipientPhone,
-                SenderId = sender.UserId, // Sender bilgisi
+                SenderId = sender.UserId,
                 SenderUsername = sender.Username,
                 SenderEmail = sender.Email,
                 SenderAddress = sender.Address,
-                SenderPhone = sender.Phone
+                SenderPhone = sender.Phone,
+                CargoProcesses = cargoProcesses // Kargo süreçlerini buraya ekliyoruz
             };
+
+            // View'e gönderiyoruz
             return View(detail);
         }
+
 
         public IActionResult TrackCargo()
         {
