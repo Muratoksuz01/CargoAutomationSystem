@@ -118,6 +118,7 @@
                     <div class="mb-3">
                         <label asp-for="UpdateUsername.Username" class="form-label"></label>
                         <input class="form-control" asp-for="UpdateUsername.Username">
+                        <span asp-validation-for="UpdateUsername.Username" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
@@ -125,3 +126,9 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+}

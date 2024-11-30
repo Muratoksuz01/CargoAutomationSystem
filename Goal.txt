@@ -1,10 +1,8 @@
-                16/11/24                                   
---hala user authintication olayı yok 
---en son databaseyı ayarlayacagız 
-                21/11/24
--- user da update Image fok. resim gondermeden save diyince hata gonderiyor 
-                23/11/24
---branch da Branch/Index de iken url bunu User/Index diyince calişmaması gerek bu da branck ve user da giriş yapan kişisin id si aynı olması 
-        yani her kişiye unigue saf int olan bir primary key vermeliyiz 
-                26/11/24
---branch icin edit sayfası tasarla 
+16/11/24                                   
+        --hala user authintication olayı yok 
+        --en son databaseyı ayarlayacagız 
+23/11/24
+        --branch da Branch/Index de iken url bunu User/Index diyince calişmaması gerek bu da branck ve user da giriş yapan kişisin id si aynı olması 
+                yani her kişiye unigue saf int olan bir primary key vermeliyiz 
+26/11/24
+        --branch icin edit sayfası tasarla 

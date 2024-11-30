@@ -316,14 +316,8 @@ namespace CargoAutomationSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateImage(SettingsViewModel model, IFormFile file)
+        public IActionResult UpdateImage(IFormFile file)
         {
-            if (!ModelState.IsValid)
-            {
-                TempData["Error"] = "Invalid image upload.";
-                return View("Settings", model);
-            }
-
             var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
             if (file != null)
             {
@@ -378,12 +372,19 @@ namespace CargoAutomationSystem.Controllers
         [HttpPost]
         public IActionResult UpdateUsername(SettingsViewModel model)
         {
+            var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+            model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
+            model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
+            model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
+           // model.UpdatePassword=new UpdatePasswordViewModel{pa}
             if (!ModelState.IsValid)
             {
+                System.Console.WriteLine("burada");
+              //  ModelState.AddModelError("UpdateUsername.Username","username is requred");
                 return View("Settings", model);
             }
 
-            var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+          //  var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
             user.Username = model.UpdateUsername.Username;
             // SaveChanges logic here
 

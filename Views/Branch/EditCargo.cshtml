@@ -1,5 +1,7 @@
 @model EditCargoViewModel
-
+@section navbar {
+    @await Component.InvokeAsync("Branch")
+}
 <h2>Kargo Düzenleme</h2>
 
 <form method="post" asp-action="EditCargo">
