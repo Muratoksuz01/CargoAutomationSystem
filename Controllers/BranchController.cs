@@ -2,10 +2,15 @@ using System.Security.Claims;
 using CargoAutomationSystem.Entity;
 using CargoAutomationSystem.Models.Corporate;
 using CargoAutomationSystem.Models.Users;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CargoAutomationSystem.Controllers
 {
+    [Authorize(Roles = "Branch")]
+
     public class BranchController : Controller
 
     {
@@ -56,7 +61,7 @@ namespace CargoAutomationSystem.Controllers
             }
             else if (model.Status == "Başka Şubeye Aktar" && model.NewBranchId.HasValue)
             {
-
+                branch.Cargos.Remove(cargo);
                 cargo.CurrentBranchId = model.NewBranchId.Value;
                 cargo.Status = "Şubeye Aktarıldı";
 
@@ -65,11 +70,11 @@ namespace CargoAutomationSystem.Controllers
                 {
                     CargoProcessId = CargoProcesses.Count + 1,
                     CargoId = cargo.CargoId,
-                    Process = $"Başka Şubeye Aktarıldı (Şube ID: {model.NewBranchId.Value})",
+                    Process = $"Başka Şubeye Aktarıldı (Şube ismi: {Branches.FirstOrDefault(b => b.BranchId == model.NewBranchId.Value).BranchName})",
                     ProcessDate = DateTime.Now
                 });
                 Branches.FirstOrDefault(b => b.BranchId == model.NewBranchId).Cargos.Add(cargo);
-                branch.Cargos.Remove(cargo);
+
             }
             else
             {
@@ -85,9 +90,9 @@ namespace CargoAutomationSystem.Controllers
         {
             System.Console.WriteLine("burada");
             var branch = Branches.FirstOrDefault(b => b.BranchId == CurrentBranch.BranchId);
-            var cargo =Cargos.FirstOrDefault(c => c.HashCode == hashCode);
-            if(cargo==null)
-            return RedirectToAction("List");
+            var cargo = Cargos.FirstOrDefault(c => c.HashCode == hashCode);
+            if (cargo == null)
+                return RedirectToAction("List");
             if (branch.Cargos.Contains(cargo))
             {
                 branch.Cargos.Remove(cargo); // Şubeden kargoyu kaldır
@@ -99,7 +104,7 @@ namespace CargoAutomationSystem.Controllers
 
         public IActionResult List()
         {
-            var branch=Branches.FirstOrDefault(br=>br.BranchId==CurrentBranch.BranchId);
+            var branch = Branches.FirstOrDefault(br => br.BranchId == CurrentBranch.BranchId);
 
             var cargos = branch.Cargos
                 .Select(c => new BListViewModel
@@ -115,42 +120,42 @@ namespace CargoAutomationSystem.Controllers
         }
 
         public IActionResult Details(string hashCode)
-{
-    // Kargo bilgilerini al
-    var cargo = Cargos.SingleOrDefault(c => c.HashCode == hashCode);
-    if (cargo == null)
-    {
-        return NotFound($"No cargo found with hash code: {hashCode}");
-    }
+        {
+            // Kargo bilgilerini al
+            var cargo = Cargos.SingleOrDefault(c => c.HashCode == hashCode);
+            if (cargo == null)
+            {
+                return NotFound($"No cargo found with hash code: {hashCode}");
+            }
 
-    // Gönderici bilgilerini al
-    var sender = Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
-    
-    // Kargo süreçlerini al (örneğin, processlerin bulunduğu bir koleksiyon)
-    var cargoProcesses = CargoProcesses.Where(cp => cp.CargoId == cargo.CargoId)
-                                       .OrderBy(cp => cp.ProcessDate)
-                                       .ToList();
+            // Gönderici bilgilerini al
+            var sender = Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
 
-    // Detay modelini oluştur
-    var detail = new DetailViewModel
-    {
-        CargoId = cargo.CargoId,
-        HashCode = cargo.HashCode,
-        Status = cargo.Status,
-        RecipientName = cargo.RecipientName,
-        RecipientAddress = cargo.RecipientAddress,
-        RecipientPhone = cargo.RecipientPhone,
-        SenderId = sender?.UserId ?? 0,
-        SenderUsername = sender?.Username,
-        SenderEmail = sender?.Email,
-        SenderAddress = sender?.Address,
-        SenderPhone = sender?.Phone,
-        CargoProcesses = cargoProcesses // Kargo süreçlerini ekle
-    };
+            // Kargo süreçlerini al (örneğin, processlerin bulunduğu bir koleksiyon)
+            var cargoProcesses = CargoProcesses.Where(cp => cp.CargoId == cargo.CargoId)
+                                               .OrderBy(cp => cp.ProcessDate)
+                                               .ToList();
 
-    System.Console.WriteLine($"Detail fetched for cargo hash code: {hashCode}");
-    return View(detail);
-}
+            // Detay modelini oluştur
+            var detail = new DetailViewModel
+            {
+                CargoId = cargo.CargoId,
+                HashCode = cargo.HashCode,
+                Status = cargo.Status,
+                RecipientName = cargo.RecipientName,
+                RecipientAddress = cargo.RecipientAddress,
+                RecipientPhone = cargo.RecipientPhone,
+                SenderId = sender?.UserId ?? 0,
+                SenderUsername = sender?.Username,
+                SenderEmail = sender?.Email,
+                SenderAddress = sender?.Address,
+                SenderPhone = sender?.Phone,
+                CargoProcesses = cargoProcesses // Kargo süreçlerini ekle
+            };
+
+            System.Console.WriteLine($"Detail fetched for cargo hash code: {hashCode}");
+            return View(detail);
+        }
 
 
         public IActionResult Index()
@@ -184,6 +189,8 @@ namespace CargoAutomationSystem.Controllers
         public IActionResult LogOut()
         {
             HttpContext.Session.Clear();
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
             return RedirectToAction("CorporateLogin", "Home");
         }
 

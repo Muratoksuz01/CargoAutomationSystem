@@ -1,8 +1,2 @@
 16/11/24                                   
-        --hala user authintication olayı yok 
         --en son databaseyı ayarlayacagız 
-23/11/24
-        --branch da Branch/Index de iken url bunu User/Index diyince calişmaması gerek bu da branck ve user da giriş yapan kişisin id si aynı olması 
-                yani her kişiye unigue saf int olan bir primary key vermeliyiz 
-26/11/24
-        --branch icin edit sayfası tasarla 

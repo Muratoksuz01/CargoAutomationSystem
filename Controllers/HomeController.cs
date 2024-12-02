@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using CargoAutomationSystem.Models.Users;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CargoAutomationSystem.Controllers;
-
 public class HomeController : Controller
 {
     private User AuthenticateUser(string email, string password)
@@ -159,6 +159,7 @@ public class HomeController : Controller
                 var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),  // Kullanıcı ID'si
+                 new Claim(ClaimTypes.Role, "User")
             };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
@@ -185,6 +186,7 @@ public class HomeController : Controller
                 var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, branch.BranchId.ToString()),  // Kullanıcı ID'si
+                 new Claim(ClaimTypes.Role, "Branch")
             };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
@@ -214,8 +216,24 @@ public class HomeController : Controller
 
     public IActionResult CorporateRegister() => View();
     public IActionResult Register() => View();
-    public IActionResult CorporateLogin() => View();
-    public IActionResult Login() => View();
+    public IActionResult CorporateLogin()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            System.Console.WriteLine("buradaaaaa");
+            return RedirectToAction("Index", "Branch");
+        }
+        return View();
+    }
+    public IActionResult Login()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            System.Console.WriteLine("buradaaaaa");
+            return RedirectToAction("Index", "User");
+        }
+        return View();
+    }
     public IActionResult Index() => View();
     [AcceptVerbs("GET", "POST")]
     public IActionResult VerifyUserName(string UserName)
