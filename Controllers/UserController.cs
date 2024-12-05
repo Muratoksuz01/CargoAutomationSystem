@@ -69,13 +69,25 @@ public class UserController : Controller
         // Kargoyu global listeye ekle
         Cargos.Add(newCargo);
         System.Console.WriteLine("kargo kargolar vertabanına eklendi");
+
+        var newProcess = new CargoProcess
+        {
+            CargoProcessId = CargoProcesses.Count + 1,
+            CargoId = newCargo.CargoId,
+            ProcessDate = DateTime.Now,
+            Process = "Kargo kabul edildi"
+        };
+        CargoProcesses.Add(newProcess);
+        System.Console.WriteLine("Kargo kargo süreçlerine eklendi.");
+
+
+
         // Göndericinin listesine ekle
         var sender = Users.FirstOrDefault(u => u.UserId == model.SenderId);
         if (sender != null)
         {
             sender.Cargos.Add(newCargo);
             System.Console.WriteLine("kargo sender cargosa vertabanına eklendi");
-
         }
 
         // Şubenin listesine ekle
@@ -84,7 +96,6 @@ public class UserController : Controller
         {
             branch.Cargos.Add(newCargo);
             System.Console.WriteLine("kargo branch cargosa vertabanına eklendi");
-
         }
 
         // Alıcının sisteme kayıtlı olup olmadığını kontrol et
@@ -374,7 +385,7 @@ public class UserController : Controller
     public IActionResult UpdateUsername(SettingsViewModel model)
     {
         var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-        model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
+       // model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
         model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
         model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
         // model.UpdatePassword=new UpdatePasswordViewModel{pa}

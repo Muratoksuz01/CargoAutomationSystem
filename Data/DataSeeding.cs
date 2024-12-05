@@ -25,7 +25,7 @@ public static class DataSeeding
             RecipientAddress = "321 Oak St",
             RecipientPhone = "11111111111",
             HashCode = "XYZfew789",
-            Status = "Tamamlandı"
+            Status = "Teslim Edildi"
         },
         new Cargo()
         {
@@ -36,7 +36,7 @@ public static class DataSeeding
             RecipientAddress = "321 Oak St",
             RecipientPhone = "33333333333",
             HashCode = "XYZ7vs89",
-            Status = "Tamamlandı"
+            Status = "Teslim Edildi"
         },
         new Cargo()
         {
@@ -47,7 +47,7 @@ public static class DataSeeding
             RecipientAddress = "321 Oak St",
             RecipientPhone = "33333333333",
             HashCode = "XYZ78vs9",
-            Status = "Tamamlandı"
+            Status = "Teslim Edildi"
         }
     };
 
@@ -122,21 +122,14 @@ public static class DataSeeding
         {
             CargoProcessId = 1,
             CargoId = 1,
-            Process = "Şubeden Gönderildi",
+            Process = "kargo kabul edildi",
             ProcessDate = DateTime.Now.AddHours(-12)
         },
         new CargoProcess
         {
             CargoProcessId = 2,
-            CargoId = 1,
-            Process = "Alıcıya Ulaştı",
-            ProcessDate = DateTime.Now.AddHours(-1)
-        },
-        new CargoProcess
-        {
-            CargoProcessId = 3,
             CargoId = 2,
-            Process = "Şubeden Gönderildi",
+            Process = "kargo kabul edildi",
             ProcessDate = DateTime.Now.AddDays(-2).AddHours(-3)
         }
     };

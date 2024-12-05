@@ -1,2 +1,5 @@
 16/11/24                                   
         --en son databaseyı ayarlayacagız 
+yeni kargo subede gorunmuyor 
+
+username edit te calişmıyor 

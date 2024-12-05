@@ -60,10 +60,10 @@ namespace CargoAutomationSystem.Controllers
                 });
             }
             else if (model.Status == "Başka Şubeye Aktar" && model.NewBranchId.HasValue)
-            {
+            {   System.Console.WriteLine("edit sayfası silen hesap: ",branch.BranchName.ToString());
                 branch.Cargos.Remove(cargo);
                 cargo.CurrentBranchId = model.NewBranchId.Value;
-                cargo.Status = "Şubeye Aktarıldı";
+                cargo.Status = model.Status;
 
                 // Başka şubeye aktarma işlem kaydı
                 CargoProcesses.Add(new CargoProcess
@@ -169,11 +169,12 @@ namespace CargoAutomationSystem.Controllers
                   Email = c.Email,
                   Address = c.Address,
               },
-              Cargos = Cargos
-                  .Where(a => a.Status != "Tamamlandı") // Telefon numarasına göre filtreleme
+              Cargos = c.Cargos
+                  .Where(a => a.Status!="Teslim Edildi" && 
+                           CargoProcesses.Any(cp => cp.CargoId == a.CargoId
+                            && (cp.Process.StartsWith("Başka Şubeye") || cp.Process.StartsWith("Kargo kabul"))))
                   .Select(a => new BIndexCargoViewModel
                   {
-
                       CargoId = a.CargoId,
                       ReceiverName = a.RecipientName,
                       Status = a.Status,
