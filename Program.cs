@@ -1,14 +1,14 @@
 using CargoAutomationSystem.Data;
+using CargoAutomationSystem.Entity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Veritabanı bağlamı ekleniyor (InMemory Database kullanılıyor)
-builder.Services.AddDbContext<CargoContext>(options =>
-    options.UseInMemoryDatabase("CargoDb")); 
-
-builder.Services.AddScoped<CargoContext>(); 
+// Veritabanı bağlamı ekleniyor (MySQL kullanılıyor)
+builder.Services.AddDbContext<CargoDbContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), 
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
 // Kimlik doğrulama ve çerez yapılandırması ekleniyor
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -50,6 +50,17 @@ app.UseAuthorization();
 
 // Session'ı kullanabilmek için UseSession'ı ekleyin
 app.UseSession();
+
+// Veritabanını seed işlemi yapıyoruz
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<CargoDbContext>();
+    
+    // Veritabanını oluşturma ve seed işlemi
+    context.Database.Migrate(); // Migration'ları uyguluyor
+    DataSeeding.Seed(context);  // Seed verilerini ekliyoruz
+}
 
 app.MapControllerRoute(
     name: "default",

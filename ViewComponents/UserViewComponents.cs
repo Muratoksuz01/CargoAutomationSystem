@@ -1,26 +1,29 @@
 using System.Security.Claims;
+using CargoAutomationSystem.Data;
 using CargoAutomationSystem.Entity;
-using CargoAutomationSystem.Models;
 using CargoAutomationSystem.Models.Users;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CargoAutomationSystem.ViewComponents
 {
     public class UserViewComponent : ViewComponent
     {
+        private readonly CargoDbContext _context;
 
-        private readonly List<User> Users = DataSeeding.Users;
-        private readonly List<Branch> Branches = DataSeeding.Branches;
+        public UserViewComponent(CargoDbContext context)
+        {
+            _context = context;
+        }
+
         public IViewComponentResult Invoke()
         {
             var claimsPrincipal = User as ClaimsPrincipal;
 
-  
-
             int userId = int.Parse(claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier));
 
             // Kullanıcıyı sorguluyoruz ve UserInfoViewModel'e dönüştürüyoruz
-            var userInfo = Users
+            var userInfo = _context.Users
                 .Where(u => u.UserId == userId) // Filtreleme önce
                 .Select(u => new UserInfoViewModel
                 {
@@ -29,14 +32,12 @@ namespace CargoAutomationSystem.ViewComponents
                     Email = u.Email,
                     Address = u.Address,
                     Phone = u.Phone,
-                    ImageUrl=u.ImageUrl
+                    ImageUrl = u.ImageUrl
                     // Diğer UserInfoViewModel alanlarını ekleyin
                 })
                 .FirstOrDefault();
 
             // Modeli doldur
-          
-
             return View(userInfo);
         }
     }

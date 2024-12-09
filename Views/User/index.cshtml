@@ -26,6 +26,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Sender Name</th>
+                    <th scope="col">Receiver Name</th>
                     <th scope="col">status</th>
                     <th scope="col"></th>
                 </tr>
@@ -41,6 +42,7 @@
                             <tr>
                                 <th scope="row">@(i + 1)</th> <!-- Index değeri için 1 ekliyoruz -->
                                 <td>@item.SenderName</td>
+                                <td>@item.ReceiverName</td>
                                 <td>@item.Status</td>
                                 <td>
                                     <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode">

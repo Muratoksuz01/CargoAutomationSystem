@@ -1,5 +1,3 @@
-16/11/24                                   
-        --en son databaseyı ayarlayacagız 
-yeni kargo subede gorunmuyor 
-
-username edit te calişmıyor 
+8/12/24
+        kargo olusutunda senderId alıcının ıd si oluyor bunu duzelt 
+        kullanıcıdana kargo silindiginde subeden de siliniyor 

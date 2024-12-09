@@ -6,34 +6,39 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using CargoAutomationSystem.Data;
 
 namespace CargoAutomationSystem.Controllers
 {
     [Authorize(Roles = "Branch")]
-
     public class BranchController : Controller
-
     {
-        private readonly List<User> Users = DataSeeding.Users;
-        private readonly List<Branch> Branches = DataSeeding.Branches;
-        private readonly List<Cargo> Cargos = DataSeeding.Cargos;
-        private readonly List<CargoProcess> CargoProcesses = DataSeeding.CargoProcesses;
         protected BranchInfoViewModel CurrentBranch => new BranchInfoViewModel
         {
             BranchId = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : 0,
         };
 
+        private readonly CargoDbContext _context;
+
+        public BranchController(CargoDbContext context)
+        {
+            _context = context;  // Dependency injection ile context alınır
+        }
 
         [HttpGet]
         public IActionResult EditCargo(string hashCode)
         {
-            var cargo = Cargos.FirstOrDefault(c => c.HashCode == hashCode);
+            var cargo = _context.Cargos.FirstOrDefault(c => c.HashCode == hashCode);
             if (cargo == null) return NotFound("Kargo bulunamadı.");
 
             var model = new EditCargoViewModel
             {
                 HashCode = cargo.HashCode,
-                Branches = Branches.Where(b => b.BranchId != CurrentBranch.BranchId).ToList() // Şube listesini gönderiyoruz
+                Branches = _context.Branches
+                                    .Where(b => b.BranchId != CurrentBranch.BranchId)
+                                    .ToList() // Veritabanındaki şubeler
             };
 
             return View(model);
@@ -42,8 +47,8 @@ namespace CargoAutomationSystem.Controllers
         [HttpPost]
         public IActionResult EditCargo(EditCargoViewModel model)
         {
-            var branch = Branches.FirstOrDefault(b => b.BranchId == CurrentBranch.BranchId);
-            var cargo = Cargos.FirstOrDefault(c => c.HashCode == model.HashCode);
+            var branch = _context.Branches.FirstOrDefault(b => b.BranchId == CurrentBranch.BranchId);
+            var cargo = _context.Cargos.FirstOrDefault(c => c.HashCode == model.HashCode);
             if (cargo == null) return NotFound("Kargo bulunamadı.");
 
             if (model.Status == "Teslim Edildi")
@@ -51,30 +56,42 @@ namespace CargoAutomationSystem.Controllers
                 cargo.Status = "Teslim Edildi";
 
                 // Teslim edildi işlem kaydı
-                CargoProcesses.Add(new CargoProcess
+                _context.CargoProcesses.Add(new CargoProcess
                 {
-                    CargoProcessId = CargoProcesses.Count + 1,
                     CargoId = cargo.CargoId,
                     Process = "Teslim Edildi",
                     ProcessDate = DateTime.Now
                 });
             }
             else if (model.Status == "Başka Şubeye Aktar" && model.NewBranchId.HasValue)
-            {   System.Console.WriteLine("edit sayfası silen hesap: ",branch.BranchName.ToString());
-                branch.Cargos.Remove(cargo);
-                cargo.CurrentBranchId = model.NewBranchId.Value;
-                cargo.Status = model.Status;
-
-                // Başka şubeye aktarma işlem kaydı
-                CargoProcesses.Add(new CargoProcess
+            {
+                var newBranch = _context.Branches.Include(b => b.BranchCargos).FirstOrDefault(b => b.BranchId == model.NewBranchId.Value);
+                if (newBranch != null)
                 {
-                    CargoProcessId = CargoProcesses.Count + 1,
-                    CargoId = cargo.CargoId,
-                    Process = $"Başka Şubeye Aktarıldı (Şube ismi: {Branches.FirstOrDefault(b => b.BranchId == model.NewBranchId.Value).BranchName})",
-                    ProcessDate = DateTime.Now
-                });
-                Branches.FirstOrDefault(b => b.BranchId == model.NewBranchId).Cargos.Add(cargo);
+                    // Kargoyu mevcut şubeden çıkar
+                    var branchCargo = _context.BranchCargos.FirstOrDefault(bc => bc.BranchId == branch.BranchId && bc.CargoId == cargo.CargoId);
+                    if (branchCargo != null)
+                    {
+                        _context.BranchCargos.Remove(branchCargo); // Şubeden çıkarıyoruz
+                    }
 
+                    // Kargoyu yeni şubeye ekle
+                    _context.BranchCargos.Add(new BranchCargo
+                    {
+                        BranchId = newBranch.BranchId,
+                        CargoId = cargo.CargoId
+                    });
+
+                    cargo.Status = model.Status;
+
+                    // Başka şubeye aktarma işlem kaydı
+                    _context.CargoProcesses.Add(new CargoProcess
+                    {
+                        CargoId = cargo.CargoId,
+                        Process = $"Başka Şubeye Aktarıldı (Şube: {newBranch.BranchName})",
+                        ProcessDate = DateTime.Now
+                    });
+                }
             }
             else
             {
@@ -82,31 +99,38 @@ namespace CargoAutomationSystem.Controllers
                 return View(model);
             }
 
+            _context.SaveChanges(); // Değişiklikleri kaydediyoruz
             return RedirectToAction("Index", "Branch");
         }
 
-
         public IActionResult RemoveCargo(string hashCode)
         {
-            System.Console.WriteLine("burada");
-            var branch = Branches.FirstOrDefault(b => b.BranchId == CurrentBranch.BranchId);
-            var cargo = Cargos.FirstOrDefault(c => c.HashCode == hashCode);
-            if (cargo == null)
-                return RedirectToAction("List");
-            if (branch.Cargos.Contains(cargo))
+            var branch = _context.Branches.FirstOrDefault(b => b.BranchId == CurrentBranch.BranchId);
+            var cargo = _context.Cargos.FirstOrDefault(c => c.HashCode == hashCode);
+            if (cargo == null) return RedirectToAction("List");
+
+            var branchCargo = _context.BranchCargos.FirstOrDefault(bc => bc.BranchId == branch.BranchId && bc.CargoId == cargo.CargoId);
+            if (branchCargo != null)
             {
-                branch.Cargos.Remove(cargo); // Şubeden kargoyu kaldır
-                System.Console.WriteLine($"Kargonun şube bağlantısı kaldırıldı. Hash kodu: {hashCode}");
+                _context.BranchCargos.Remove(branchCargo); // Kargoyu şubeden çıkar
             }
+
+            _context.SaveChanges(); // Değişiklikleri kaydet
             return RedirectToAction("List");
         }
 
-
         public IActionResult List()
         {
-            var branch = Branches.FirstOrDefault(br => br.BranchId == CurrentBranch.BranchId);
+            var branch = _context.Branches
+                .Include(b => b.BranchCargos)
+                    .ThenInclude(bc => bc.Cargo)
+                .FirstOrDefault(br => br.BranchId == CurrentBranch.BranchId);
 
-            var cargos = branch.Cargos
+            if (branch == null) return NotFound("Şube bulunamadı.");
+
+            var cargos = branch.BranchCargos.Select(bc => bc.Cargo).ToList(); // Şubeye ait kargoları al
+
+            var cargoViewModels = cargos
                 .Select(c => new BListViewModel
                 {
                     CargoId = c.CargoId,
@@ -116,27 +140,24 @@ namespace CargoAutomationSystem.Controllers
                     Status = c.Status
                 })
                 .ToList();
-            return View(cargos);
+
+            return View(cargoViewModels);
         }
 
         public IActionResult Details(string hashCode)
         {
-            // Kargo bilgilerini al
-            var cargo = Cargos.SingleOrDefault(c => c.HashCode == hashCode);
+            var cargo = _context.Cargos.SingleOrDefault(c => c.HashCode == hashCode);
             if (cargo == null)
             {
                 return NotFound($"No cargo found with hash code: {hashCode}");
             }
 
-            // Gönderici bilgilerini al
-            var sender = Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
+            var sender = _context.Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
 
-            // Kargo süreçlerini al (örneğin, processlerin bulunduğu bir koleksiyon)
-            var cargoProcesses = CargoProcesses.Where(cp => cp.CargoId == cargo.CargoId)
-                                               .OrderBy(cp => cp.ProcessDate)
-                                               .ToList();
+            var cargoProcesses = _context.CargoProcesses.Where(cp => cp.CargoId == cargo.CargoId)
+                                                       .OrderBy(cp => cp.ProcessDate)
+                                                       .ToList();
 
-            // Detay modelini oluştur
             var detail = new DetailViewModel
             {
                 CargoId = cargo.CargoId,
@@ -150,57 +171,53 @@ namespace CargoAutomationSystem.Controllers
                 SenderEmail = sender?.Email,
                 SenderAddress = sender?.Address,
                 SenderPhone = sender?.Phone,
-                CargoProcesses = cargoProcesses // Kargo süreçlerini ekle
+                CargoProcesses = cargoProcesses
             };
 
-            System.Console.WriteLine($"Detail fetched for cargo hash code: {hashCode}");
             return View(detail);
         }
 
-
         public IActionResult Index()
         {
-            var branch = Branches.Where(i => i.BranchId == CurrentBranch.BranchId)
-          .Select(c => new BIndexViewModel
-          {
-              BranchInfos = new BranchInfoViewModel
-              {
-                  BranchName = c.BranchName,
-                  Email = c.Email,
-                  Address = c.Address,
-              },
-              Cargos = c.Cargos
-                  .Where(a => a.Status!="Teslim Edildi" && 
-                           CargoProcesses.Any(cp => cp.CargoId == a.CargoId
-                            && (cp.Process.StartsWith("Başka Şubeye") || cp.Process.StartsWith("Kargo kabul"))))
-                  .Select(a => new BIndexCargoViewModel
-                  {
-                      CargoId = a.CargoId,
-                      ReceiverName = a.RecipientName,
-                      Status = a.Status,
-                      HashCode = a.HashCode,
-                      ReceiverAddress = a.RecipientAddress
-                  }).ToList() // Filtrelenmiş kargoların listesini oluştur
-          }).FirstOrDefault();
-            System.Console.WriteLine("branch index fonksiyonu çalıştı.");
+            var branch = _context.Branches
+                .Where(i => i.BranchId == CurrentBranch.BranchId)
+                .Select(c => new BIndexViewModel
+                {
+                    BranchInfos = new BranchInfoViewModel
+                    {
+                        BranchName = c.BranchName,
+                        Email = c.Email,
+                        Address = c.Address,
+                    },
+                    Cargos = c.BranchCargos
+                        .Where(bc => bc.Cargo.Status != "Teslim Edildi" &&
+                                     _context.CargoProcesses.Any(cp => cp.CargoId == bc.CargoId &&
+                                        (cp.Process.StartsWith("Başka Şubeye") || cp.Process.StartsWith("Kargo kabul"))))
+                        .Select(bc => new BIndexCargoViewModel
+                        {
+                            CargoId = bc.Cargo.CargoId,
+                            ReceiverName = bc.Cargo.RecipientName,
+                            Status = bc.Cargo.Status,
+                            HashCode = bc.Cargo.HashCode,
+                            ReceiverAddress = bc.Cargo.RecipientAddress
+                        }).ToList()
+                }).FirstOrDefault();
+
             return View(branch);
         }
-
 
         public IActionResult LogOut()
         {
             HttpContext.Session.Clear();
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
             return RedirectToAction("CorporateLogin", "Home");
         }
 
-
         public IActionResult Settings()
         {
-            System.Console.WriteLine(" branch setting de ");
+            var branch = _context.Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
+            if (branch == null) return NotFound("Şube bulunamadı.");
 
-            var branch = Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
             var model = new BSettingsViewModel
             {
                 UpdateUsername = new BUpdateUsernameViewModel { Username = branch.BranchName },
@@ -215,18 +232,18 @@ namespace CargoAutomationSystem.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //       TempData["Error"] = "Invalid username.";
                 return View("Settings", model);
             }
 
-            var branch = Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
-            branch.BranchName = model.UpdateUsername.Username;
-            //                                                       sonra burada saveChanges gelecek
+            var branch = _context.Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
+            if (branch != null)
+            {
+                branch.BranchName = model.UpdateUsername.Username;
+                _context.SaveChanges(); // Değişiklikleri kaydediyoruz
+            }
 
-            //  TempData["Message"] = "Username updated successfully!";
             return RedirectToAction("Settings");
         }
-
 
         [HttpPost]
         public IActionResult UpdateInfo(BSettingsViewModel model)
@@ -235,47 +252,40 @@ namespace CargoAutomationSystem.Controllers
             {
                 return View("Settings", model);
             }
-            var branch = Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
-            branch.Email = model.EditInfo.Email;
-            branch.Address = model.EditInfo.Address;
+
+            var branch = _context.Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
+            if (branch != null)
+            {
+                branch.Email = model.EditInfo.Email;
+                branch.Address = model.EditInfo.Address;
+                _context.SaveChanges(); // Değişiklikleri kaydediyoruz
+            }
+
             return RedirectToAction("Settings");
         }
 
         [HttpPost]
         public IActionResult UpdatePassword(BSettingsViewModel model)
         {
-            var branch = Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
-            model.UpdateUsername = new BUpdateUsernameViewModel { Username = branch.BranchName };
-            model.EditInfo = new BEditInfoViewModel { Email = branch.Email, Address = branch.Address };
+            var branch = _context.Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
+            model.UpdateUsername = new BUpdateUsernameViewModel { Username = branch?.BranchName };
+            model.EditInfo = new BEditInfoViewModel { Email = branch?.Email, Address = branch?.Address };
+
             if (!ModelState.IsValid)
             {
-                foreach (var key in ModelState.Keys)
-                {
-                    var errors = ModelState[key].Errors;
-                    foreach (var error in errors)
-                    {
-                        Console.WriteLine($"Field: {key}, Error: {error.ErrorMessage}");
-                    }
-                }
-
-
                 return View("Settings", model); // Ana modeli döndürüyoruz.
             }
 
-            if (branch.Password != model.UpdatePassword.CurrentPassword)
+            if (branch?.Password != model.UpdatePassword.CurrentPassword)
             {
                 ModelState.AddModelError("UpdatePassword.CurrentPassword", "Current password is incorrect.");
                 return View("Settings", model);
             }
 
             branch.Password = model.UpdatePassword.NewPassword;
-            //                                                       sonra burada saveChanges gelecek
+            _context.SaveChanges(); // Değişiklikleri kaydediyoruz
 
             return RedirectToAction("Settings");
         }
-
-
     }
-
-
 }

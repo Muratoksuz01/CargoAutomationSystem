@@ -1,8 +1,11 @@
+using CargoAutomationSystem.Data;
 using CargoAutomationSystem.Entity;
+using System;
+using System.Collections.Generic;
 
 public static class DataSeeding
 {
-    // Cargos verisinin null olup olmadığını kontrol et
+    // Kargoları tanımlıyoruz
     public static List<Cargo> Cargos = new List<Cargo>
     {
         new Cargo()
@@ -63,8 +66,7 @@ public static class DataSeeding
             Address = "789 West St, Westside",
             Phone = "11111111111",
             ImageUrl = "john_doe.png",
-            IsTemporary=false,
-            Cargos = new List<Cargo> { Cargos[0], Cargos[1], Cargos[3] }  // Kargo ID 1, 2, 4
+            IsTemporary=false
         },
         new User
         {
@@ -75,8 +77,7 @@ public static class DataSeeding
             Address = "101 South St, Southside",
             Phone = "22222222222",
             ImageUrl = "jane_smith.png",
-            IsTemporary=false,
-            Cargos = new List<Cargo> { Cargos[0], Cargos[1], Cargos[2] }  // Kargo ID 1, 2, 3
+            IsTemporary=false
         },
         new User
         {
@@ -87,8 +88,7 @@ public static class DataSeeding
             Address = "123 South St, Southside",
             Phone = "33333333333",
             ImageUrl = "jane_smith.png",
-            IsTemporary=false,
-            Cargos = new List<Cargo> { Cargos[2], Cargos[3] }  // Kargo ID 3, 4
+            IsTemporary=false
         }
     };
 
@@ -101,8 +101,7 @@ public static class DataSeeding
             BranchName = "Central Branch",
             Email = "branch1@cargo.com",
             Address = "123 Main St, City Center",
-            Password="hashedpassword1",
-            Cargos = new List<Cargo> { Cargos[0], Cargos[2] }
+            Password = "hashedpassword1"
         },
         new Branch
         {
@@ -110,8 +109,7 @@ public static class DataSeeding
             BranchName = "East Branch",
             Email = "branch2@cargo.com",
             Address = "456 East Rd, East Town",
-            Password="hashedpassword1",
-            Cargos = new List<Cargo> { Cargos[1], Cargos[3] }
+            Password = "hashedpassword1"
         }
     };
 
@@ -133,4 +131,104 @@ public static class DataSeeding
             ProcessDate = DateTime.Now.AddDays(-2).AddHours(-3)
         }
     };
+
+    // Seed Data'larını ekleyerek ilişkileri oluşturuyoruz
+    public static void Seed(CargoDbContext context)
+    {
+         if (!context.Cargos.Any())
+        {
+        // Kullanıcıları ekleyelim
+        foreach (var user in Users)
+        {
+            context.Users.Add(user);
+        }
+        }
+ if (!context.Branches.Any())
+        {
+        // Şubeleri ekleyelim
+        foreach (var branch in Branches)
+        {
+            context.Branches.Add(branch);
+        }
+        }
+        if (!context.Cargos.Any())
+        {
+            // Kargoları ekleyelim
+            foreach (var cargo in Cargos)
+            {
+                context.Cargos.Add(cargo);
+            }
+        }
+
+        // Kargo süreçlerini ekleyelim
+          if (!context.CargoProcesses.Any())
+        {
+        foreach (var cargoProcess in CargoProcesses)
+        {
+            context.CargoProcesses.Add(cargoProcess);
+        }
+        }
+
+        // UserCargo ilişkilerini ekleyelim
+         if (!context.UserCargos.Any())
+        {
+        context.UserCargos.AddRange(new UserCargo
+        {
+            UserId = 1,
+            CargoId = 1
+        }, new UserCargo
+        {
+            UserId = 1,
+            CargoId = 2
+        }, new UserCargo
+        {
+            UserId = 1,
+            CargoId = 4
+        }, new UserCargo
+        {
+            UserId = 2,
+            CargoId = 1
+        }, new UserCargo
+        {
+            UserId = 2,
+            CargoId = 2
+        }, new UserCargo
+        {
+            UserId = 2,
+            CargoId = 3
+        }, new UserCargo
+        {
+            UserId = 3,
+            CargoId = 3
+        }, new UserCargo
+        {
+            UserId = 3,
+            CargoId = 4
+        });
+        }
+        
+         if (!context.BranchCargos.Any())
+        {
+        // BranchCargo ilişkilerini ekleyelim
+        context.BranchCargos.AddRange(new BranchCargo
+        {
+            BranchId = 1,
+            CargoId = 1
+        }, new BranchCargo
+        {
+            BranchId = 1,
+            CargoId = 3
+        }, new BranchCargo
+        {
+            BranchId = 2,
+            CargoId = 2
+        }, new BranchCargo
+        {
+            BranchId = 2,
+            CargoId = 4
+        });
+        }
+        // Veritabanına kaydedelim
+        context.SaveChanges();
+    }
 }

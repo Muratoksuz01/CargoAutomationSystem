@@ -5,404 +5,417 @@ using Microsoft.AspNetCore.Mvc;
 using CargoAutomationSystem.Entity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CargoAutomationSystem.Models.Users;
-using System.Linq;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-namespace CargoAutomationSystem.Controllers;
-[Authorize(Roles = "User")]
+using System.Linq;
+using System.IO;
+using CargoAutomationSystem.Data;
+using System.Net.Http.Json;
+using System.Xml;
+using System.Text.Json;
 
-public class UserController : Controller
+namespace CargoAutomationSystem.Controllers
 {
-    public UserController()
+    [Authorize(Roles = "User")]
+    public class UserController : Controller
     {
-        // CurrentUser
-    }
-    private readonly List<User> Users = DataSeeding.Users;
-    private readonly List<Branch> Branches = DataSeeding.Branches;
-    private readonly List<Cargo> Cargos = DataSeeding.Cargos;
-    private readonly List<CargoProcess> CargoProcesses = DataSeeding.CargoProcesses;
+        private readonly CargoDbContext _context;
 
-
-    protected UserInfoViewModel CurrentUser => new UserInfoViewModel
-    {
-        UserId = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : 0,
-    };
-
-
-    public IActionResult SendCargo()
-    {
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-        var sendCargoModel = new SendCargoViewModel
+        public UserController(CargoDbContext context)
         {
-            SenderId = user.UserId,
-            SenderEmail = user.Email,
-            SenderUsername = user.Username,
-            SenderAddress = user.Address,
-            SenderPhone = user.Phone
-        };
-        ViewBag.Branches = new SelectList(Branches, "BranchId", "BranchName");
-
-        return View(sendCargoModel);
-    }
-
-    [HttpPost]
-    public IActionResult SendCargo(SendCargoViewModel model)
-    {
-        if (!ModelState.IsValid)
-        {
-            ViewBag.Branches = new SelectList(Branches, "BranchId", "BranchName");
-            return View(model);
+            _context = context;
         }
-        // Yeni kargo oluştur
-        var newCargo = new Cargo
+
+        // Access current user info
+        protected UserInfoViewModel CurrentUser => new UserInfoViewModel
         {
-            CargoId = Cargos.Count + 1, // Yeni bir ID atama
-            SenderId = model.SenderId,
-            CurrentBranchId = model.SenderBranchId,
-            RecipientName = model.RecipientName,
-            RecipientAddress = model.RecipientAddress,
-            RecipientPhone = model.RecipientPhone,
-            HashCode = GenerateUniqueHashCode(),
-            Status = "Taşımada"
+            UserId = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : 0,
         };
 
-        // Kargoyu global listeye ekle
-        Cargos.Add(newCargo);
-        System.Console.WriteLine("kargo kargolar vertabanına eklendi");
+        // Method to send cargo
 
-        var newProcess = new CargoProcess
+
+        // Handle sending cargo via POST
+        [HttpPost]
+        public IActionResult SendCargo(SendCargoViewModel model)
         {
-            CargoProcessId = CargoProcesses.Count + 1,
-            CargoId = newCargo.CargoId,
-            ProcessDate = DateTime.Now,
-            Process = "Kargo kabul edildi"
-        };
-        CargoProcesses.Add(newProcess);
-        System.Console.WriteLine("Kargo kargo süreçlerine eklendi.");
-
-
-
-        // Göndericinin listesine ekle
-        var sender = Users.FirstOrDefault(u => u.UserId == model.SenderId);
-        if (sender != null)
-        {
-            sender.Cargos.Add(newCargo);
-            System.Console.WriteLine("kargo sender cargosa vertabanına eklendi");
-        }
-
-        // Şubenin listesine ekle
-        var branch = Branches.FirstOrDefault(b => b.BranchId == model.SenderBranchId);
-        if (branch != null)
-        {
-            branch.Cargos.Add(newCargo);
-            System.Console.WriteLine("kargo branch cargosa vertabanına eklendi");
-        }
-
-        // Alıcının sisteme kayıtlı olup olmadığını kontrol et
-        var recipient = Users.FirstOrDefault(u => u.Phone == model.RecipientPhone);
-        if (recipient != null)
-        {
-            // Kayıtlıysa kargo alıcının listesine eklenir
-            recipient.Cargos.Add(newCargo);
-            System.Console.WriteLine("alıcı cargosa eklendi");
-        }
-        else
-        {
-            var tempUser = new User
+            if (!ModelState.IsValid)
             {
-                UserId = Users.Count + 1,
-                Username = model.RecipientName,
-                Email = $"{model.RecipientPhone}@temporary.com",
-                Password = "temporary",
-                Address = model.RecipientAddress,
-                Phone = model.RecipientPhone,
-                ImageUrl = null,
-                IsTemporary = true,
-                Cargos = new List<Cargo> { newCargo }
+                ViewBag.Branches = new SelectList(_context.Branches, "BranchId", "BranchName");
+                return View(model);
+            }
+
+            // Create new cargo record
+            var newCargo = new Cargo
+            {   
+                CargoId=_context.Cargos.Max(c=>c.CargoId)+1,
+                SenderId = model.SenderId,
+                CurrentBranchId = model.SenderBranchId,
+                RecipientName = model.RecipientName,
+                RecipientAddress = model.RecipientAddress,
+                RecipientPhone = model.RecipientPhone,
+                HashCode = GenerateUniqueHashCode(),
+                Status = "Taşımada"
             };
 
-            Users.Add(tempUser);
-            System.Console.WriteLine($"Yeni geçici kullanıcı oluşturuldu: {tempUser.Username}");
-        }
-
-        System.Console.WriteLine("Kargo başarıyla gönderildi.");
-        return RedirectToAction("Index");
-    }
-
-
-
-
-    public IActionResult Index()
-    {
-        // Aktif kullanıcıyı buluyoruz.
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-
-        if (user == null)
-        {
-            return NotFound("Kullanıcı bulunamadı.");
-        }
-
-        // Kargo listesi, eğer yoksa boş bir liste oluşturulacak.
-        List<IndexCargoViewModel> userCargos;
-        userCargos = new List<IndexCargoViewModel>();
-        if (user.Cargos != null)
-        {
-            userCargos = user.Cargos
-                               .Where(c => c.Status != "Tamamlandı") // Tamamlanmamış kargolar.
-                               .Select(c => new IndexCargoViewModel
-                               {
-                                   CargoId = c.CargoId,
-                                   SenderName = Users.FirstOrDefault(u => u.UserId == c.SenderId)?.Username, // Gönderici adı.
-                                   Status = c.Status,
-                                   HashCode = c.HashCode
-                               }).ToList();
-        }
-
-
-        // ViewModel'i oluşturuyoruz.
-        var model = new IndexViewModel
-        {
-            UserInfos = new UserInfoViewModel
+            // Save the new cargo
+            _context.Cargos.Add(newCargo);
+            System.Console.WriteLine($"burdad eni kargı ıd:{newCargo.CargoId}");
+            // Create a CargoProcess record for the cargo
+            var newProcess = new CargoProcess
             {
-                Username = user.Username,
-                Email = user.Email,
-                Phone = user.Phone,
-                Address = user.Address,
-                ImageUrl = user.ImageUrl
-            },
-            Cargos = userCargos
-        };
+                Cargo = newCargo,
+                ProcessDate = DateTime.Now,
+                Process = "Kargo kabul edildi"
+            };
+            _context.CargoProcesses.Add(newProcess);
 
-        return View(model);
-    }
-
-
-
-    public IActionResult Detail(string hashCode)
-    {
-        // Kargo bilgilerini alıyoruz
-        var cargo = Cargos.SingleOrDefault(c => c.HashCode == hashCode);
-        if (cargo == null)
-            return NotFound($"No cargo found with hash code: {hashCode}");
-
-        // Gönderici bilgilerini alıyoruz
-        var sender = Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
-
-        // Bulunduğu şube bilgisini alıyoruz
-        var currentBranch = Branches.SingleOrDefault(b => b.BranchId == cargo.CurrentBranchId);
-
-        // Kargo süreçlerini alıyoruz
-        var cargoProcesses = CargoProcesses.Where(cp => cp.CargoId == cargo.CargoId)
-                                           .OrderBy(cp => cp.ProcessDate)
-                                           .ToList();
-
-        // ViewModel'ı dolduruyoruz
-        var detail = new DetailViewModel
-        {
-            CargoId = cargo.CargoId,
-            HashCode = cargo.HashCode,
-            Status = cargo.Status,
-            CurrentBranch = currentBranch.BranchName,
-            RecipientName = cargo.RecipientName,
-            RecipientAddress = cargo.RecipientAddress,
-            RecipientPhone = cargo.RecipientPhone,
-            SenderId = sender.UserId,
-            SenderUsername = sender.Username,
-            SenderEmail = sender.Email,
-            SenderAddress = sender.Address,
-            SenderPhone = sender.Phone,
-            CargoProcesses = cargoProcesses // Kargo süreçlerini buraya ekliyoruz
-        };
-
-        // View'e gönderiyoruz
-        return View(detail);
-    }
-
-
-    public IActionResult TrackCargo()
-    {
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-
-        var cargos = user.Cargos
-            .Select(c => new TrackCargoViewModel
+            // Associate sender and branch
+            var sender = _context.Users.Include(u => u.UserCargos).FirstOrDefault(u => u.UserId == model.SenderId);
+            if (sender != null)
             {
-                CargoId = c.CargoId,
-                SenderName = Users.FirstOrDefault(u => u.UserId == c.SenderId)?.Username,
-                RecipientName = c.RecipientName,
-                RecipientAddress = c.RecipientAddress,
-                Status = c.Status,
-                HashCode = c.HashCode
-            })
-            .ToList();
+                sender.UserCargos.Add(new UserCargo { UserId = sender.UserId, CargoId = newCargo.CargoId });
+            }
 
-        return View(cargos);
-    }
-
-
-
-
-
-
-    public IActionResult RemoveCargo(string hashCode)
-    {
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-
-        System.Console.WriteLine($"Gelen hash kodu: {hashCode}");
-        var cargoToRemove = DataSeeding.Cargos.FirstOrDefault(c => c.HashCode == hashCode);
-        if (cargoToRemove == null)
-        {
-            System.Console.WriteLine("Kargo bulunamadı.");
-            return RedirectToAction("TrackCargo"); // Eğer kargo bulunamazsa geri yönlendir
-        }
-
-
-        if (user.Cargos.Contains(cargoToRemove))
-        {
-            user.Cargos.Remove(cargoToRemove);
-            System.Console.WriteLine($"Kargo {cargoToRemove.HashCode} kullanıcıdan silindi: {user.Username}");
-        }
-
-        return RedirectToAction("TrackCargo");
-    }
-
-
-
-
-
-    public IActionResult LogOut()
-    {
-        HttpContext.Session.Clear();
-        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Login", "Home");
-    }
-
-    private string GenerateUniqueHashCode()
-    {
-        return Guid.NewGuid().ToString();
-    }
-
-    public IActionResult Settings()
-    {
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-        var model = new SettingsViewModel
-        {
-            UpdateUsername = new UpdateUsernameViewModel { Username = user.Username },
-            EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address },
-            UpdatePassword = new UpdatePasswordViewModel(),
-            UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl }
-        };
-        return View(model);
-    }
-
-    [HttpPost]
-    public IActionResult UpdatePassword(SettingsViewModel model)
-    {
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-        model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
-        model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
-        model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
-
-        if (!ModelState.IsValid)
-        {
-            foreach (var key in ModelState.Keys)
+            var branch = _context.Branches.FirstOrDefault(b => b.BranchId == model.SenderBranchId);
+            if (branch != null)
             {
-                var errors = ModelState[key].Errors;
-                foreach (var error in errors)
+                branch.BranchCargos.Add(new BranchCargo { BranchId = branch.BranchId, CargoId = newCargo.CargoId });
+            }
+
+            // Check if recipient exists, otherwise create a temporary user
+            var recipient = _context.Users.Include(u => u.UserCargos).FirstOrDefault(u => u.Phone == model.RecipientPhone);
+            if (recipient == null)
+            {
+                recipient = new User
                 {
-                    Console.WriteLine($"Field: {key}, Error: {error.ErrorMessage}");
+                    Username = model.RecipientName,
+                    Email = $"{model.RecipientPhone}@temporary.com",
+                    Password = "temporary",
+                    Address = model.RecipientAddress,
+                    Phone = model.RecipientPhone,
+                    IsTemporary = true,
+                    ImageUrl="nouser.png",
+                    UserCargos = new List<UserCargo> { new UserCargo { CargoId = newCargo.CargoId } }
+                };
+                _context.Users.Add(recipient);
+            }
+            else
+            {
+                recipient.UserCargos.Add(new UserCargo { UserId = recipient.UserId, CargoId = newCargo.CargoId });
+            }
+
+            newCargo.RecipientId = recipient.UserId;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
+
+
+
+
+
+        // Index method for displaying user's cargo
+        public IActionResult Index()
+        {
+             var user = _context.Users
+                .Include(u => u.UserCargos)
+                .ThenInclude(uc => uc.Cargo)
+                .ThenInclude(c => c.Sender)
+                .FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+          
+            if (user == null) return NotFound("User not found.");
+
+        var userCargos=user.UserCargos
+        .Where(u=>u.Cargo.Status!="Teslim Edildi")
+        .Select(uc=>new IndexCargoViewModel{
+            CargoId=uc.Cargo.CargoId,
+            SenderName=uc.Cargo.Sender.Username,
+            ReceiverName=uc.Cargo.RecipientName,
+            Status=uc.Cargo.Status,
+            HashCode=uc.Cargo.HashCode
+        }).ToList();
+
+
+
+
+
+
+            // var userCargos = _context.Cargos
+            //     .Where(c => (c.SenderId == user.UserId || c.RecipientId == user.UserId) && c.Status != "Tamamlandı")
+            //     .Select(c => new IndexCargoViewModel
+            //     {
+            //         CargoId = c.CargoId,
+            //         SenderName = c.Sender.Username,
+            //         ReceiverName = c.RecipientName,
+            //         Status = c.Status,
+            //         HashCode = c.HashCode
+            //     }).ToList();
+
+            var model = new IndexViewModel
+            {
+                UserInfos = new UserInfoViewModel
+                {
+                    Username = user.Username,
+                    Email = user.Email,
+                    Phone = user.Phone,
+                    Address = user.Address,
+                    ImageUrl = user.ImageUrl
+                },
+                Cargos = userCargos
+            };
+
+            return View(model);
+        }
+
+
+        // Track cargo method
+        public IActionResult TrackCargo()
+        {
+            var user = _context.Users
+                .Include(u => u.UserCargos)
+                .ThenInclude(uc => uc.Cargo)
+                .ThenInclude(c => c.Sender)
+                .FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+          
+            if (user == null)
+                return NotFound("User not found.");
+
+            // Cargos'u UserCargos üzerinden al
+            var cargos = user.UserCargos.Select(uc => new TrackCargoViewModel //            null geliyor 
+            {
+                CargoId = uc.Cargo.CargoId,
+                SenderName = uc.Cargo.Sender.Username, //nulll geliyor 
+                RecipientName = uc.Cargo.RecipientName,
+                RecipientAddress = uc.Cargo.RecipientAddress,
+                Status = uc.Cargo.Status,
+                HashCode = uc.Cargo.HashCode
+            }).ToList();
+
+            return View(cargos);
+        }
+
+
+        // Remove cargo method
+        public IActionResult RemoveCargo(string hashCode)
+        {
+            var cargoToRemove = _context.Cargos.FirstOrDefault(c => c.HashCode == hashCode);
+            if (cargoToRemove == null)
+                return RedirectToAction("TrackCargo");
+
+            var user = _context.Users
+                .Include(u => u.UserCargos) // UserCargos'u dahil et
+                .ThenInclude(uc => uc.Cargo) // UserCargo'dan Cargo'yu dahil et
+                .FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+
+            if (user == null)
+                return RedirectToAction("TrackCargo");
+
+            // UserCargos koleksiyonundan ilgili Cargo'yu bul ve sil
+            var userCargoToRemove = user.UserCargos.FirstOrDefault(uc => uc.CargoId == cargoToRemove.CargoId);
+            if (userCargoToRemove != null)
+            {
+                _context.UserCargos.Remove(userCargoToRemove); // UserCargo ilişkisinden sil
+                _context.SaveChanges(); // Değişiklikleri kaydet
+            }
+
+            return RedirectToAction("TrackCargo");
+        }
+
+
+
+
+
+
+
+
+
+        public IActionResult SendCargo()
+        {
+            var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var sendCargoModel = new SendCargoViewModel
+            {
+                SenderId = user.UserId,
+                SenderEmail = user.Email,
+                SenderUsername = user.Username,
+                SenderAddress = user.Address,
+                SenderPhone = user.Phone
+            };
+
+            ViewBag.Branches = new SelectList(_context.Branches, "BranchId", "BranchName");
+
+            return View(sendCargoModel);
+        }
+        // Cargo detail view
+        public IActionResult Detail(string hashCode)
+        {
+            var cargo = _context.Cargos
+                .Include(c => c.Sender)
+                .Include(c => c.CargoProcesses)
+                .FirstOrDefault(c => c.HashCode == hashCode);
+
+            if (cargo == null) return NotFound($"No cargo found with hash code: {hashCode}");
+
+            var currentBranch = _context.Branches.FirstOrDefault(b => b.BranchId == cargo.CurrentBranchId);
+            var detail = new DetailViewModel
+            {
+                CargoId = cargo.CargoId,
+                HashCode = cargo.HashCode,
+                Status = cargo.Status,
+                CurrentBranch = currentBranch?.BranchName,
+                RecipientName = cargo.RecipientName,
+                RecipientAddress = cargo.RecipientAddress,
+                RecipientPhone = cargo.RecipientPhone,
+                SenderId = cargo.Sender.UserId,
+                SenderUsername = cargo.Sender.Username,
+                SenderEmail = cargo.Sender.Email,
+                SenderAddress = cargo.Sender.Address,
+                SenderPhone = cargo.Sender.Phone,
+                CargoProcesses = cargo.CargoProcesses.OrderBy(cp => cp.ProcessDate).ToList()
+            };
+
+            return View(detail);
+        }
+
+
+        // Logout method
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Home");
+        }
+
+        // Helper to generate unique hash code
+        private string GenerateUniqueHashCode()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
+        // Settings page for user profile
+        public IActionResult Settings()
+        {
+            var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+            if (user == null) return NotFound("User not found.");
+
+            var model = new SettingsViewModel
+            {
+                UpdateUsername = new UpdateUsernameViewModel { Username = user.Username },
+                EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address },
+                UpdatePassword = new UpdatePasswordViewModel(),
+                UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl }
+            };
+
+            return View(model);
+        }
+
+        // Update password
+        [HttpPost]
+        public IActionResult UpdatePassword(SettingsViewModel model)
+        {
+            var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+            if (user == null) return NotFound("User not found.");
+
+            model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
+            model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
+            model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
+
+            if (!ModelState.IsValid || user.Password != model.UpdatePassword.CurrentPassword)
+            {
+                ModelState.AddModelError("UpdatePassword.CurrentPassword", "Current password is incorrect.");
+                return View("Settings", model);
+            }
+
+            user.Password = model.UpdatePassword.NewPassword;
+            _context.SaveChanges();
+
+            return RedirectToAction("Settings");
+        }
+
+        // Update profile image
+        [HttpPost]
+        public IActionResult UpdateImage(IFormFile file)
+        {
+            var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+            if (user == null) return NotFound("User not found.");
+
+            if (file != null)
+            {
+                var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img");
+                if (!Directory.Exists(uploadsPath)) Directory.CreateDirectory(uploadsPath);
+
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(uploadsPath, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
                 }
-            }
-            return View("Settings", model);
-        }
 
-        if (user.Password != model.UpdatePassword.CurrentPassword)
-        {
-            ModelState.AddModelError("UpdatePassword.CurrentPassword", "Current password is incorrect.");
-            return View("Settings", model);
-        }
-
-        user.Password = model.UpdatePassword.NewPassword;
-        // SaveChanges logic would go here
-
-        return RedirectToAction("Settings");
-    }
-
-    [HttpPost]
-    public IActionResult UpdateImage(IFormFile file)
-    {
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-        if (file != null)
-        {
-            // Save the uploaded file
-            var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img");
-            if (!Directory.Exists(uploadsPath))
-            {
-                Directory.CreateDirectory(uploadsPath);
+                user.ImageUrl = fileName;
+                _context.SaveChanges();
             }
 
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(uploadsPath, fileName);
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
-
-            user.ImageUrl = fileName;
-            // SaveChanges logic here
+            return RedirectToAction("Settings");
         }
 
-        return RedirectToAction("Settings");
-    }
-
-    [HttpPost]
-    public IActionResult UpdateInfo(SettingsViewModel model)
-    {
-        if (!ModelState.IsValid)
+        // Update user information
+        [HttpPost]
+        public IActionResult UpdateInfo(SettingsViewModel model)
         {
-            return View("Settings", model);
+            if (!ModelState.IsValid) return View("Settings", model);
+
+            var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+            if (user == null) return NotFound("User not found.");
+
+            user.Email = model.EditInfo.Email;
+            user.Address = model.EditInfo.Address;
+            user.Phone = model.EditInfo.Phone;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Settings");
         }
 
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-        user.Email = model.EditInfo.Email;
-        user.Address = model.EditInfo.Address;
-        user.Phone = model.EditInfo.Phone;
-
-        // SaveChanges logic here
-
-        return RedirectToAction("Settings");
-    }
-
-    [HttpPost]
-    public IActionResult RemoveImage()
-    {
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-        user.ImageUrl = "";
-        // SaveChanges logic here
-        return RedirectToAction("Settings");
-    }
-
-    [HttpPost]
-    public IActionResult UpdateUsername(SettingsViewModel model)
-    {
-        var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-       // model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
-        model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
-        model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
-        // model.UpdatePassword=new UpdatePasswordViewModel{pa}
-        if (!ModelState.IsValid)
+        // Remove profile image
+        [HttpPost]
+        public IActionResult RemoveImage()
         {
-            System.Console.WriteLine("burada");
-            //  ModelState.AddModelError("UpdateUsername.Username","username is requred");
-            return View("Settings", model);
+            var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+            if (user == null) return NotFound("User not found.");
+
+            user.ImageUrl = string.Empty;
+            _context.SaveChanges();
+            return RedirectToAction("Settings");
         }
 
-        //  var user = Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-        user.Username = model.UpdateUsername.Username;
-        // SaveChanges logic here
+        // Update username
+        [HttpPost]
+        public IActionResult UpdateUsername(SettingsViewModel model)
+        {
+            var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
+            if (user == null) return NotFound("User not found.");
 
-        return RedirectToAction("Settings");
+            model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
+            model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
+
+            if (!ModelState.IsValid) return View("Settings", model);
+
+            user.Username = model.UpdateUsername.Username;
+            _context.SaveChanges();
+
+            return RedirectToAction("Settings");
+        }
     }
-
-
-
 }
