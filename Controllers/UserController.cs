@@ -74,13 +74,13 @@ namespace CargoAutomationSystem.Controllers
             var sender = _context.Users.Include(u => u.UserCargos).FirstOrDefault(u => u.UserId == model.SenderId);
             if (sender != null)
             {
-                sender.UserCargos.Add(new UserCargo { UserId = sender.UserId, CargoId = newCargo.CargoId });
+                sender.UserCargos.Add(new UserCargo { Id=_context.UserCargos.Max(i=>i.Id)+1, UserId = sender.UserId, CargoId = newCargo.CargoId });
             }
 
             var branch = _context.Branches.FirstOrDefault(b => b.BranchId == model.SenderBranchId);
             if (branch != null)
             {
-                branch.BranchCargos.Add(new BranchCargo { BranchId = branch.BranchId, CargoId = newCargo.CargoId });
+                branch.BranchCargos.Add(new BranchCargo {Id=_context.BranchCargos.Max(i=>i.Id)+1, BranchId = branch.BranchId, CargoId = newCargo.CargoId });
             }
 
             // Check if recipient exists, otherwise create a temporary user
@@ -143,21 +143,6 @@ namespace CargoAutomationSystem.Controllers
             HashCode=uc.Cargo.HashCode
         }).ToList();
 
-
-
-
-
-
-            // var userCargos = _context.Cargos
-            //     .Where(c => (c.SenderId == user.UserId || c.RecipientId == user.UserId) && c.Status != "Tamamlandı")
-            //     .Select(c => new IndexCargoViewModel
-            //     {
-            //         CargoId = c.CargoId,
-            //         SenderName = c.Sender.Username,
-            //         ReceiverName = c.RecipientName,
-            //         Status = c.Status,
-            //         HashCode = c.HashCode
-            //     }).ToList();
 
             var model = new IndexViewModel
             {
@@ -395,7 +380,7 @@ namespace CargoAutomationSystem.Controllers
             var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
             if (user == null) return NotFound("User not found.");
 
-            user.ImageUrl = string.Empty;
+            user.ImageUrl = "nouser.png";
             _context.SaveChanges();
             return RedirectToAction("Settings");
         }

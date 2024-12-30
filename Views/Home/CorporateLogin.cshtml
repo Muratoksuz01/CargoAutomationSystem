@@ -3,8 +3,9 @@
 }
 @model LoginViewModel
 @section navbar{
-@await Html.PartialAsync("_navbar")
+    @await Html.PartialAsync("_navbar")
 }
+
 @if (ViewBag.IsSuccess != null)
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -12,29 +13,63 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-<h2>Kurumsal Giriş</h2>
 
-<form asp-action="CorporateLogin" asp-controller="Home" method="post">
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input class="form-control" asp-for="Email" value="branch1@cargo.com" placeholder="Kurumsal Email adresinizi girin" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header text-center bg-primary text-white">
+                    <h2>Kurumsal Giriş</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CorporateLogin" asp-controller="Home" method="post">
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input class="form-control" asp-for="Email" value="branch1@cargo.com" placeholder="Kurumsal Email adresinizi girin" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3 position-relative">
+                            <label asp-for="Password" class="form-label"></label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" asp-for="Password" value="hashedpassword1" placeholder="Şifrenizi girin" id="password-field" />
+                                <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePasswordVisibility()" style="cursor: pointer;">
+                                    <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                                </span>
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <p>Hesabınız yok mu? <a asp-controller="Home" asp-action="CorporateRegister">Kayıt olun</a></p>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input type="password" class="form-control" value="password" asp-for="Password" placeholder="Şifrenizi girin" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Giriş Yap</button>
-
-    <div class="mt-3">
-        <p>Hesabınız yok mu? <a asp-controller="Home" asp-action="CorporateRegister">Kayıt olun</a></p>
-    </div>
-</form>
+</div>
 
 @section Scripts {
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById('password-field');
+        const toggleIcon = document.getElementById('togglePasswordIcon');
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    }
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>

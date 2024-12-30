@@ -1,11 +1,12 @@
-// using CargoAutomationSystem.Entity;
+using CargoAutomationSystem.Entity;
 
-// public class BranchCargo
-// {
-//     public int BranchId { get; set; } // Branch ile ilişkili ID
-//     public int CargoId { get; set; }  // Cargo ile ilişkili ID
+  public class BranchCargo
+    {   
+        public int Id { get; set; }
+        public int BranchId { get; set; }
+        public int CargoId { get; set; }
 
-//     // Navigation properties
-//     public Branch Branch { get; set; }  // Şubeyi temsil eden navigation property
-//     public Cargo Cargo { get; set; }  // Kargoyu temsil eden navigation property
-// }
+        // Navigation properties
+        public Branch Branch { get; set; }
+        public Cargo Cargo { get; set; }
+    }

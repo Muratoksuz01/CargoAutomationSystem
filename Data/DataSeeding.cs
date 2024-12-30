@@ -178,30 +178,37 @@ public static class DataSeeding
             CargoId = 1
         }, new UserCargo
         {
+            Id=1,
             UserId = 1,
             CargoId = 2
         }, new UserCargo
         {
+            Id=2,
             UserId = 1,
             CargoId = 4
         }, new UserCargo
         {
+            Id=3,
             UserId = 2,
             CargoId = 1
         }, new UserCargo
         {
+            Id=4,
             UserId = 2,
             CargoId = 2
         }, new UserCargo
         {
+            Id=5,
             UserId = 2,
             CargoId = 3
         }, new UserCargo
         {
+            Id=6,
             UserId = 3,
             CargoId = 3
         }, new UserCargo
         {
+            Id=7,
             UserId = 3,
             CargoId = 4
         });
@@ -210,23 +217,29 @@ public static class DataSeeding
          if (!context.BranchCargos.Any())
         {
         // BranchCargo ilişkilerini ekleyelim
-        context.BranchCargos.AddRange(new BranchCargo
+        context.BranchCargos.AddRange(
+         new BranchCargo
         {
-            BranchId = 1,
-            CargoId = 1
-        }, new BranchCargo
-        {
+            Id=1,
             BranchId = 1,
             CargoId = 3
         }, new BranchCargo
         {
+            Id=2,
             BranchId = 2,
             CargoId = 2
         }, new BranchCargo
         {
+            Id=3,
             BranchId = 2,
             CargoId = 4
-        });
+        },new BranchCargo
+        {
+            Id=4,
+            BranchId = 1,
+            CargoId = 1
+        }
+        );
         }
         // Veritabanına kaydedelim
         context.SaveChanges();

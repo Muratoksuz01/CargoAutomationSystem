@@ -9,115 +9,111 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CargoAutomationSystem
 build_property.RootNamespace = CargoAutomationSystem
-build_property.ProjectDir = c:\Users\denem\Documents\C#\process\CargoAutomationSystem\
+build_property.ProjectDir = C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\denem\Documents\C#\process\CargoAutomationSystem
+build_property.MSBuildProjectDirectory = C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Branch/Details.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Branch/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmNoXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Branch/EditCargo.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Branch/EditCargo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmNoXEVkaXRDYXJnby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Branch/index.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Branch/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmNoXGluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Branch/List.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Branch/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmNoXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Branch/Settings.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Branch/Settings.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmNoXFNldHRpbmdzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Home/CorporateLogin.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Home/CorporateLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb3Jwb3JhdGVMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Home/CorporateRegister.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Home/CorporateRegister.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb3Jwb3JhdGVSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Home/Detail.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Home/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Home/Index.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Home/Login.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Home/Register.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Home/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Shared/Components/Branch/Default.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Shared/Components/Branch/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQnJhbmNoXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Shared/Components/User/Default.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Shared/Components/User/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVXNlclxEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Shared/_CargoTablePartial.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Shared/_CargoTablePartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DYXJnb1RhYmxlUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Shared/_navbar.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Shared/_navbar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9uYXZiYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Shared/_TrackCargoTablePartial.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Shared/_TrackCargoTablePartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9UcmFja0NhcmdvVGFibGVQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/User/detail.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/User/detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxkZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/User/index.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/User/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxpbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/User/LogOut.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dPdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/User/SendCargo.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/User/SendCargo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTZW5kQ2FyZ28uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/User/Settings.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/User/Settings.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTZXR0aW5ncy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/User/TrackCargo.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/User/TrackCargo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxUcmFja0NhcmdvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/_ViewImports.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/_ViewStart.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/denem/Documents/C\#/process/CargoAutomationSystem/Views/Shared/_Layout.cshtml]
+[C:/Users/denem/Documents/CSharp/process/CargoAutomationSystem/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-wkrjtavldy

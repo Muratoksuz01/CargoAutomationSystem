@@ -4,66 +4,80 @@
     @await Component.InvokeAsync("User")
 }
 
-<div class="row p-3">
-    <div class="col-md-3">
-        <div class="card d-flex align-items-center">
-            <img src="/img/@Model.UserInfos.ImageUrl" class="card-img-top rounded-circle" style="width: 200px;">
-            <div class="card-body">
-                <h5 class="card-title">@Model.UserInfos.Username</h5>
-                <p class="card-text">@Model.UserInfos.Email</p>
-                <p class="card-text">@Model.UserInfos.Phone</p>
-                <p class="card-text">@Model.UserInfos.Address</p>
-                <a href="/User/Settings" class="text-primary">Düzenlemek ister misiniz?</a>
+<div class="container mt-5">
+    <div class="row">
+        <!-- Kullanıcı Bilgileri Kartı -->
+        <div class="col-md-3">
+            <div class="card shadow-lg text-center">
+                <div class="card-body">
+                    <img src="/img/@Model.UserInfos.ImageUrl" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                    <h5 class="card-title">@Model.UserInfos.Username</h5>
+                    <p class="card-text text-muted">@Model.UserInfos.Email</p>
+                    <p class="card-text text-muted">@Model.UserInfos.Phone</p>
+                    <p class="card-text text-muted">@Model.UserInfos.Address</p>
+                    <a href="/User/Settings" class="btn btn-outline-primary btn-sm">Düzenlemek ister misiniz?</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kargo İşlemleri ve Tablo -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between mb-3">
+                <a href="/User/SendCargo" class="btn btn-outline-primary">Kargo Gönderin</a>
+                <a href="/User/TrackCargo" class="btn btn-outline-success">Kargolarınızı İzleyin</a>
+            </div>
+
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Kargo Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Gönderici</th>
+                                <th scope="col">Alıcı</th>
+                                <th scope="col">Durum</th>
+                                <th scope="col">Detay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Cargos != null && Model.Cargos.Any())
+                            {
+                                for (int i = 0; i < Model.Cargos.Count; i++)
+                                {
+                                    var item = Model.Cargos[i];
+                                    @if (item.Status != "Teslim Edildi" || item.Status == "Tamamlandı")
+                                    {
+                                        <tr>
+                                            <th scope="row">@(i + 1)</th>
+                                            <td>@item.SenderName</td>
+                                            <td>@item.ReceiverName</td>
+                                            <td>@item.Status</td>
+                                            <td>
+                                                <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode" class="text-info">
+                                                    <i class="fa-solid fa-circle-info"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Kargo bilgisi bulunamadı.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-9">
-        <a href="/User/SendCargo" class="btn btn-outline-primary">Kargo gonderin</a>
-        <a href="/User/TrackCargo" class="btn btn-outline-success">kargolarınızı izleyin</a>
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Sender Name</th>
-                    <th scope="col">Receiver Name</th>
-                    <th scope="col">status</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Cargos != null && Model.Cargos.Any())
-                {
-                    for (int i = 0; i < Model.Cargos.Count; i++)
-                    {
-                        var item = Model.Cargos[i];
-                        @if (item.Status != "Teslim Edildi" || item.Status == "Tamamlandı")
-                        {
-                            <tr>
-                                <th scope="row">@(i + 1)</th> <!-- Index değeri için 1 ekliyoruz -->
-                                <td>@item.SenderName</td>
-                                <td>@item.ReceiverName</td>
-                                <td>@item.Status</td>
-                                <td>
-                                    <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="3" class="text-center">Kargo bilgisi bulunamadı.</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
 </div>
+
 @section Scripts {
     <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>
-
 }

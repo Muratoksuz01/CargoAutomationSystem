@@ -4,110 +4,118 @@
     @await Component.InvokeAsync("Branch")
 }
 
-<h2>Kargo Detayları</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Kargo Detayları</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Bilgi</th>
-            <th scope="col">Değer</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Kargo Bilgileri -->
-        <tr>
-            <th scope="row">1</th>
-            <td>Kargo ID</td>
-            <td>@Model.CargoId</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Takip Kodu</td>
-            <td>@Model.HashCode</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Kargo Durumu</td>
-            <td>@Model.Status</td>
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-            <td>Alıcı Adı</td>
-            <td>@Model.RecipientName</td>
-        </tr>
-        <tr>
-            <th scope="row">5</th>
-            <td>Alıcı Adresi</td>
-            <td>@Model.RecipientAddress</td>
-        </tr>
-        <tr>
-            <th scope="row">6</th>
-            <td>Alıcı Telefon</td>
-            <td>@Model.RecipientPhone</td>
-        </tr>
-        <!-- Gönderici Bilgileri -->
-        <tr>
-            <th scope="row">7</th>
-            <td>Gönderici Adı</td>
-            <td>@Model.SenderUsername</td>
-        </tr>
-        <tr>
-            <th scope="row">8</th>
-            <td>Gönderici Email</td>
-            <td>@Model.SenderEmail</td>
-        </tr>
-        <tr>
-            <th scope="row">9</th>
-            <td>Gönderici Adresi</td>
-            <td>@Model.SenderAddress</td>
-        </tr>
-        <tr>
-            <th scope="row">10</th>
-            <td>Gönderici Telefon</td>
-            <td>@Model.SenderPhone</td>
-        </tr>
-    </tbody>
-</table>
-
-<!-- Detaylar Butonu -->
-<button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails"
-    aria-expanded="false" aria-controls="collapseDetails">
-    Detayları Göster
-</button>
-
-<!-- Collapse Alanı -->
-<div class="collapse mt-3" id="collapseDetails">
-    <h4>Kargo Süreçleri</h4>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">İşlem</th>
-                <th scope="col">Tarih</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.CargoProcesses != null && Model.CargoProcesses.Any())
-            {
-                for (int i = 0; i < Model.CargoProcesses.Count(); i++)
-                {
-                    var process = Model.CargoProcesses.ElementAt(i);
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead class="table-primary">
                     <tr>
-                        <th scope="row">@(i + 1)</th>
-                        <td>@process.Process</td>
-                        <td>@process.ProcessDate.ToString("dd MMM yyyy HH:mm")</td>
+                        <th scope="col">#</th>
+                        <th scope="col">Bilgi</th>
+                        <th scope="col">Değer</th>
                     </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="3" class="text-center">Kargo süreci bilgisi bulunamadı.</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    <!-- Kargo Bilgileri -->
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Kargo ID</td>
+                        <td>@Model.CargoId</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Takip Kodu</td>
+                        <td>@Model.HashCode</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Kargo Durumu</td>
+                        <td>@Model.Status</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Alıcı Adı</td>
+                        <td>@Model.RecipientName</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>Alıcı Adresi</td>
+                        <td>@Model.RecipientAddress</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>Alıcı Telefon</td>
+                        <td>@Model.RecipientPhone</td>
+                    </tr>
+                    <!-- Gönderici Bilgileri -->
+                    <tr>
+                        <th scope="row">7</th>
+                        <td>Gönderici Adı</td>
+                        <td>@Model.SenderUsername</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td>Gönderici Email</td>
+                        <td>@Model.SenderEmail</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9</th>
+                        <td>Gönderici Adresi</td>
+                        <td>@Model.SenderAddress</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">10</th>
+                        <td>Gönderici Telefon</td>
+                        <td>@Model.SenderPhone</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Detaylar Butonu -->
+            <div class="text-center mt-4">
+                <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails"
+                    aria-expanded="false" aria-controls="collapseDetails">
+                    Detayları Göster
+                </button>
+            </div>
+
+            <!-- Collapse Alanı -->
+            <div class="collapse mt-3" id="collapseDetails">
+                <h4 class="text-center">Kargo Süreçleri</h4>
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">İşlem</th>
+                            <th scope="col">Tarih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.CargoProcesses != null && Model.CargoProcesses.Any())
+                        {
+                            for (int i = 0; i < Model.CargoProcesses.Count(); i++)
+                            {
+                                var process = Model.CargoProcesses.ElementAt(i);
+                                <tr>
+                                    <th scope="row">@(i + 1)</th>
+                                    <td>@process.Process</td>
+                                    <td>@process.ProcessDate.ToString("dd MMM yyyy HH:mm")</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3" class="text-center">Kargo süreci bilgisi bulunamadı.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

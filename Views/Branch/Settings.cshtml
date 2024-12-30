@@ -4,87 +4,97 @@
     @await Component.InvokeAsync("Branch")
 }
 
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Ayarlar</h2>
 
-<div class="container w-75">
-    <h2 class="text-center">Settings</h2>
-
-
-
-    <!-- Profil Resmi ve Düzenle Butonu -->
-    <div class="row">
-        <div asp-validation-summary="All"></div>
-
+    <div class="row g-4">
+        <!-- Kullanıcı Adı Düzenleme -->
         <div class="col-md-4">
-           
-            <div class="position-relative">
-                <div class="p-1">
-                    <h3>@Model.UpdateUsername.Username</h3>
+            <div class="card text-center shadow-lg">
+                <div class="card-body position-relative">
+                    <h3 class="mb-3">@Model.UpdateUsername.Username</h3>
+                    <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#UsernameModalLabel">
+                        Kullanıcı Adını Düzenle
+                    </button>
                 </div>
-                <span class="badge bg-warning text-dark position-absolute bottom-0 end-0" role="button"
-                    data-bs-toggle="modal" data-bs-target="#UsernameModalLabel">
-                    Edit
-                </span>
             </div>
         </div>
-        <div class="col-md-4">
-            <form asp-controller="Branch" asp-action="UpdateInfo" method="post">
-                <div class="mb-3">
-                    <label asp-for="EditInfo.Email" class="form-label">Email</label>
-                    <input class="form-control" asp-for="EditInfo.Email">
-                </div>
-                
-                <div class="mb-3">
-                    <label asp-for="EditInfo.Address" class="form-label">Address</label>
-                    <input class="form-control" asp-for="EditInfo.Address">
-                </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="submit">Save</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4">
-            <form asp-controller="Branch" asp-action="UpdatePassword" method="post">
-                <div class="mb-3">
-                    <label for="currentPassword" class="form-label">Current Password</label>
-                    <input class="form-control" asp-for="UpdatePassword.CurrentPassword">
-                    <span class="text-danger" asp-validation-for="UpdatePassword.CurrentPassword"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="NewPassword" class="form-label">New Password</label>
-                    <input class="form-control" asp-for="UpdatePassword.NewPassword">
-                    <span class="text-danger" asp-validation-for="UpdatePassword.NewPassword"></span>
 
+        <!-- Bilgileri Düzenle -->
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h5>Bilgileri Düzenle</h5>
                 </div>
-                <div class="mb-3">
-                    <label for="RePassword" class="form-label">Confirm Password</label>
-                    <input class="form-control" asp-for="UpdatePassword.RePassword">
-                    <span class="text-danger" asp-validation-for="UpdatePassword.NewPassword"></span>
-
+                <div class="card-body">
+                    <form asp-controller="Branch" asp-action="UpdateInfo" method="post">
+                        <div class="mb-3">
+                            <label asp-for="EditInfo.Email" class="form-label">Email</label>
+                            <input class="form-control" asp-for="EditInfo.Email">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="EditInfo.Address" class="form-label">Adres</label>
+                            <input class="form-control" asp-for="EditInfo.Address">
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="submit">Save</button>
-                </div>
-            </form>
+            </div>
         </div>
 
+        <!-- Şifre Güncelle -->
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-header bg-secondary text-white">
+                    <h5>Şifre Güncelle</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Branch" asp-action="UpdatePassword" method="post">
+                        <div class="mb-3">
+                            <label asp-for="UpdatePassword.CurrentPassword" class="form-label">Mevcut Şifre</label>
+                            <input class="form-control" asp-for="UpdatePassword.CurrentPassword">
+                            <span class="text-danger" asp-validation-for="UpdatePassword.CurrentPassword"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UpdatePassword.NewPassword" class="form-label">Yeni Şifre</label>
+                            <input class="form-control" asp-for="UpdatePassword.NewPassword">
+                            <span class="text-danger" asp-validation-for="UpdatePassword.NewPassword"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UpdatePassword.RePassword" class="form-label">Şifreyi Onayla</label>
+                            <input class="form-control" asp-for="UpdatePassword.RePassword">
+                            <span class="text-danger" asp-validation-for="UpdatePassword.RePassword"></span>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-secondary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-
+<!-- Kullanıcı Adı Modal -->
 <div class="modal fade" id="UsernameModalLabel" tabindex="-1" aria-labelledby="usernameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Username</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">Kullanıcı Adını Düzenle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
             </div>
             <div class="modal-body">
                 <form asp-action="UpdateUsername" asp-controller="Branch" method="post">
                     <div class="mb-3">
-                        <label asp-for="UpdateUsername.Username" class="form-label"></label>
+                        <label asp-for="UpdateUsername.Username" class="form-label">Yeni Kullanıcı Adı</label>
                         <input class="form-control" asp-for="UpdateUsername.Username">
+                        <span asp-validation-for="UpdateUsername.Username" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -4,53 +4,53 @@
 
 @model IEnumerable<BListViewModel>
 
-<h2>Tüm Kargolar</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Tüm Kargolar</h2>
 
-@if (!Model.Any())
-{
-  <p>Şubenizde şu anda hiç kargo yok.</p>
-}
-else
- {
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            Şubenizde şu anda hiç kargo yok.
+        </div>
+    }
+    else
+    {
+        <div class="accordion accordion-flush shadow-lg" id="accordionFlushExample">
+            <!-- Devam Eden Kargolar -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed fw-bold text-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Devam Eden Kargolar
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status != "Tamamlandı" && x.Status != "Teslim Edildi"))
+                    </div>
+                </div>
+            </div>
 
-
-<div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingOne">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        Devam Eden Kargolar
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
-      data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
-        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status != "Tamamlandı"  && x.Status!="Teslim Edildi"))
-
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-        Tamamlananlar
-      </button>
-    </h2>
-    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-      data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
-        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status == "Tamamlandı" || x.Status=="Teslim Edildi"))
-
-      </div>
-    </div>
-  </div>
-
+            <!-- Tamamlananlar -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed fw-bold text-success" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Tamamlananlar
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        @await Html.PartialAsync("_CargoTablePartial", Model.Where(x => x.Status == "Tamamlandı" || x.Status == "Teslim Edildi"))
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
-}
+
 @section Scripts {
   <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>
 }
-
-
-

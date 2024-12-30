@@ -4,6 +4,7 @@ using CargoAutomationSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CargoAutomationSystem.Migrations
 {
     [DbContext(typeof(CargoDbContext))]
-    partial class CargoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241210150916_SmallFix")]
+    partial class SmallFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace CargoAutomationSystem.Migrations
                     b.Property<int>("CargoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.HasKey("BranchId", "CargoId");
@@ -190,7 +193,7 @@ namespace CargoAutomationSystem.Migrations
                     b.Property<int>("CargoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.HasKey("UserId", "CargoId");

@@ -4,48 +4,59 @@
     @await Component.InvokeAsync("User")
 }
 
-<h2>Kargo Takip</h2>
-
-@if (!Model.Any())
-{
-    <p>Kargo bilgisi bulunamadı.</p>
-}
-else
-{
-    <div class="accordion accordion-flush" id="accordionTrackCargo">
-        <!-- Devam Eden Kargolar -->
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingInProgress">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseInProgress" aria-expanded="false" aria-controls="collapseInProgress">
-                    Devam Eden Kargolar
-                </button>
-            </h2>
-            <div id="collapseInProgress" class="accordion-collapse collapse show" 
-                 aria-labelledby="headingInProgress" data-bs-parent="#accordionTrackCargo">
-                <div class="accordion-body">
-                    @await Html.PartialAsync("_TrackCargoTablePartial", Model.Where(x => x.Status != "Tamamlandı" && x.Status!="Teslim Edildi"))
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Kargo Takip</h2>
                 </div>
-            </div>
-        </div>
+                <div class="card-body">
+                    @if (!Model.Any())
+                    {
+                        <p class="text-center text-muted">Kargo bilgisi bulunamadı.</p>
+                    }
+                    else
+                    {
+                        <div class="accordion accordion-flush" id="accordionTrackCargo">
+                            <!-- Devam Eden Kargolar -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingInProgress">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseInProgress" aria-expanded="false" aria-controls="collapseInProgress">
+                                        Devam Eden Kargolar
+                                    </button>
+                                </h2>
+                                <div id="collapseInProgress" class="accordion-collapse collapse show"
+                                     aria-labelledby="headingInProgress" data-bs-parent="#accordionTrackCargo">
+                                    <div class="accordion-body">
+                                        @await Html.PartialAsync("_TrackCargoTablePartial", Model.Where(x => x.Status != "Tamamlandı" && x.Status != "Teslim Edildi"))
+                                    </div>
+                                </div>
+                            </div>
 
-        <!-- Tamamlanan Kargolar -->
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingCompleted">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseCompleted" aria-expanded="false" aria-controls="collapseCompleted">
-                    Tamamlanan Kargolar
-                </button>
-            </h2>
-            <div id="collapseCompleted" class="accordion-collapse collapse" 
-                 aria-labelledby="headingCompleted" data-bs-parent="#accordionTrackCargo">
-                <div class="accordion-body">
-                    @await Html.PartialAsync("_TrackCargoTablePartial", Model.Where(x => x.Status == "Tamamlandı" || x.Status=="Teslim Edildi"))
+                            <!-- Tamamlanan Kargolar -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingCompleted">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseCompleted" aria-expanded="false" aria-controls="collapseCompleted">
+                                        Tamamlanan Kargolar
+                                    </button>
+                                </h2>
+                                <div id="collapseCompleted" class="accordion-collapse collapse"
+                                     aria-labelledby="headingCompleted" data-bs-parent="#accordionTrackCargo">
+                                    <div class="accordion-body">
+                                        @await Html.PartialAsync("_TrackCargoTablePartial", Model.Where(x => x.Status == "Tamamlandı" || x.Status == "Teslim Edildi"))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
-}
+</div>
 
 @section Scripts {
     <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>

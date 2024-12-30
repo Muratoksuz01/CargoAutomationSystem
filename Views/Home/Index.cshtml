@@ -5,67 +5,76 @@
     @await Html.PartialAsync("_navbar")
 }
 
+<style>
+    .card-img-top {
+        transition: transform 0.3s ease;
+    }
 
+    .card-img-top:hover {
+        transform: scale(1.1);
+    }
+</style>
 
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
-                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
-                preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">first
-                    slide</text>
-            </svg>
-
-            <div class="carousel-caption d-none d-md-block">
-                <h5>first slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
-            </div>
-        </div>
-        <div class="carousel-item ">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
-                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
-                preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second
-                    slide</text>
-            </svg>
-
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
-                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
-                preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">thisrt
-                    slide</text>
-            </svg>
-
-            <div class="carousel-caption d-none d-md-block">
-                <h5>thirt slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+<div id="hero" class="text-center text-white bg-primary py-5">
+    <h1>Welcome to CargoPro</h1>
+    <p class="lead">Efficient. Reliable. Fast.</p>
 </div>
+
+<div class="container my-5">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card border-0 shadow">
+                <img src="/SourceImage/image1.webp" class="card-img-top" alt="Service 1">
+                <div class="card-body">
+                    <h5 class="card-title">Global Shipping</h5>
+                    <p class="card-text">Seamless and reliable shipping across the globe.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow">
+                <img src="/SourceImage/image2.webp" class="card-img-top" alt="Service 2">
+                <div class="card-body">
+                    <h5 class="card-title">Advanced Tracking</h5>
+                    <p class="card-text">Stay informed with real-time tracking of your packages.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow">
+                <img src="/SourceImage/image3.webp" class="card-img-top" alt="Service 3">
+                <div class="card-body">
+                    <h5 class="card-title">Custom Solutions</h5>
+                    <p class="card-text">Tailored logistics solutions for your business needs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light py-5">
+    <div class="container text-center">
+        <h2>Why Choose Us?</h2>
+        <p class="lead">At CargoPro, we prioritize your satisfaction with our top-notch services.</p>
+        <ul class="list-unstyled">
+            <li>✓ Comprehensive Logistics</li>
+            <li>✓ 24/7 Customer Support</li>
+            <li>✓ State-of-the-Art Technology</li>
+        </ul>
+    </div>
+</div>
+
+
+<footer class="bg-dark text-white mt-5 p-3">
+    <div class="container d-flex justify-content-between">
+        <div class="footer-left">
+            <!-- Boş Alan -->
+        </div>
+        <div class="footer-center text-center">
+            <p>© 2024 Tüm Hakları Saklıdır.</p>
+        </div>
+        <div class="footer-right">
+            <a href="https://github.com" target="_blank" class="text-white">GitHub</a>
+        </div>
+    </div>
+</footer>

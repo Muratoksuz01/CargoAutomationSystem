@@ -27,8 +27,10 @@ namespace CargoAutomationSystem.Models.Home
         [Compare(nameof(Password), ErrorMessage = "Şifreler uyuşmuyor.")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
-        [Phone]
+
+       // [Phone]
         [Required]
+        [ PhoneNumberValidation]// special attribute 
         [Remote(action: "VerifyPhone", controller: "Home", ErrorMessage = "Telefon numarası zaten kayıtlı.")]
         public string PhoneNumber { get; set; }
 

@@ -96,6 +96,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\67e6d773-62c4-46b5-89b5-b3a4291ad309_cargo db seması 1.png))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\84bd27aa-63dd-4bf8-ac3a-f2802ac2d8b0.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CargoAutomationSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CargoAutomationSystem</BasePath>
+      <RelativePath>img/84bd27aa-63dd-4bf8-ac3a-f2802ac2d8b0.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\84bd27aa-63dd-4bf8-ac3a-f2802ac2d8b0.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\caadf472-348c-421b-92fa-e7dd27005068_cargo db seması 1.png))">
       <SourceType>Package</SourceType>
       <SourceId>CargoAutomationSystem</SourceId>
@@ -159,6 +175,38 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\f16c7ce3-756d-4c7c-afc5-20031f25d936_download.jpeg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\f89e1ba0-5422-4b72-b7de-95fc54bc238f.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CargoAutomationSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CargoAutomationSystem</BasePath>
+      <RelativePath>img/f89e1ba0-5422-4b72-b7de-95fc54bc238f.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\f89e1ba0-5422-4b72-b7de-95fc54bc238f.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\fcd699ed-8aee-451e-a1e6-043cf5fdfa81.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CargoAutomationSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CargoAutomationSystem</BasePath>
+      <RelativePath>img/fcd699ed-8aee-451e-a1e6-043cf5fdfa81.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\fcd699ed-8aee-451e-a1e6-043cf5fdfa81.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\img\jane_smith.png))">
       <SourceType>Package</SourceType>
@@ -1135,6 +1183,54 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\LICENSE.txt))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\SourceImage\DALL·E 2024-12-30 15.48.25 - Create three distinct images related to a cargo automation system_ 1) A modern warehouse with automated conveyor belts and robotic arms sorting packag.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CargoAutomationSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CargoAutomationSystem</BasePath>
+      <RelativePath>SourceImage/DALL·E 2024-12-30 15.48.25 - Create three distinct images related to a cargo automation system_ 1) A modern warehouse with automated conveyor belts and robotic arms sorting packag.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\SourceImage\DALL·E 2024-12-30 15.48.25 - Create three distinct images related to a cargo automation system_ 1) A modern warehouse with automated conveyor belts and robotic arms sorting packag.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\SourceImage\DALL·E 2024-12-30 15.48.35 - A futuristic cargo automation system featuring a centralized control hub with holographic displays, showing package locations in real-time, surrounded.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CargoAutomationSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CargoAutomationSystem</BasePath>
+      <RelativePath>SourceImage/DALL·E 2024-12-30 15.48.35 - A futuristic cargo automation system featuring a centralized control hub with holographic displays, showing package locations in real-time, surrounded.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\SourceImage\DALL·E 2024-12-30 15.48.35 - A futuristic cargo automation system featuring a centralized control hub with holographic displays, showing package locations in real-time, surrounded.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\SourceImage\DALL·E 2024-12-30 15.48.41 - 1) A high-tech warehouse with automated robots sorting and moving packages on conveyor belts, 2) A futuristic delivery vehicle with drones loading par.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CargoAutomationSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CargoAutomationSystem</BasePath>
+      <RelativePath>SourceImage/DALL·E 2024-12-30 15.48.41 - 1) A high-tech warehouse with automated robots sorting and moving packages on conveyor belts, 2) A futuristic delivery vehicle with drones loading par.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\SourceImage\DALL·E 2024-12-30 15.48.41 - 1) A high-tech warehouse with automated robots sorting and moving packages on conveyor belts, 2) A futuristic delivery vehicle with drones loading par.webp))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

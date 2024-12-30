@@ -4,78 +4,86 @@
     @await Component.InvokeAsync("User")
 }
 
-<h2>Kargo Gönder</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Kargo Gönder</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="SendCargo" method="post" class="form-group">
+                        <!-- Gönderici Bilgileri (readonly) -->
+                        <fieldset class="border p-3 rounded">
+                            <legend class="w-auto px-2 text-primary">Gönderici Bilgileri</legend>
+                            <br>
+                            <input type="hidden" asp-for="SenderId">
+                            
+                            <div class="mb-3">
+                                <label for="SenderEmail" class="form-label">Gönderici Email</label>
+                                <input type="text" id="SenderEmail" name="SenderEmail" class="form-control" value="@Model.SenderEmail" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="SenderUsername" class="form-label">Gönderici Kullanıcı Adı</label>
+                                <input type="text" id="SenderUsername" name="SenderUsername" class="form-control" value="@Model.SenderUsername" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="SenderAddress" class="form-label">Gönderici Adresi</label>
+                                <input type="text" id="SenderAddress" name="SenderAddress" class="form-control" value="@Model.SenderAddress" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="SenderPhone" class="form-label">Gönderici Telefon</label>
+                                <input type="text" id="SenderPhone" name="SenderPhone" class="form-control" value="@Model.SenderPhone" readonly />
+                            </div>
+                        </fieldset>
 
-<form asp-action="SendCargo" method="post" class="form-group">
-    <!-- Gönderici Bilgileri (readonly) -->
-    <fieldset >
-        <input type="hidden" asp-for="SenderId">
-        <legend>Gönderici Bilgileri</legend>
-        <div class="mb-3">
-            <label for="SenderEmail" class="form-label">Gönderici Email</label>
-            <input type="text" id="SenderEmail" name="SenderEmail" class="form-control" value="@Model.SenderEmail"
-                readonly />
-            <span class="text-danger"></span>
+                        <!-- Alıcı Bilgileri (editable) -->
+                        <fieldset class="border p-3 rounded mt-4">
+                            <legend class="w-auto px-2 text-primary">Alıcı Bilgileri</legend>
+                            <div class="mb-3">
+                                <label asp-for="RecipientName" class="form-label">Alıcı Adı</label>
+                                <input asp-for="RecipientName" class="form-control" placeholder="Alıcı adını girin" />
+                                <span asp-validation-for="RecipientName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="RecipientAddress" class="form-label">Alıcı Adresi</label>
+                                <input asp-for="RecipientAddress" class="form-control" placeholder="Alıcı adresini girin" />
+                                <span asp-validation-for="RecipientAddress" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="RecipientPhone" class="form-label">Alıcı Telefonu</label>
+                                <input asp-for="RecipientPhone"  class="form-control" placeholder="Alıcı telefonunu girin" />
+                                <span asp-validation-for="RecipientPhone" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="SenderBranchId" class="form-label"></label>
+                                <select asp-for="SenderBranchId" class="form-control" asp-items="ViewBag.Branches">
+                                    <option value="">Şube Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="SenderBranchId" class="text-danger"></span>
+                            </div>
+                        </fieldset>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary">Kargo Gönder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
 
-        <div class="mb-3">
-            <label for="SenderUsername" class="form-label">Gönderici Kullanıcı Adı</label>
-            <input type="text" id="SenderUsername" name="SenderUsername" class="form-control"
-                value="@Model.SenderUsername" readonly />
-            <span class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label for="SenderAddress" class="form-label">Gönderici Adresi</label>
-            <input type="text" id="SenderAddress" name="SenderAddress" class="form-control" value="@Model.SenderAddress"
-                readonly />
-            <span class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label for="SenderPhone" class="form-label">Gönderici Telefon</label>
-            <input type="text" id="SenderPhone" name="SenderPhone" class="form-control" value="@Model.SenderPhone"
-                readonly />
-            <span class="text-danger"></span>
-        </div>
-
-    </fieldset>
-
-    <!-- Alıcı Bilgileri (editable) -->
-    <fieldset>
-        <legend>Alıcı Bilgileri</legend>
-
-        <div class="mb-3">
-            <label asp-for="RecipientName" class="form-label">Alıcı Adı</label>
-            <input asp-for="RecipientName" class="form-control" />
-            <span asp-validation-for="RecipientName" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="RecipientAddress" class="form-label">Alıcı Adresi</label>
-            <input asp-for="RecipientAddress" class="form-control" />
-            <span asp-validation-for="RecipientAddress" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="RecipientPhone" class="form-label">Alıcı Telefonu</label>
-            <input asp-for="RecipientPhone" class="form-control" />
-            <span asp-validation-for="RecipientPhone" class="text-danger"></span>
-        </div>
-
-        <!-- Şube Seçimi -->
-        <div class="mb-3">
-            <label asp-for="SenderBranchId" class="form-label">Şube Seçiniz</label>
-            <select asp-for="SenderBranchId" class="form-control" asp-items="ViewBag.Branches">
-                <option value="">Şube Seçiniz</option>
-            </select>
-            <span asp-validation-for="SenderBranchId" class="text-danger"></span>
-        </div>
-    </fieldset>
-
-    <button type="submit" class="btn btn-primary">Kargo Gönder</button>
-</form>
+@* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> *@
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#RecipientPhone').inputmask("(999) 999 99 99", {
+            placeholder: "_",
+            clearMaskOnLostFocus: true
+        });
+    });
+</script> 
 }

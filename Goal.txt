@@ -1,3 +1,6 @@
-8/12/24
-        kargo olusutunda senderId alıcının ıd si oluyor bunu duzelt 
-        kullanıcıdana kargo silindiginde subeden de siliniyor 
+30/12/2024
+--kullancı giris yaptı sonra / dizinine geldi buradan yeni kullnaıcı olusturabliyor yani sistemede olan birisi yeni birisini olusturabiliyor  hatta sube kayıt olusturabiliyor
+-- access denied sayfası tasarla 
+-- kullanıcı giris yapmadı ama user/sendcargo linkine gitmek istedi izin verilmiyor direk logine yonlendiriyor ama burada girş yaptıgında sendcargoya gitmiyor 
+-- sube iptal talebi olusturabilsin 
+-- varsa artık solid işlemleri 

@@ -3,68 +3,77 @@
 }
 @model BIndexViewModel
 
+<div class="container mt-5">
+    <div class="row g-4">
+        <!-- Şube Bilgileri Kartı -->
+        <div class="col-md-3">
+            <div class="card shadow-lg">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">@Model.BranchInfos.BranchName</h5>
+                    <p class="card-text text-muted">@Model.BranchInfos.Email</p>
+                    <p class="card-text text-muted">@Model.BranchInfos.Address</p>
+                    <a href="/Branch/Settings" class="btn btn-outline-primary btn-sm mt-2">Düzenlemek ister misiniz?</a>
+                </div>
+            </div>
+        </div>
 
+        <!-- Kargo Bilgileri ve Tablo -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between mb-3">
+                <a href="/Branch/List" class="btn btn-outline-success">Kargolarınızı İzleyin</a>
+            </div>
 
-<div class="row p-3">
-    <div class="col-md-3">
-        <div class="card d-flex align-items-center">
-            <div class="card-body">
-                <h5 class="card-title">@Model.BranchInfos.BranchName</h5>
-                <p class="card-text">@Model.BranchInfos.Email</p>
-                <p class="card-text">@Model.BranchInfos.Address</p>
-                <a href="/Branch/Settings" class="text-primary">Düzenlemek ister misiniz?</a>
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Kargo Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Alıcı Adı</th>
+                                <th scope="col">Alıcı Adresi</th>
+                                <th scope="col">Durum</th>
+                                <th scope="col">Detay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Cargos != null && Model.Cargos.Any())
+                            {
+                                for (int i = 0; i < Model.Cargos.Count(); i++)
+                                {
+                                    var item = Model.Cargos.ElementAt(i);
+                                    @if (item.Status != "Teslim Edildi" || item.Status == "Tamamlandı")
+                                    {
+                                        <tr>
+                                            <th scope="row">@(i + 1)</th>
+                                            <td>@item.ReceiverName</td>
+                                            <td>@item.ReceiverAddress</td>
+                                            <td>@item.Status</td>
+                                            <td>
+                                                <a asp-controller="Branch" asp-action="Details" asp-route-HashCode="@item.HashCode" class="text-info">
+                                                    <i class="fa-solid fa-circle-info"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Kargo bilgisi bulunamadı.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-9">
-        <a href="/Branch/List" class="btn btn-outline-success">kargolarınızı izleyin</a>
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">receiver Name</th>
-                    <th scope="col">receiver Address</th>
-                    <th scope="col">status</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Cargos != null && Model.Cargos.Any())
-                {
-                    for (int i = 0; i < Model.Cargos.Count(); i++)
-                    {
-                        var item = Model.Cargos.ElementAt(i);
-                        <!-- Model'deki her bir öğeye index ile erişim -->
-                        @if (item.Status != "Teslim Edildi" || item.Status == "Tamamlandı")
-                        {
-                            <tr>
-                                <th scope="row">@(i + 1) </th> <!-- i + 1 ile index'in 1'den başlamasını sağlıyoruz -->
-                                <td>@item.ReceiverName</td>
-                                <td>@item.ReceiverAddress</td>
-                                <td>@item.Status</td>
-                                <td>
-                                    <a asp-controller="Branch" asp-action="Details" asp-route-HashCode="@item.HashCode">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="5" class="text-center">Kargo bilgisi bulunamadı.</td>
-                    </tr>
-                }
-
-
-            </tbody>
-        </table>
-    </div>
 </div>
+
 @section Scripts {
     <script src="https://kit.fontawesome.com/fa3609583e.js" crossorigin="anonymous"></script>
-
 }

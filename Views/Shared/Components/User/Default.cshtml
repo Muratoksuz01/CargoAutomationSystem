@@ -1,30 +1,31 @@
 @model UserInfoViewModel
 
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="/User/Index">Navbar</a>
+        <a class="navbar-brand fw-bold" href="/User/Index">CargoApp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" asp-action="SendCargo" asp-controller="User">Kargo Gönder</a>
+                    <a class="nav-link active fw-semibold" aria-current="page" asp-action="SendCargo" asp-controller="User">Kargo Gönder</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="TrackCargo" asp-controller="User">Kargo Takip</a>
+                    <a class="nav-link fw-semibold" asp-action="TrackCargo" asp-controller="User">Kargo Takip</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        @Model.Username
-                        <img src="/img/@(!string.IsNullOrEmpty( Model.ImageUrl) ? Model.ImageUrl:"nouser.png")" 
-                        class="ms-1 rounded-circle" width="30" alt="User Image">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="me-2">@Model.Username</span>
+                        <img src="/img/@(!string.IsNullOrEmpty(Model.ImageUrl) ? Model.ImageUrl : "nouser.png")" 
+                             class="rounded-circle" width="30" height="30" alt="User Image">
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-controller="User" asp-action="LogOut">Log Out</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
                         <li><a class="dropdown-item" asp-controller="User" asp-action="Settings">Ayarlar</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" asp-controller="User" asp-action="LogOut">Çıkış Yap</a></li>
                     </ul>
                 </li>
             </ul>

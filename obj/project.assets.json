@@ -2151,11 +2151,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj",
+      "projectUniqueName": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj",
       "projectName": "CargoAutomationSystem",
-      "projectPath": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj",
+      "projectPath": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\CargoAutomationSystem.csproj",
       "packagesPath": "C:\\Users\\denem\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\denem\\Documents\\C#\\process\\CargoAutomationSystem\\obj\\",
+      "outputPath": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\denem\\AppData\\Roaming\\NuGet\\NuGet.Config"
