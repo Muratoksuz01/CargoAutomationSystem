@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "AccessDenied";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Eğer bir layout kullanıyorsanız belirtin
+    int redirectTime = 5; // Kaç saniyelik geri sayım olacağını buradan belirtebilirsiniz
+}
+
+<div class="container text-center mt-5">
+    <h1 class="text-danger">Erişim Engellendi</h1>
+    <p class="mt-3">Bu sayfaya erişim izniniz bulunmamaktadır.</p>
+    <p id="countdown" class="fw-bold">@redirectTime saniye içinde ana sayfaya yönlendirileceksiniz.</p>
+    <p>Eğer yönlendirilmezseniz, <a href="/">buraya tıklayın</a>.</p>
+</div>
+
+<script>
+    let countdownElement = document.getElementById("countdown");
+    let secondsRemaining = @redirectTime;
+
+    // Her saniye kalan süreyi azalt ve ekranda güncelle
+    const interval = setInterval(() => {
+        secondsRemaining--;
+        countdownElement.textContent = secondsRemaining + " saniye içinde ana sayfaya yönlendirileceksiniz.";
+        
+        // Geri sayım bittiğinde yönlendir
+        if (secondsRemaining <= 0) {
+            clearInterval(interval); // Timer'ı durdur
+            window.location.href = "/"; // Ana sayfaya yönlendir
+        }
+    }, 1000); // 1 saniye
+</script>

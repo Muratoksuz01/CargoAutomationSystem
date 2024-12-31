@@ -19,6 +19,7 @@
                 <option value="">İşlem Seçiniz</option>
                 <option value="Teslim Edildi">Teslim Edildi</option>
                 <option value="Başka Şubeye Aktar">Başka Şubeye Aktar</option>
+                <option value="İptal Talebi Oluştur">İptal Talebi Oluştur</option>
             </select>
         </div>
 
@@ -44,7 +45,7 @@
         function toggleBranchDropdown() {
             var status = document.getElementById('Status').value;
             var branchDropdown = document.getElementById('branchDropdown');
-            if (status === 'Başka Şubeye Aktar') {
+            if (status === 'Başka Şubeye Aktar' || status === 'İptal Talebi Oluştur' ) {
                 branchDropdown.style.display = 'block';
             } else {
                 branchDropdown.style.display = 'none';

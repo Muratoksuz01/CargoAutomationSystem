@@ -47,8 +47,8 @@ namespace CargoAutomationSystem.Controllers
 
             // Create new cargo record
             var newCargo = new Cargo
-            {   
-                CargoId=_context.Cargos.Max(c=>c.CargoId)+1,
+            {
+                CargoId = _context.Cargos.Max(c => c.CargoId) + 1,
                 SenderId = model.SenderId,
                 CurrentBranchId = model.SenderBranchId,
                 RecipientName = model.RecipientName,
@@ -74,13 +74,13 @@ namespace CargoAutomationSystem.Controllers
             var sender = _context.Users.Include(u => u.UserCargos).FirstOrDefault(u => u.UserId == model.SenderId);
             if (sender != null)
             {
-                sender.UserCargos.Add(new UserCargo { Id=_context.UserCargos.Max(i=>i.Id)+1, UserId = sender.UserId, CargoId = newCargo.CargoId });
+                sender.UserCargos.Add(new UserCargo { Id = _context.UserCargos.Max(i => i.Id) + 1, UserId = sender.UserId, CargoId = newCargo.CargoId });
             }
 
             var branch = _context.Branches.FirstOrDefault(b => b.BranchId == model.SenderBranchId);
             if (branch != null)
             {
-                branch.BranchCargos.Add(new BranchCargo {Id=_context.BranchCargos.Max(i=>i.Id)+1, BranchId = branch.BranchId, CargoId = newCargo.CargoId });
+                branch.BranchCargos.Add(new BranchCargo { Id = _context.BranchCargos.Max(i => i.Id) + 1, BranchId = branch.BranchId, CargoId = newCargo.CargoId });
             }
 
             // Check if recipient exists, otherwise create a temporary user
@@ -95,7 +95,7 @@ namespace CargoAutomationSystem.Controllers
                     Address = model.RecipientAddress,
                     Phone = model.RecipientPhone,
                     IsTemporary = true,
-                    ImageUrl="nouser.png",
+                    ImageUrl = "nouser.png",
                     UserCargos = new List<UserCargo> { new UserCargo { CargoId = newCargo.CargoId } }
                 };
                 _context.Users.Add(recipient);
@@ -125,23 +125,27 @@ namespace CargoAutomationSystem.Controllers
         // Index method for displaying user's cargo
         public IActionResult Index()
         {
-             var user = _context.Users
-                .Include(u => u.UserCargos)
-                .ThenInclude(uc => uc.Cargo)
-                .ThenInclude(c => c.Sender)
-                .FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-          
-            if (user == null) return NotFound("User not found.");
+            var user = _context.Users
+               .Include(u => u.UserCargos)
+               .ThenInclude(uc => uc.Cargo)
+               .ThenInclude(c => c.Sender)
+               .FirstOrDefault(i => i.UserId == CurrentUser.UserId);
 
-        var userCargos=user.UserCargos
-        .Where(u=>u.Cargo.Status!="Teslim Edildi")
-        .Select(uc=>new IndexCargoViewModel{
-            CargoId=uc.Cargo.CargoId,
-            SenderName=uc.Cargo.Sender.Username,
-            ReceiverName=uc.Cargo.RecipientName,
-            Status=uc.Cargo.Status,
-            HashCode=uc.Cargo.HashCode
-        }).ToList();
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
+            var userCargos = user.UserCargos
+            .Where(u => u.Cargo.Status != "Teslim Edildi")
+            .Select(uc => new IndexCargoViewModel
+            {
+                CargoId = uc.Cargo.CargoId,
+                SenderName = uc.Cargo.Sender.Username,
+                ReceiverName = uc.Cargo.RecipientName,
+                Status = uc.Cargo.Status,
+                HashCode = uc.Cargo.HashCode
+            }).ToList();
 
 
             var model = new IndexViewModel
@@ -169,10 +173,12 @@ namespace CargoAutomationSystem.Controllers
                 .ThenInclude(uc => uc.Cargo)
                 .ThenInclude(c => c.Sender)
                 .FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-          
-            if (user == null)
-                return NotFound("User not found.");
 
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
             // Cargos'u UserCargos üzerinden al
             var cargos = user.UserCargos.Select(uc => new TrackCargoViewModel //            null geliyor 
             {
@@ -227,7 +233,8 @@ namespace CargoAutomationSystem.Controllers
             var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
             if (user == null)
             {
-                return NotFound("User not found.");
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
             }
 
             var sendCargoModel = new SendCargoViewModel
@@ -251,7 +258,11 @@ namespace CargoAutomationSystem.Controllers
                 .Include(c => c.CargoProcesses)
                 .FirstOrDefault(c => c.HashCode == hashCode);
 
-            if (cargo == null) return NotFound($"No cargo found with hash code: {hashCode}");
+            if (cargo == null)
+            {
+                TempData["ErrorMessage"] = "kargo bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
 
             var currentBranch = _context.Branches.FirstOrDefault(b => b.BranchId == cargo.CurrentBranchId);
             var detail = new DetailViewModel
@@ -293,7 +304,11 @@ namespace CargoAutomationSystem.Controllers
         public IActionResult Settings()
         {
             var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-            if (user == null) return NotFound("User not found.");
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullaıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
 
             var model = new SettingsViewModel
             {
@@ -311,7 +326,11 @@ namespace CargoAutomationSystem.Controllers
         public IActionResult UpdatePassword(SettingsViewModel model)
         {
             var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-            if (user == null) return NotFound("User not found.");
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
 
             model.UpdateUsername = new UpdateUsernameViewModel { Username = user.Username };
             model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
@@ -334,13 +353,28 @@ namespace CargoAutomationSystem.Controllers
         public IActionResult UpdateImage(IFormFile file)
         {
             var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-            if (user == null) return NotFound("User not found.");
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
 
             if (file != null)
             {
                 var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img");
                 if (!Directory.Exists(uploadsPath)) Directory.CreateDirectory(uploadsPath);
 
+                // Eski resmi silme işlemi
+                if (!string.IsNullOrEmpty(user.ImageUrl))
+                {
+                    var oldImagePath = Path.Combine(uploadsPath, user.ImageUrl);
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                // Yeni resmi kaydetme işlemi
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 var filePath = Path.Combine(uploadsPath, fileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -355,6 +389,7 @@ namespace CargoAutomationSystem.Controllers
             return RedirectToAction("Settings");
         }
 
+
         // Update user information
         [HttpPost]
         public IActionResult UpdateInfo(SettingsViewModel model)
@@ -362,8 +397,11 @@ namespace CargoAutomationSystem.Controllers
             if (!ModelState.IsValid) return View("Settings", model);
 
             var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-            if (user == null) return NotFound("User not found.");
-
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
             user.Email = model.EditInfo.Email;
             user.Address = model.EditInfo.Address;
             user.Phone = model.EditInfo.Phone;
@@ -378,20 +416,42 @@ namespace CargoAutomationSystem.Controllers
         public IActionResult RemoveImage()
         {
             var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-            if (user == null) return NotFound("User not found.");
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
 
-            user.ImageUrl = "nouser.png";
+            // Resim sunucudan siliniyor
+            if (!string.IsNullOrEmpty(user.ImageUrl))
+            {
+                var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img");
+                var imagePath = Path.Combine(uploadsPath, user.ImageUrl);
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath); // Resmi sil
+                }
+            }
+
+            // Kullanıcı resmi temizleniyor
+            user.ImageUrl = "";
             _context.SaveChanges();
+
             return RedirectToAction("Settings");
         }
+
 
         // Update username
         [HttpPost]
         public IActionResult UpdateUsername(SettingsViewModel model)
         {
             var user = _context.Users.FirstOrDefault(i => i.UserId == CurrentUser.UserId);
-            if (user == null) return NotFound("User not found.");
-
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Kullaıcı bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
             model.EditInfo = new EditInfoViewModel { Email = user.Email, Phone = user.Phone, Address = user.Address };
             model.UpdateImage = new UpdateImageViewModel { ImageFile = user.ImageUrl };
 

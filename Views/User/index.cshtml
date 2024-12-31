@@ -10,7 +10,9 @@
         <div class="col-md-3">
             <div class="card shadow-lg text-center">
                 <div class="card-body">
-                    <img src="/img/@Model.UserInfos.ImageUrl" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                    <img src="/img/@(!string.IsNullOrEmpty(Model.UserInfos.ImageUrl) ? Model.UserInfos.ImageUrl : "nouser.png")"
+                        class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;"
+                        alt="User Image">
                     <h5 class="card-title">@Model.UserInfos.Username</h5>
                     <p class="card-text text-muted">@Model.UserInfos.Email</p>
                     <p class="card-text text-muted">@Model.UserInfos.Phone</p>
@@ -56,7 +58,8 @@
                                             <td>@item.ReceiverName</td>
                                             <td>@item.Status</td>
                                             <td>
-                                                <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode" class="text-info">
+                                                <a asp-controller="User" asp-action="Detail" asp-route-HashCode="@item.HashCode"
+                                                    class="text-info">
                                                     <i class="fa-solid fa-circle-info"></i>
                                                 </a>
                                             </td>

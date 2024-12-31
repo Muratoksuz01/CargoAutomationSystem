@@ -1,6 +1,15 @@
 30/12/2024
---kullancı giris yaptı sonra / dizinine geldi buradan yeni kullnaıcı olusturabliyor yani sistemede olan birisi yeni birisini olusturabiliyor  hatta sube kayıt olusturabiliyor
--- access denied sayfası tasarla 
--- kullanıcı giris yapmadı ama user/sendcargo linkine gitmek istedi izin verilmiyor direk logine yonlendiriyor ama burada girş yaptıgında sendcargoya gitmiyor 
--- sube iptal talebi olusturabilsin 
--- varsa artık solid işlemleri 
+--kullancı giris yaptı sonra / dizinine geldi buradan yeni kullnaıcı olusturabliyor yani sistemede 
+olan birisi yeni birisini olusturabiliyor  hatta sube kayıt olusturabiliyor                         tamam
+
+-- access denied sayfası tasarla                                                                    tamam
+
+-- kullanıcı giris yapmadı ama user/sendcargo linkine gitmek istedi izin verilmiyor direk logine    tamam
+yonlendiriyor ama burada girş yaptıgında sendcargoya gitmiyor                                       
+
+-- sube iptal talebi olusturabilsin      tamam
+
+-- varsa artık solid işlemleri      
+-- resim degiştirildigi zaman kullnaıcıın kullandıgı resmi sil gerek yok        tamam
+
+--not found sayfası                     tamam

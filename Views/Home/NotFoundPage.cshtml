@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "NotFoundPage";
+        var errorMessage = TempData["ErrorMessage"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Layout kullanıyorsanız belirtin
+}
+
+<div class="container text-center mt-5">
+    <h1 class="display-1 text-danger">404</h1>
+    <h2 class="text-dark">Sayfa Bulunamadı</h2>
+    @if (!string.IsNullOrEmpty(errorMessage?.ToString()))
+    {
+        <p class="text-danger">@errorMessage</p>
+    }
+    <a class="btn btn-primary mt-3" href="/">Ana Sayfaya Dön</a>
+</div>

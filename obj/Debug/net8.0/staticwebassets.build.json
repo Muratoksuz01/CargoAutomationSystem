@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kI0m/nxQQRGCACned81RmJsHuE1NVgh27ai0+zvMWxU=",
+  "Hash": "pyrZ3+hGrVFsCYuF2YnMATH+ayppyQY7sxf10yLTTeE=",
   "Source": "CargoAutomationSystem",
   "BasePath": "_content/CargoAutomationSystem",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\84bd27aa-63dd-4bf8-ac3a-f2802ac2d8b0.png"
+    },
+    {
+      "Identity": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\img\\ad46b5f7-edda-4f9b-8c1a-79034fde447a.png",
+      "SourceId": "CargoAutomationSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\",
+      "BasePath": "_content/CargoAutomationSystem",
+      "RelativePath": "img/ad46b5f7-edda-4f9b-8c1a-79034fde447a.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\ad46b5f7-edda-4f9b-8c1a-79034fde447a.png"
     },
     {
       "Identity": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\img\\caadf472-348c-421b-92fa-e7dd27005068_cargo db seması 1.png",
@@ -1442,12 +1461,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.25 - Create three distinct images related to a cargo automation system_ 1) A modern warehouse with automated conveyor belts and robotic arms sorting packag.webp",
+      "Identity": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\image1.webp",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
-      "RelativePath": "SourceImage/DALL·E 2024-12-30 15.48.25 - Create three distinct images related to a cargo automation system_ 1) A modern warehouse with automated conveyor belts and robotic arms sorting packag.webp",
+      "RelativePath": "SourceImage/image1.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1458,15 +1477,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.25 - Create three distinct images related to a cargo automation system_ 1) A modern warehouse with automated conveyor belts and robotic arms sorting packag.webp"
+      "OriginalItemSpec": "wwwroot\\SourceImage\\image1.webp"
     },
     {
-      "Identity": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.35 - A futuristic cargo automation system featuring a centralized control hub with holographic displays, showing package locations in real-time, surrounded.webp",
+      "Identity": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\image2.webp",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
-      "RelativePath": "SourceImage/DALL·E 2024-12-30 15.48.35 - A futuristic cargo automation system featuring a centralized control hub with holographic displays, showing package locations in real-time, surrounded.webp",
+      "RelativePath": "SourceImage/image2.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1477,15 +1496,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.35 - A futuristic cargo automation system featuring a centralized control hub with holographic displays, showing package locations in real-time, surrounded.webp"
+      "OriginalItemSpec": "wwwroot\\SourceImage\\image2.webp"
     },
     {
-      "Identity": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.41 - 1) A high-tech warehouse with automated robots sorting and moving packages on conveyor belts, 2) A futuristic delivery vehicle with drones loading par.webp",
+      "Identity": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\image3.webp",
       "SourceId": "CargoAutomationSystem",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\",
       "BasePath": "_content/CargoAutomationSystem",
-      "RelativePath": "SourceImage/DALL·E 2024-12-30 15.48.41 - 1) A high-tech warehouse with automated robots sorting and moving packages on conveyor belts, 2) A futuristic delivery vehicle with drones loading par.webp",
+      "RelativePath": "SourceImage/image3.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1496,7 +1515,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.41 - 1) A high-tech warehouse with automated robots sorting and moving packages on conveyor belts, 2) A futuristic delivery vehicle with drones loading par.webp"
+      "OriginalItemSpec": "wwwroot\\SourceImage\\image3.webp"
     }
   ]
 }

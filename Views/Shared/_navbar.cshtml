@@ -7,34 +7,50 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                <li class="nav-item dropdown ms-auto">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Bireysel
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-controller="Home" asp-action="Login" >Giris</a></li>
-                        <li><a class="dropdown-item" asp-controller="Home" asp-action="Register" >Katıt</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown ms-auto">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Kurumsal 
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-controller="Home" asp-action="CorporateLogin">Giris</a></li>
-                        <li><a class="dropdown-item" asp-controller="Home" asp-action="CorporateRegister">Katıt</a></li>
-                    </ul>
-                </li>
-
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Branch"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Branch">Şube Paneli</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User">Kullanıcı Paneli</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="nav-item dropdown ms-auto">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Bireysel
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="Home" asp-action="Login">Giriş</a></li>
+                            <li><a class="dropdown-item" asp-controller="Home" asp-action="Register">Kayıt</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown ms-auto">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Kurumsal
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="Home" asp-action="CorporateLogin">Giriş</a></li>
+                            <li><a class="dropdown-item" asp-controller="Home" asp-action="CorporateRegister">Kayıt</a></li>
+                        </ul>
+                    </li>
+                }
             </ul>
             <form asp-action="GetCargoByHash" asp-controller="Home" class="d-flex" role="search">
-                <input class="form-control me-2" type="search" name="hashCode" placeholder="Gonderi Kodu Giriniz" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" name="hashCode" placeholder="Gönderi Kodu Giriniz"
+                    aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Ara</button>
             </form>
-
         </div>
     </div>
 </nav>

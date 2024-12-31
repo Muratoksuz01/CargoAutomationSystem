@@ -41,7 +41,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseStatusCodePagesWithReExecute("/Home/NotFoundPage");
 app.UseRouting();
 
 // Kimlik doğrulama ve yetkilendirme middleware'leri ekleniyor

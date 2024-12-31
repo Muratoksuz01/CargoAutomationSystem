@@ -30,13 +30,20 @@ namespace CargoAutomationSystem.Controllers
         {
             return _context.Branches.SingleOrDefault(u => u.Email == email && u.Password == password);
         }
+        public IActionResult Index() => View();
+
+
+
 
         [HttpPost]
         public IActionResult GetCargoByHash(string hashCode)
         {
             var cargo = _context.Cargos.SingleOrDefault(c => c.HashCode == hashCode);
             if (cargo == null)
-                return NotFound($"No cargo found with hash code: {hashCode}");
+            {
+                TempData["ErrorMessage"] = "kargo bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
 
             // Gönderici bilgilerini alıyoruz
             var sender = _context.Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
@@ -69,6 +76,78 @@ namespace CargoAutomationSystem.Controllers
 
             // View'e gönderiyoruz
             return View("Detail", detail);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> CorporateLogin(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var branch = AuthenticateBranch(model.Email, model.Password);
+                if (branch != null)
+                {
+                    // Kullanıcı bilgileri doğruysa, claims oluşturuluyor
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, branch.BranchId.ToString()),  // Kullanıcı ID'si
+                        new Claim(ClaimTypes.Role, "Branch")
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                    return RedirectToAction("Index", "Branch"); // Başarılı girişten sonra yönlendirme
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Geçersiz kullanıcı adı veya şifre");
+                    return View(model); // Giriş başarısızsa tekrar giriş ekranına dön
+                }
+            }
+            ModelState.AddModelError("", "formu kontrol ediniz ");
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult CorporateRegister(CorporateRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Branches.Add(new Branch { Email = model.Email, Password = model.Password, Address = model.Address, BranchName = model.UserName });
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        public IActionResult CorporateRegister()
+        {
+
+            return View();
+        }
+        public IActionResult CorporateLogin()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Branch");
+            }
+            return View();
+        }
+
+
+
+
+
+        public IActionResult Register() => View();
+        public IActionResult Login(string? returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "User");
+            }
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
         }
 
         [HttpPost]
@@ -145,7 +224,7 @@ namespace CargoAutomationSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -160,6 +239,10 @@ namespace CargoAutomationSystem.Controllers
                     };
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
                     return RedirectToAction("Index", "User"); // Başarılı girişten sonra yönlendirme
                 }
                 else
@@ -172,69 +255,11 @@ namespace CargoAutomationSystem.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CorporateLogin(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var branch = AuthenticateBranch(model.Email, model.Password);
-                if (branch != null)
-                {
-                    // Kullanıcı bilgileri doğruysa, claims oluşturuluyor
-                    var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, branch.BranchId.ToString()),  // Kullanıcı ID'si
-                        new Claim(ClaimTypes.Role, "Branch")
-                    };
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                    return RedirectToAction("Index", "Branch"); // Başarılı girişten sonra yönlendirme
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Geçersiz kullanıcı adı veya şifre");
-                    return View(model); // Giriş başarısızsa tekrar giriş ekranına dön
-                }
-            }
-            ModelState.AddModelError("", "formu kontrol ediniz ");
-            return View(model);
-        }
 
-        [HttpPost]
-        public IActionResult CorporateRegister(CorporateRegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Branches.Add(new Branch { Email = model.Email, Password = model.Password ,Address=model.Address,BranchName=model.UserName});
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(model);
-        }
 
-        public IActionResult CorporateRegister() => View();
-        public IActionResult Register() => View();
-        
-        public IActionResult CorporateLogin()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Branch");
-            }
-            return View();
-        }
 
-        public IActionResult Login()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "User");
-            }
-            return View();
-        }
 
-        public IActionResult Index() => View();
 
         [AcceptVerbs("GET", "POST")]
         public IActionResult VerifyUserName(string UserName)
@@ -268,5 +293,18 @@ namespace CargoAutomationSystem.Controllers
             }
             return Json(true); // Telefon numarası kullanılabilir
         }
+
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult NotFoundPage()
+        {
+            return View();
+        }
+
     }
 }

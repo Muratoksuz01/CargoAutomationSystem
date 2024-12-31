@@ -31,8 +31,11 @@ namespace CargoAutomationSystem.Controllers
         public IActionResult EditCargo(string hashCode)
         {
             var cargo = _context.Cargos.FirstOrDefault(c => c.HashCode == hashCode);
-            if (cargo == null) return NotFound("Kargo bulunamadı.");
-
+            if (cargo == null)
+            {
+                TempData["ErrorMessage"] = "kargo bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
             var model = new EditCargoViewModel
             {
                 HashCode = cargo.HashCode,
@@ -49,13 +52,15 @@ namespace CargoAutomationSystem.Controllers
         {
             var branch = _context.Branches.FirstOrDefault(b => b.BranchId == CurrentBranch.BranchId);
             var cargo = _context.Cargos.FirstOrDefault(c => c.HashCode == model.HashCode);
-            if (cargo == null) return NotFound("Kargo bulunamadı.");
-
+            if (cargo == null)
+            {
+                TempData["ErrorMessage"] = "kargo bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
             if (model.Status == "Teslim Edildi")
             {
                 cargo.Status = "Teslim Edildi";
 
-                // Teslim edildi işlem kaydı
                 _context.CargoProcesses.Add(new CargoProcess
                 {
                     CargoId = cargo.CargoId,
@@ -68,14 +73,12 @@ namespace CargoAutomationSystem.Controllers
                 var newBranch = _context.Branches.Include(b => b.BranchCargos).FirstOrDefault(b => b.BranchId == model.NewBranchId.Value);
                 if (newBranch != null)
                 {
-                    // Kargoyu mevcut şubeden çıkar
                     var branchCargo = _context.BranchCargos.FirstOrDefault(bc => bc.BranchId == branch.BranchId && bc.CargoId == cargo.CargoId);
                     if (branchCargo != null)
                     {
-                        _context.BranchCargos.Remove(branchCargo); // Şubeden çıkarıyoruz
+                        _context.BranchCargos.Remove(branchCargo);
                     }
 
-                    // Kargoyu yeni şubeye ekle
                     _context.BranchCargos.Add(new BranchCargo
                     {
                         BranchId = newBranch.BranchId,
@@ -84,7 +87,6 @@ namespace CargoAutomationSystem.Controllers
 
                     cargo.Status = model.Status;
 
-                    // Başka şubeye aktarma işlem kaydı
                     _context.CargoProcesses.Add(new CargoProcess
                     {
                         CargoId = cargo.CargoId,
@@ -93,15 +95,48 @@ namespace CargoAutomationSystem.Controllers
                     });
                 }
             }
+            else if (model.Status == "İptal Talebi Oluştur" && model.NewBranchId.HasValue)
+            {
+                var newBranch = _context.Branches.Include(b => b.BranchCargos).FirstOrDefault(b => b.BranchId == model.NewBranchId.Value);
+                if (newBranch != null)
+                {
+                    var branchCargo = _context.BranchCargos.FirstOrDefault(bc => bc.BranchId == branch.BranchId && bc.CargoId == cargo.CargoId);
+                    if (branchCargo != null)
+                    {
+                        _context.BranchCargos.Remove(branchCargo);
+                    }
+
+                    _context.BranchCargos.Add(new BranchCargo
+                    {
+                        BranchId = newBranch.BranchId,
+                        CargoId = cargo.CargoId
+                    });
+
+                    cargo.Status = "İptal Talebi Oluşturuldu";
+
+                    _context.CargoProcesses.Add(new CargoProcess
+                    {
+                        CargoId = cargo.CargoId,
+                        Process = $"İptal Talebi Oluşturuldu ve Kargo Şubesi Değiştirildi (Yeni Şube: {newBranch.BranchName})",
+                        ProcessDate = DateTime.Now
+                    });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Geçerli bir şube seçmelisiniz.");
+                    return View(model);
+                }
+            }
             else
             {
                 ModelState.AddModelError("", "Geçerli bir işlem veya şube seçmelisiniz.");
                 return View(model);
             }
 
-            _context.SaveChanges(); // Değişiklikleri kaydediyoruz
+            _context.SaveChanges();
             return RedirectToAction("Index", "Branch");
         }
+
 
         public IActionResult RemoveCargo(string hashCode)
         {
@@ -126,7 +161,10 @@ namespace CargoAutomationSystem.Controllers
                     .ThenInclude(bc => bc.Cargo)
                 .FirstOrDefault(br => br.BranchId == CurrentBranch.BranchId);
 
-            if (branch == null) return NotFound("Şube bulunamadı.");
+            if (branch == null){
+                TempData["ErrorMessage"] = "Sube bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
 
             var cargos = branch.BranchCargos.Select(bc => bc.Cargo).ToList(); // Şubeye ait kargoları al
 
@@ -149,7 +187,8 @@ namespace CargoAutomationSystem.Controllers
             var cargo = _context.Cargos.SingleOrDefault(c => c.HashCode == hashCode);
             if (cargo == null)
             {
-                return NotFound($"No cargo found with hash code: {hashCode}");
+                TempData["ErrorMessage"] = "kargo bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
             }
 
             var sender = _context.Users.SingleOrDefault(u => u.UserId == cargo.SenderId);
@@ -216,7 +255,11 @@ namespace CargoAutomationSystem.Controllers
         public IActionResult Settings()
         {
             var branch = _context.Branches.FirstOrDefault(i => i.BranchId == CurrentBranch.BranchId);
-            if (branch == null) return NotFound("Şube bulunamadı.");
+            if (branch == null)
+            {
+                TempData["ErrorMessage"] = "Sube bulunamadı.";
+                return RedirectToAction("NotFoundPage", "Home");
+            }
 
             var model = new BSettingsViewModel
             {

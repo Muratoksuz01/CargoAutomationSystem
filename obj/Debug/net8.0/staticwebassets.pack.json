@@ -5,16 +5,16 @@
       "PackagePath": "staticwebassets\\CargoAutomationSystem.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.25 - Create three distinct images related to a cargo automation system_ 1) A modern warehouse with automated conveyor belts and robotic arms sorting packag.webp",
-      "PackagePath": "staticwebassets\\SourceImage\\DALL·E 2024-12-30 15.48.25 - Create three distinct images related to a cargo automation system_ 1) A modern warehouse with automated conveyor belts and robotic arms sorting packag.webp"
+      "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\image1.webp",
+      "PackagePath": "staticwebassets\\SourceImage\\image1.webp"
     },
     {
-      "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.35 - A futuristic cargo automation system featuring a centralized control hub with holographic displays, showing package locations in real-time, surrounded.webp",
-      "PackagePath": "staticwebassets\\SourceImage\\DALL·E 2024-12-30 15.48.35 - A futuristic cargo automation system featuring a centralized control hub with holographic displays, showing package locations in real-time, surrounded.webp"
+      "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\image2.webp",
+      "PackagePath": "staticwebassets\\SourceImage\\image2.webp"
     },
     {
-      "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\DALL·E 2024-12-30 15.48.41 - 1) A high-tech warehouse with automated robots sorting and moving packages on conveyor belts, 2) A futuristic delivery vehicle with drones loading par.webp",
-      "PackagePath": "staticwebassets\\SourceImage\\DALL·E 2024-12-30 15.48.41 - 1) A high-tech warehouse with automated robots sorting and moving packages on conveyor belts, 2) A futuristic delivery vehicle with drones loading par.webp"
+      "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\SourceImage\\image3.webp",
+      "PackagePath": "staticwebassets\\SourceImage\\image3.webp"
     },
     {
       "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\css\\site.css",
@@ -39,6 +39,10 @@
     {
       "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\img\\84bd27aa-63dd-4bf8-ac3a-f2802ac2d8b0.png",
       "PackagePath": "staticwebassets\\img\\84bd27aa-63dd-4bf8-ac3a-f2802ac2d8b0.png"
+    },
+    {
+      "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\img\\ad46b5f7-edda-4f9b-8c1a-79034fde447a.png",
+      "PackagePath": "staticwebassets\\img\\ad46b5f7-edda-4f9b-8c1a-79034fde447a.png"
     },
     {
       "Id": "C:\\Users\\denem\\Documents\\CSharp\\process\\CargoAutomationSystem\\wwwroot\\img\\caadf472-348c-421b-92fa-e7dd27005068_cargo db seması 1.png",
