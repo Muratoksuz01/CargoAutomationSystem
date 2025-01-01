@@ -15,7 +15,7 @@ public static class DataSeeding
             CurrentBranchId = 1,
             RecipientName = "user2",
             RecipientAddress = "789 Maple St",
-            RecipientPhone = "22222222222",
+            RecipientPhone = "2222222222",
             HashCode = "ABC123",
             Status = "Taşımada"
         },
@@ -26,7 +26,7 @@ public static class DataSeeding
             CurrentBranchId = 2,
             RecipientName = "user1",
             RecipientAddress = "321 Oak St",
-            RecipientPhone = "11111111111",
+            RecipientPhone = "1111111111",
             HashCode = "XYZfew789",
             Status = "Teslim Edildi"
         },
@@ -37,7 +37,7 @@ public static class DataSeeding
             CurrentBranchId = 1,
             RecipientName = "user3",
             RecipientAddress = "321 Oak St",
-            RecipientPhone = "33333333333",
+            RecipientPhone = "3333333333",
             HashCode = "XYZ7vs89",
             Status = "Teslim Edildi"
         },
@@ -48,7 +48,7 @@ public static class DataSeeding
             CurrentBranchId = 2,
             RecipientName = "user3",
             RecipientAddress = "321 Oak St",
-            RecipientPhone = "33333333333",
+            RecipientPhone = "3333333333",
             HashCode = "XYZ78vs9",
             Status = "Teslim Edildi"
         }
@@ -64,7 +64,7 @@ public static class DataSeeding
             Email = "user1@example.com",
             Password = "hashedpassword4",
             Address = "789 West St, Westside",
-            Phone = "11111111111",
+            Phone = "1111111111",
             ImageUrl = "john_doe.png",
             IsTemporary=false
         },
@@ -75,7 +75,7 @@ public static class DataSeeding
             Email = "user2@example.com",
             Password = "hashedpassword4",
             Address = "101 South St, Southside",
-            Phone = "22222222222",
+            Phone = "2222222222",
             ImageUrl = "jane_smith.png",
             IsTemporary=false
         },
@@ -86,7 +86,7 @@ public static class DataSeeding
             Email = "user3@example.com",
             Password = "hashedpassword4",
             Address = "123 South St, Southside",
-            Phone = "33333333333",
+            Phone = "3333333333",
             ImageUrl = "jane_smith.png",
             IsTemporary=false
         }

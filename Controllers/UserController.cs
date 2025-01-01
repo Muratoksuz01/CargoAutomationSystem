@@ -16,6 +16,7 @@ using MimeKit;
 using CargoAutomationSystem.Models;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 
 namespace CargoAutomationSystem.Controllers
@@ -97,12 +98,14 @@ namespace CargoAutomationSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> SendCargo(SendCargoViewModel model)
         {
+            var emailSettings = _configuration.GetSection("EmailSettings").Get<EmailSettings>();
+
             if (!ModelState.IsValid)
             {
                 ViewBag.Branches = new SelectList(_context.Branches, "BranchId", "BranchName");
                 return View(model);
             }
-
+            var receiverPhone=Regex.Replace(model.RecipientPhone, @"[^\d]", "");
             // Create new cargo record
             var newCargo = new Cargo
             {
@@ -111,7 +114,7 @@ namespace CargoAutomationSystem.Controllers
                 CurrentBranchId = model.SenderBranchId,
                 RecipientName = model.RecipientName,
                 RecipientAddress = model.RecipientAddress,
-                RecipientPhone = model.RecipientPhone,
+                RecipientPhone = receiverPhone,
                 HashCode = GenerateUniqueHashCode(),
                 Status = "Taşımada"
             };
@@ -142,7 +145,7 @@ namespace CargoAutomationSystem.Controllers
             }
 
             // Check if recipient exists, otherwise create a temporary user
-            var recipient = _context.Users.Include(u => u.UserCargos).FirstOrDefault(u => u.Phone == model.RecipientPhone);
+            var recipient = _context.Users.Include(u => u.UserCargos).FirstOrDefault(u => u.Phone == receiverPhone);
             if (recipient == null)
             {
                 recipient = new User
@@ -151,7 +154,7 @@ namespace CargoAutomationSystem.Controllers
                     Email = $"{model.RecipientPhone}@temporary.com",
                     Password = "temporary",
                     Address = model.RecipientAddress,
-                    Phone = model.RecipientPhone,
+                    Phone = receiverPhone,
                     IsTemporary = true,
                     ImageUrl = "nouser.png",
                     UserCargos = new List<UserCargo> { new UserCargo { CargoId = newCargo.CargoId } }
@@ -161,18 +164,27 @@ namespace CargoAutomationSystem.Controllers
             else
             {
                 recipient.UserCargos.Add(new UserCargo { UserId = recipient.UserId, CargoId = newCargo.CargoId });
+
+
             }
 
-            newCargo.RecipientId = recipient.UserId;
+            //  newCargo.RecipientId = recipient.UserId;
+            var emailSonucuForReceiver = await SendEmailAsync(
+                           emailSettings.SMTPServer,
+                           emailSettings.Port,
+                           emailSettings.SenderEmail,
+                           emailSettings.Password,
+                           recipient.Email,
+                           "Kargonuz Gönderildi",
+                           $"Sayın {recipient.Username}, size bir kargo gonderildi. Takip kodunuz: {newCargo.HashCode}."
+                       );
 
 
 
-            var emailSettings = _configuration.GetSection("EmailSettings").Get<EmailSettings>();
 
 
 
-
-            var emailSonucu = await SendEmailAsync(
+            var emailSonucuForSender = await SendEmailAsync(
                 emailSettings.SMTPServer,
                 emailSettings.Port,
                 emailSettings.SenderEmail,
@@ -182,15 +194,15 @@ namespace CargoAutomationSystem.Controllers
                 $"Sayın {model.SenderUsername}, kargonuz başarıyla gönderilmiştir. Takip kodunuz: {newCargo.HashCode}."
             );
 
-TempData["AlertMessage"] = JsonSerializer.Serialize(new
-{
-    Type = emailSonucu ? "Success" : "Error",
-    Message = emailSonucu
-        ? "Kargonuz olustu ve email gonderildi."
-        : "Kargonuz olustu fakat email gonderilemedi."
-});
+            TempData["AlertMessage"] = JsonSerializer.Serialize(new
+            {
+                SenderEmail = emailSonucuForSender ? "bilgilerndirme maili basarali bir sekilde gonderilmistir " : "bilgilerndirme maili gonderilemesitir",
+                receiverEmail = emailSonucuForReceiver
+                    ? "kargonuz alıcı mailine basarlı  gondeildi"
+                    : "kargonuz alıcı mailine gonderilmedi "
+            });
 
-         
+
             _context.SaveChanges();
 
 

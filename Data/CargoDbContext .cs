@@ -26,12 +26,14 @@ namespace CargoAutomationSystem.Data
             modelBuilder.Entity<UserCargo>()
                 .HasOne(uc => uc.User)
                 .WithMany(u => u.UserCargos)  // User'daki UserCargos koleksiyonu "IEnumerable<UserCargo>" olmalı
-                .HasForeignKey(uc => uc.UserId);
+                .HasForeignKey(uc => uc.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Silme davranışı eklendi
 
             modelBuilder.Entity<UserCargo>()
                 .HasOne(uc => uc.Cargo)
                 .WithMany(c => c.UserCargos)  // Cargo'daki UserCargos koleksiyonu "IEnumerable<UserCargo>" olmalı
-                .HasForeignKey(uc => uc.CargoId);
+                .HasForeignKey(uc => uc.CargoId)
+                .OnDelete(DeleteBehavior.Cascade); // Silme davranışı eklendi
 
             // Branch-Cargo many-to-many relationship
             modelBuilder.Entity<BranchCargo>()
@@ -40,12 +42,14 @@ namespace CargoAutomationSystem.Data
             modelBuilder.Entity<BranchCargo>()
                 .HasOne(bc => bc.Branch)
                 .WithMany(b => b.BranchCargos)
-                .HasForeignKey(bc => bc.BranchId);
+                .HasForeignKey(bc => bc.BranchId)
+                .OnDelete(DeleteBehavior.Cascade); // Silme davranışı eklendi
 
             modelBuilder.Entity<BranchCargo>()
                 .HasOne(bc => bc.Cargo)
                 .WithMany(c => c.BranchCargos)
-                .HasForeignKey(bc => bc.CargoId);
+                .HasForeignKey(bc => bc.CargoId)
+                .OnDelete(DeleteBehavior.Cascade); // Silme davranışı eklendi
         }
     }
 }

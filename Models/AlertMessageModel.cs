@@ -1,5 +1,5 @@
 public class AlertMessageModel
 {
-    public string Type { get; set; }
-    public string Message { get; set; }
+    public string SenderEmail { get; set; }
+    public string receiverEmail { get; set; }
 }

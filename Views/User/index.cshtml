@@ -11,8 +11,10 @@
 {
     var alertMessage = JsonSerializer.Deserialize<AlertMessageModel>(TempData["AlertMessage"].ToString());
 
-    <div class="alert alert-@(alertMessage.Type == "Success" ? "success" : "danger") alert-dismissible fade show" role="alert">
-        <strong>@(alertMessage.Type == "Success" ? "Success!" : "Error!")</strong> @alertMessage.Message
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        @alertMessage.SenderEmail
+        <br>
+        @alertMessage.SenderEmail
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 

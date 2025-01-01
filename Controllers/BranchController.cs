@@ -86,6 +86,7 @@ namespace CargoAutomationSystem.Controllers
                     });
 
                     cargo.Status = model.Status;
+                    cargo.CurrentBranchId=newBranch.BranchId;
 
                     _context.CargoProcesses.Add(new CargoProcess
                     {
