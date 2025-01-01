@@ -7,12 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CargoAutomationSystem.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using System.Linq;
-using System.IO;
+
 using CargoAutomationSystem.Data;
-using System.Net.Http.Json;
-using System.Xml;
+
+using MailKit.Net.Smtp; // SmtpClient sınıfı burada bulunur
+using MailKit.Security; // Güvenlik seçenekleri için gerekli
+using MimeKit;
+using CargoAutomationSystem.Models;
+using System.Diagnostics;
 using System.Text.Json;
+
 
 namespace CargoAutomationSystem.Controllers
 {
@@ -20,11 +24,14 @@ namespace CargoAutomationSystem.Controllers
     public class UserController : Controller
     {
         private readonly CargoDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public UserController(CargoDbContext context)
+        public UserController(CargoDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
+
 
         // Access current user info
         protected UserInfoViewModel CurrentUser => new UserInfoViewModel
@@ -32,12 +39,63 @@ namespace CargoAutomationSystem.Controllers
             UserId = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : 0,
         };
 
-        // Method to send cargo
 
+
+        private async Task<bool> SendEmailAsync(
+        string smtpServer,
+        int port,
+        string senderEmail,
+        string password,
+        string toEmail,
+        string subject,
+        string body)
+        {
+            try
+            {
+                var stopwatch = Stopwatch.StartNew();
+
+                using (var smtpClient = new SmtpClient())
+                {
+                    smtpClient.ServerCertificateValidationCallback = (s, c, h, e) => true; // Sertifika doğrulamasını geçici olarak devre dışı bırak
+                    smtpClient.Timeout = 2000; // Maksimum 10 saniye bekleme
+
+                    // SMTP sunucusuna bağlanma ve süre ölçümü
+                    var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5)); // 10 saniye timeout
+                    await smtpClient.ConnectAsync(smtpServer, port, MailKit.Security.SecureSocketOptions.StartTls, cancellationTokenSource.Token);
+
+                    stopwatch.Stop();
+                    Console.WriteLine($"SMTP bağlantı süresi: {stopwatch.ElapsedMilliseconds} ms");
+
+                    // SMTP kimlik doğrulama
+                    await smtpClient.AuthenticateAsync(senderEmail, password);
+
+                    // E-posta oluşturma ve gönderme
+                    var email = new MimeMessage();
+                    email.From.Add(new MailboxAddress("CargoApp", senderEmail));
+                    email.To.Add(new MailboxAddress("", toEmail));
+                    email.Subject = subject;
+
+                    email.Body = new TextPart("plain")
+                    {
+                        Text = body
+                    };
+
+                    await smtpClient.SendAsync(email);
+                    await smtpClient.DisconnectAsync(true);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"E-posta gönderimi hatası: {ex.Message}");
+                return false;
+            }
+        }
 
         // Handle sending cargo via POST
         [HttpPost]
-        public IActionResult SendCargo(SendCargoViewModel model)
+        public async Task<IActionResult> SendCargo(SendCargoViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -107,7 +165,34 @@ namespace CargoAutomationSystem.Controllers
 
             newCargo.RecipientId = recipient.UserId;
 
+
+
+            var emailSettings = _configuration.GetSection("EmailSettings").Get<EmailSettings>();
+
+
+
+
+            var emailSonucu = await SendEmailAsync(
+                emailSettings.SMTPServer,
+                emailSettings.Port,
+                emailSettings.SenderEmail,
+                emailSettings.Password,
+                model.SenderEmail,
+                "Kargonuz Gönderildi",
+                $"Sayın {model.SenderUsername}, kargonuz başarıyla gönderilmiştir. Takip kodunuz: {newCargo.HashCode}."
+            );
+
+TempData["AlertMessage"] = JsonSerializer.Serialize(new
+{
+    Type = emailSonucu ? "Success" : "Error",
+    Message = emailSonucu
+        ? "Kargonuz olustu ve email gonderildi."
+        : "Kargonuz olustu fakat email gonderilemedi."
+});
+
+         
             _context.SaveChanges();
+
 
             return RedirectToAction("Index");
         }

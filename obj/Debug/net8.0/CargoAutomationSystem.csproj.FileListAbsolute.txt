@@ -299,3 +299,6 @@ C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem\obj\Debug\net8.0\r
 C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem\obj\Debug\net8.0\CargoAutomationSystem.pdb
 C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem\obj\Debug\net8.0\CargoAutomationSystem.genruntimeconfig.cache
 C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem\obj\Debug\net8.0\ref\CargoAutomationSystem.dll
+C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem\bin\Debug\net8.0\MailKit.dll
+C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem\bin\Debug\net8.0\MimeKit.dll
+C:\Users\denem\Documents\CSharp\process\CargoAutomationSystem\bin\Debug\net8.0\BouncyCastle.Crypto.dll

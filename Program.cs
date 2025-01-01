@@ -1,5 +1,6 @@
 using CargoAutomationSystem.Data;
 using CargoAutomationSystem.Entity;
+using CargoAutomationSystem.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,7 +31,7 @@ builder.Services.AddSession(options =>
 
 // Diğer servisler
 builder.Services.AddControllersWithViews();
-
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 var app = builder.Build();  
 
 if (!app.Environment.IsDevelopment())
